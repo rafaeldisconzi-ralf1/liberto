@@ -1475,7 +1475,7 @@
     for (let i = 0; i < COUNT; i++) {
       const el = document.createElement('span');
       el.className = 'cross-particle';
-      el.textContent = '✝';
+      el.innerHTML = '&#x271D;&#xFE0E;';
       const size   = 1.1 + Math.random() * 1.0;   // 1.1–2.1rem
       const left   = Math.random() * 100;             // % across
       const dur    = 14 + Math.random() * 22;         // 14–36s cycle
