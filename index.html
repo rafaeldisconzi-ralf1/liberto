@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Devocional Filho Liberto</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #16a34a;
+      --green-dark: #15803d;
+      --red: #dc2626;
+      --red-dark: #b91c1c;
+      --bg: #ffffff;
+      --text: #030712;
+      --text-muted: #6b7280;
+      --radius: 16px;
+      --max-w: 480px;
+      --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html { height: 100%; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f3f4f6;
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── PROGRESS BAR ── */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 4px;
+      background: var(--green);
+      transition: width 0.5s ease;
+      z-index: 100;
+      border-radius: 0 4px 4px 0;
+    }
+
+    /* ── WRAPPER ── */
+    #quiz-wrapper {
+      width: 100%;
+      max-width: var(--max-w);
+      min-height: 100vh;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ── STEP ── */
+    .step {
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+      padding: 28px 20px 40px;
+      animation: fadeIn var(--transition) forwards;
+    }
+
+    .step.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── TYPOGRAPHY ── */
+    .headline {
+      font-size: 1.35rem;
+      font-weight: 800;
+      line-height: 1.35;
+      text-align: center;
+      color: var(--text);
+    }
+
+    .headline .highlight { color: var(--green); }
+    .headline .underline-green { text-decoration: underline; color: var(--green); }
+
+    .subheadline {
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.5;
+      text-align: center;
+      color: var(--text);
+    }
+
+    .body-text {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    /* ── IMAGES ── */
+    .step-img {
+      width: 100%;
+      border-radius: var(--radius);
+      display: block;
+      object-fit: cover;
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 17px 20px;
+      border: none;
+      border-radius: var(--radius);
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      text-align: center;
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn:active { transform: scale(0.97); }
+
+    .btn-green {
+      background: var(--green);
+      color: #fff;
+      box-shadow: 0 4px 24px rgba(22,163,74,0.35);
+    }
+
+    .btn-green:hover {
+      filter: brightness(1.08);
+      box-shadow: 0 6px 30px rgba(22,163,74,0.45);
+    }
+
+    .btn-red {
+      background: var(--red);
+      color: #fff;
+      box-shadow: 0 4px 24px rgba(220,38,38,0.3);
+    }
+
+    .btn-red:hover { filter: brightness(1.08); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--green);
+      border: 2px solid var(--green);
+    }
+
+    /* Pulse animation */
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 4px 24px rgba(22,163,74,0.35); }
+      50% { box-shadow: 0 4px 40px rgba(22,163,74,0.65); transform: scale(1.015); }
+    }
+
+    .btn-pulse { animation: pulse-glow 2s ease infinite; }
+
+    /* ── ALERT BOX ── */
+    .alert-box {
+      background: var(--green);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .alert-box.red {
+      background: var(--red);
+    }
+
+    /* ── OPTIONS (multi-select) ── */
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      border: 2px solid #e5e7eb;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      user-select: none;
+    }
+
+    .option-item:hover { border-color: var(--green); background: #f0fdf4; }
+
+    .option-item.selected {
+      border-color: var(--green);
+      background: #f0fdf4;
+    }
+
+    .option-check {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      border: 2px solid #d1d5db;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .option-item.selected .option-check {
+      background: var(--green);
+      border-color: var(--green);
+    }
+
+    .option-check svg { display: none; }
+    .option-item.selected .option-check svg { display: block; }
+
+    .option-label {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* ── BADGE / TAG ── */
+    .badge {
+      display: inline-block;
+      background: #fef9c3;
+      color: #854d0e;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 999px;
+      text-align: center;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      border: none;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    /* ── PRICE BOX ── */
+    .price-box {
+      background: #f9fafb;
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .price-was {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+
+    .price-now {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--green);
+    }
+
+    .price-installment {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* ── GUARANTEE BOX ── */
+    .guarantee {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px;
+      background: #f0fdf4;
+      border-radius: var(--radius);
+      border-left: 4px solid var(--green);
+    }
+
+    .guarantee-icon { font-size: 2.5rem; flex-shrink: 0; }
+    .guarantee-text { font-size: 0.85rem; line-height: 1.5; color: var(--text); }
+    .guarantee-text strong { font-size: 0.95rem; }
+
+    /* ── TESTIMONIAL CARD ── */
+    .testimonials { display: flex; flex-direction: column; gap: 12px; }
+
+    .testimonial {
+      background: #f9fafb;
+      border-radius: var(--radius);
+      padding: 16px;
+      border-left: 3px solid var(--green);
+    }
+
+    .testimonial-text {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: var(--text);
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      margin-top: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    /* ── CAROUSEL ── */
+    .carousel {
+      overflow-x: auto;
+      display: flex;
+      gap: 12px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 8px;
+    }
+
+    .carousel::-webkit-scrollbar { display: none; }
+
+    .carousel img {
+      flex-shrink: 0;
+      width: 85%;
+      border-radius: var(--radius);
+      scroll-snap-align: center;
+    }
+
+    /* ── STEP LABEL ── */
+    .step-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #f0fdf4;
+      color: var(--green);
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 5px 14px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── SECURITY BAR ── */
+    .security-bar {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding: 12px 16px;
+      background: #f9fafb;
+      border-radius: var(--radius);
+    }
+
+    .security-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* ── FAQ ── */
+    .faq { display: flex; flex-direction: column; gap: 12px; }
+
+    .faq-item {
+      background: #f9fafb;
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+
+    .faq-q {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .faq-a {
+      font-size: 0.87rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-top: 8px;
+    }
+
+    /* ── RECAPITULO LIST ── */
+    .recap-list { display: flex; flex-direction: column; gap: 10px; }
+
+    .recap-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .recap-icon {
+      width: 22px;
+      height: 22px;
+      background: var(--green);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.7rem;
+      font-weight: 900;
+      margin-top: 1px;
+    }
+
+    /* ── CONTACT FOOTER ── */
+    .contact-footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      padding: 12px 16px;
+      background: #f9fafb;
+      border-radius: var(--radius);
+    }
+
+    /* ── MOBILE SAFE AREA ── */
+    @supports (padding-bottom: env(safe-area-inset-bottom)) {
+      .step { padding-bottom: calc(40px + env(safe-area-inset-bottom)); }
+    }
+
+    /* ── BRANCH EMPATHY STEP ── */
+    .empathy-text {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.55;
+      text-align: center;
+      color: var(--text);
+    }
+  </style>
+</head>
+<body>
+
+<div id="progress-bar" style="width:0%"></div>
+
+<div id="quiz-wrapper">
+
+  <!-- ══════════════════════════════════════
+       STEP 1 — INTRO / HOOK
+  ══════════════════════════════════════ -->
+  <div class="step active" id="step-1">
+    <div style="text-align:center;">
+      <span class="step-label">✨ Acesso Gratuito</span>
+    </div>
+
+    <h1 class="headline">
+      ACESSE AGORA O<br>
+      <span class="underline-green">DEVOCIONAL FILHO LIBERTO</span>
+    </h1>
+
+    <h2 class="subheadline">
+      ORE COM DIREÇÃO POR <span style="color:var(--green)">21 DIAS</span><br>
+      E VEJA O SEU FILHO<br>
+      <strong style="color:var(--green)">TRANSFORMADO POR DEUS</strong><br>
+      ATRAVÉS DA ORAÇÃO E DO JEJUM
+    </h2>
+
+    <img
+      class="step-img"
+      src="https://media.inlead.cloud/uploads/38779/2026-01-17/0zGbg-aprenda-a-orar-com-direcao-pelo-seu-filho.jpg"
+      alt="Devocional Filho Liberto"
+      loading="eager"
+    >
+
+    <button class="btn btn-green btn-pulse" onclick="goTo('step-2')">
+      CLIQUE PARA ACESSAR ✅
+    </button>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       STEP 2 — EMPATHY QUESTION
+  ══════════════════════════════════════ -->
+  <div class="step" id="step-2">
+    <h2 class="headline">
+      Você sabe que precisa orar com fé pelo seu filho mas <span class="highlight">não sabe se está fazendo certo?</span>
+    </h2>
+
+    <img
+      class="step-img"
+      src="https://media.inlead.cloud/uploads/38779/2025-10-30/gB3B0-b14af988b03a2212bd3167373c70b8eb.jpg"
+      alt="Mãe orando pelo filho"
+      loading="lazy"
+    >
+
+    <button class="btn btn-red" onclick="goTo('step-3')">
+      ISSO ME DEIXA TRISTE 🙁
+    </button>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       STEP 3 — BRIDGE / PROMISE
+  ══════════════════════════════════════ -->
+  <div class="step" id="step-3">
+    <div class="alert-box">
+      🙏 DEUS TE TROUXE AQUI!<br>SOMOS UMA COMUNIDADE DE MÃES QUE LUTAM PELA SALVAÇÃO DOS NOSSOS FILHOS!
+    </div>
+
+    <h2 class="headline">
+      A falta de clareza e direção na hora de orar é o que impede Deus de agir! Mas agora você vai aprender a orar com <span class="highlight">PROPÓSITO!</span>
+    </h2>
+
+    <img
+      class="step-img"
+      src="https://media.inlead.cloud/uploads/38779/2025-10-30/0xGRz-91738a9f-db7a-4f72-ba4e-25bd40c1a1b0.jpg"
+      alt="Mulher orando"
+      loading="lazy"
+    >
+
+    <button class="btn btn-green btn-pulse" onclick="goTo('step-4')">
+      QUERO ORAR COM PROPÓSITO 🙏
+    </button>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       STEP 4 — QUIZ QUESTION (multi-select)
+  ══════════════════════════════════════ -->
+  <div class="step" id="step-4">
+    <h2 class="headline">
+      Qual desses problemas <span class="highlight">MAIS afeta</span> a vida do seu filho/a?
+    </h2>
+    <p class="body-text">Selecione todos que se aplicam. Sua luta espiritual será <strong>PODEROSA e DIRECIONADA!</strong></p>
+
+    <div class="options-list" id="options-list">
+      <div class="option-item" data-value="sexual" onclick="toggleOption(this)">
+        <div class="option-check">
+          <svg width="12" height="9" viewBox="0 0 12 9" fill="none">
+            <path d="M1 4L4.5 7.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="option-label">Problemas sexuais / identidade</span>
+      </div>
+      <div class="option-item" data-value="emocional" onclick="toggleOption(this)">
+        <div class="option-check">
+          <svg width="12" height="9" viewBox="0 0 12 9" fill="none">
+            <path d="M1 4L4.5 7.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="option-label">Problemas emocionais (ansiedade, depressão etc...)</span>
+      </div>
+      <div class="option-item" data-value="vicios" onclick="toggleOption(this)">
+        <div class="option-check">
+          <svg width="12" height="9" viewBox="0 0 12 9" fill="none">
+            <path d="M1 4L4.5 7.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="option-label">Vícios: Bebida, Cigarro, Drogas, Jogos</span>
+      </div>
+      <div class="option-item" data-value="amizades" onclick="toggleOption(this)">
+        <div class="option-check">
+          <svg width="12" height="9" viewBox="0 0 12 9" fill="none">
+            <path d="M1 4L4.5 7.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="option-label">Más amizades</span>
+      </div>
+      <div class="option-item" data-value="fe" onclick="toggleOption(this)">
+        <div class="option-check">
+          <svg width="12" height="9" viewBox="0 0 12 9" fill="none">
+            <path d="M1 4L4.5 7.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="option-label">Não leva Deus a sério</span>
+      </div>
+      <div class="option-item" data-value="financeiro" onclick="toggleOption(this)">
+        <div class="option-check">
+          <svg width="12" height="9" viewBox="0 0 12 9" fill="none">
+            <path d="M1 4L4.5 7.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="option-label">Está travado na vida financeira</span>
+      </div>
+      <div class="option-item" data-value="saude" onclick="toggleOption(this)">
+        <div class="option-check">
+          <svg width="12" height="9" viewBox="0 0 12 9" fill="none">
+            <path d="M1 4L4.5 7.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="option-label">Sofre de enfermidades</span>
+      </div>
+    </div>
+
+    <button class="btn btn-green" id="btn-options" onclick="goTo('step-5')" style="opacity:0.5;pointer-events:none;">
+      BAIXAR DEVOCIONAL GRATUITO →
+    </button>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       STEP 5 — SOCIAL PROOF / INSTAGRAM
+  ══════════════════════════════════════ -->
+  <div class="step" id="step-5">
+    <div class="alert-box">
+      DEUS TE TROUXE AQUI, ENTÃO MUITO BEM-VINDA!<br>
+      SOMOS UMA COMUNIDADE DE MÃES QUE LUTAM PELA SALVAÇÃO DOS NOSSOS FILHOS!
+    </div>
+
+    <img
+      class="step-img"
+      src="https://media.inlead.cloud/uploads/38779/2026-06-06/3lG8R-whatsapp-image-2026-06-06-at-11-30-34.jpeg"
+      alt="Comunidade Instagram"
+      loading="lazy"
+    >
+
+    <p class="body-text">
+      Somos <strong>26 mil mães no Instagram!</strong> Postamos orações e estudos para alimentar a sua fé todos os dias.<br><br>
+      Mais do que receber um Devocional direcionado para o seu filho, você vai fazer parte de uma comunidade de mães que oram juntas!
+    </p>
+
+    <button class="btn btn-green btn-pulse" onclick="goTo('step-6')">
+      BAIXAR DEVOCIONAL →
+    </button>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       STEP 6 — THE 3 STEPS INTRO
+  ══════════════════════════════════════ -->
+  <div class="step" id="step-6">
+    <h2 class="headline">
+      Siga os <span class="highlight">3 passos</span> do Devocional Filho Liberto e veja o seu filho <span class="highlight">TRANSFORMADO por Deus</span> através da Oração e Jejum!
+    </h2>
+
+    <img
+      class="step-img"
+      src="https://media.inlead.cloud/uploads/38779/2025-12-23/hvIX1-design-sem-nome-100-1.png"
+      alt="3 Passos"
+      loading="lazy"
+    >
+
+    <p class="subheadline" style="color:var(--red)">
+      Somente ORANDO COM DIREÇÃO você vai ALCANÇAR O PROPÓSITO.
+    </p>
+
+    <button class="btn btn-green" onclick="goTo('step-7')">
+      QUAIS SÃO OS 3 PASSOS? →
+    </button>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       STEP 7 — PASSO 1
+  ══════════════════════════════════════ -->
+  <div class="step" id="step-7">
+    <div style="text-align:center;">
+      <span class="step-label">📋 Passo 1 de 3</span>
+    </div>
+
+    <h2 class="headline">
+      <span class="highlight">PASSO 1</span><br>
+      Identifique o que está afastando o seu filho de Deus com o <strong>Diagnóstico das Setas Malignas.</strong>
+    </h2>
+
+    <img
+      class="step-img"
+      src="https://media.inlead.cloud/uploads/38779/2025-12-23/h2gZV-0b204dec-50c5-4eea-ae41-9a4a25e2a35b.png"
+      alt="Passo 1 - Diagnóstico"
+      loading="lazy"
+    >
+
+    <div class="alert-box" style="background:#f0fdf4; color:var(--green); border: 2px solid var(--green);">
+      🎯 Deus vai te REVELAR contra O QUE LUTAR!
+    </div>
+
+    <button class="btn btn-green" onclick="goTo('step-8')">
+      QUERO FAZER O DIAGNÓSTICO ☑️
+    </button>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       STEP 8 — PASSO 2
+  ══════════════════════════════════════ -->
+  <div class="step" id="step-8">
+    <div style="text-align:center;">
+      <span class="step-label">📋 Passo 2 de 3</span>
+    </div>
+
+    <h2 class="headline">
+      <span class="highlight">PASSO 2</span><br>
+      Faça as <strong>Orações Guiadas de Libertação</strong> para Quebrar as Setas Malignas que estão ATINGINDO o seu filho.
+    </h2>
+
+    <img
+      class="step-img"
+      src="https://media.inlead.cloud/uploads/38779/2025-12-23/EgxPL-design-sem-nome-2025-12-23T142855.027.png"
+      alt="Passo 2 - Orações Guiadas"
+      loading="lazy"
+    >
+
+    <button class="btn btn-green" onclick="goTo('step-9')">
+      QUERO COMEÇAR ☑️
+    </button>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       STEP 9 — PASSO 3
+  ══════════════════════════════════════ -->
+  <div class="step" id="step-9">
+    <div style="text-align:center;">
+      <span class="step-label">📋 Passo 3 de 3</span>
+    </div>
+
+    <h2 class="headline">
+      <span class="highlight">PASSO 3</span><br>
+      Inicie o <strong>Jejum e Devocional Filho Liberto</strong> por 21 dias e veja Deus TRANSFORMAR o seu filho.
+    </h2>
+
+    <img
+      class="step-img"
+      src="https://media.inlead.cloud/uploads/38779/2025-12-23/s9k64-design-sem-nome-2025-12-23T143222.869.png"
+      alt="Passo 3 - Jejum 21 dias"
+      loading="lazy"
+    >
+
+    <div class="alert-box red">
+      ⚠️ Você vai entender porque as suas orações não eram respondidas.
+    </div>
+
+    <button class="btn btn-green" onclick="goTo('step-10')">
+      QUERO COMEÇAR ☑️
+    </button>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       STEP 10 — BÔNUS: Proteção Divina
+  ══════════════════════════════════════ -->
+  <div class="step" id="step-10">
+    <div style="text-align:center;">
+      <span class="step-label">🎁 Bônus Especial</span>
+    </div>
+
+    <h2 class="headline">
+      VOCÊ VAI RECEBER TAMBÉM<br>
+      <span class="highlight">Campanha da Proteção Divina</span>
+    </h2>
+    <p class="body-text">Um guia com as orações poderosas que protegem seu filho ⬇</p>
+
+    <img
+      class="step-img"
+      src="https://media.inlead.cloud/uploads/38779/2025-12-23/xYA9P-design-sem-nome-2025-12-23T143618.897.png"
+      alt="Proteção Divina"
+      loading="lazy"
+    >
+
+    <div class="recap-list">
+      <div class="recap-item"><div class="recap-icon">✓</div> PROTEÇÃO FÍSICA</div>
+      <div class="recap-item"><div class="recap-icon">✓</div> PROTEÇÃO EMOCIONAL</div>
+      <div class="recap-item"><div class="recap-icon">✓</div> PROTEÇÃO ESPIRITUAL</div>
+    </div>
+
+    <button class="btn btn-green" onclick="goTo('step-11')">
+      QUERO SALVAR MEU FILHO ☑️
+    </button>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       STEP 11 — BÔNUS: Mapa das Amizades
+  ══════════════════════════════════════ -->
+  <div class="step" id="step-11">
+    <div style="text-align:center;">
+      <span class="step-label">🎁 Bônus Especial</span>
+    </div>
+
+    <h2 class="headline">
+      VOCÊ VAI RECEBER TAMBÉM<br>
+      <span class="highlight">Mapa das Amizades</span>
+    </h2>
+    <p class="body-text">Descubra as amizades que têm afastado seu filho de Deus ⬇</p>
+
+    <img
+      class="step-img"
+      src="https://media.inlead.cloud/uploads/38779/2025-12-23/TJrOM-64cf9dc5-c331-45da-9337-7ea5b3607c12.png"
+      alt="Mapa das Amizades"
+      loading="lazy"
+    >
+
+    <div class="alert-box" style="background:#f0fdf4; color:var(--green); border: 2px solid var(--green);">
+      🙏🏼 Deus irá substituir essas pessoas por amigos que edificam!
+    </div>
+
+    <button class="btn btn-green" onclick="goTo('step-12')">
+      QUERO SALVAR MEU FILHO ☑️
+    </button>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       STEP 12 — BÔNUS EXTRA (ETAPA 11)
+  ══════════════════════════════════════ -->
+  <div class="step" id="step-12">
+    <div style="text-align:center;">
+      <span class="step-label">🎁 Bônus Extra</span>
+    </div>
+
+    <h2 class="headline">
+      VOCÊ VAI RECEBER TAMBÉM<br>
+      <span class="highlight">+ TODOS ESSES BÔNUS</span><br>
+      PARA TE AJUDAR NA JORNADA DE ORAÇÃO PELO SEU FILHO
+    </h2>
+
+    <img
+      class="step-img"
+      src="https://media.inlead.cloud/uploads/38779/2025-12-23/SEEFd-12-dias-de-clamor-pela-familia.png"
+      alt="Bônus extras"
+      loading="lazy"
+    >
+
+    <div class="testimonial">
+      <p class="testimonial-text">"A Delma disse que está amando todas as direções e participar do grupo 👇🏼"</p>
+    </div>
+
+    <img
+      class="step-img"
+      src="https://media.inlead.cloud/uploads/38779/2025-12-23/flNjV-0a91cc75-2346-4d85-8ed8-ad0b3e76ef41.png"
+      alt="Depoimento Delma"
+      loading="lazy"
+    >
+
+    <button class="btn btn-green" onclick="goTo('step-13')">
+      QUERO SALVAR MEU FILHO ☑️
+    </button>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       STEP 13 — PARA QUEM É?
+  ══════════════════════════════════════ -->
+  <div class="step" id="step-13">
+    <h2 class="headline">
+      O Devocional do Filho Liberto é para a mãe que ⬇
+    </h2>
+
+    <img
+      class="step-img"
+      src="https://media.inlead.cloud/uploads/38779/2025-10-30/atmr6-bf11081f-f729-4263-8896-4e65f53e1c46.jpg"
+      alt="Para quem é"
+      loading="lazy"
+    >
+
+    <button class="btn btn-green btn-pulse" onclick="goTo('step-14')">
+      QUERO COMEÇAR ☑️
+    </button>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       STEP 14 — RECAPITULANDO
+  ══════════════════════════════════════ -->
+  <div class="step" id="step-14">
+    <h2 class="headline">RECAPITULANDO</h2>
+    <p class="body-text">Veja tudo que você irá receber no <strong>Devocional Filho Liberto</strong></p>
+
+    <img
+      class="step-img"
+      src="https://media.inlead.cloud/uploads/38779/2025-12-23/2lZiV-12-dias-de-clamor-pela-familia-1.png"
+      alt="Recapitulando"
+      loading="lazy"
+    >
+
+    <div class="recap-list">
+      <div class="recap-item"><div class="recap-icon">✓</div> Devocional Filho Liberto — 21 dias de Jejum e Oração</div>
+      <div class="recap-item"><div class="recap-icon">✓</div> Diagnóstico das Setas Malignas</div>
+      <div class="recap-item"><div class="recap-icon">✓</div> Orações Guiadas de Libertação</div>
+      <div class="recap-item"><div class="recap-icon">✓</div> Campanha da Proteção Divina</div>
+      <div class="recap-item"><div class="recap-icon">✓</div> Mapa das Amizades</div>
+      <div class="recap-item"><div class="recap-icon">✓</div> + Todos os Bônus Especiais</div>
+      <div class="recap-item"><div class="recap-icon">✓</div> Acesso à Comunidade de Mães</div>
+    </div>
+
+    <img
+      class="step-img"
+      src="https://media.inlead.cloud/uploads/38779/2025-12-23/BCYX8-5c93ece5-b867-4f66-bd50-4f0caa5ded23.png"
+      alt="Tudo incluído"
+      loading="lazy"
+    >
+
+    <p class="body-text">+ todos esses <strong>BÔNUS ⬇️</strong></p>
+
+    <img
+      class="step-img"
+      src="https://media.inlead.cloud/uploads/38779/2025-12-23/61uYT-39ff59cc-d8b3-474b-a8cf-43ff0fa70cf6.png"
+      alt="Bônus"
+      loading="lazy"
+    >
+
+    <div class="price-box">
+      <p class="price-was">Tudo isso poderia custar R$649</p>
+      <p class="price-now">R$ 47</p>
+      <p class="price-installment">ou em até 12x no cartão</p>
+    </div>
+
+    <button class="btn btn-green" onclick="goTo('step-15')">
+      QUERO SALVAR MEU FILHO ☑️
+    </button>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       STEP 15 — SALES PAGE FINAL
+  ══════════════════════════════════════ -->
+  <div class="step" id="step-15">
+    <h2 class="headline">
+      Veja o seu filho <span class="highlight">TRANSFORMADO POR DEUS</span> com o poder da Oração e Jejum.<br>
+      Através do Devocional Filho Liberto ⬇️
+    </h2>
+
+    <img
+      class="step-img"
+      src="https://media.inlead.cloud/uploads/38779/2025-12-23/1LbjB-99d95cfa-dff7-4344-b80e-79bc3dcd7b65.png"
+      alt="Devocional Filho Liberto"
+      loading="lazy"
+    >
+
+    <div class="alert-box">
+      📲 RECEBA O ACESSO IMEDIATO NO WHATSAPP
+    </div>
+
+    <a class="btn btn-green btn-pulse" href="https://pay.hotmart.com/V103303064X?checkoutMode=10" target="_blank" rel="noopener">
+      QUERO COMEÇAR AGORA ✅
+    </a>
+
+    <hr class="divider">
+
+    <h3 class="subheadline">RECAPITULANDO</h3>
+    <p class="body-text">Veja tudo que você irá receber no <strong>Devocional Filho Liberto</strong></p>
+
+    <img
+      class="step-img"
+      src="https://media.inlead.cloud/uploads/38779/2025-11-04/9gfz1-inserir-um-subtitulo-1.png"
+      alt="Recapitulando completo"
+      loading="lazy"
+    >
+
+    <hr class="divider">
+
+    <h3 class="subheadline" style="color:var(--red)">
+      Ficar vendo o seu filho se perder? Ou dobrar o joelho e orar por ele?
+    </h3>
+
+    <img
+      class="step-img"
+      src="https://media.inlead.cloud/uploads/38779/2025-12-23/4kjr1-7769b040-49fa-43ce-a08e-cad36f64de00.png"
+      alt="Decisão"
+      loading="lazy"
+    >
+
+    <div class="recap-list">
+      <div class="recap-item" style="color:var(--red)">
+        <div class="recap-icon" style="background:var(--red)">✕</div>
+        Você prefere CONTINUAR SOFRENDO enquanto vê ele perder a salvação.
+      </div>
+      <div class="recap-item">
+        <div class="recap-icon">✓</div>
+        Ou contribuir para a salvação dele usando a AUTORIDADE DE MÃE que Deus te deu, orando com DIREÇÃO e PROPÓSITO!
+      </div>
+    </div>
+
+    <a class="btn btn-green btn-pulse" href="https://pay.hotmart.com/V103303064X?checkoutMode=10" target="_blank" rel="noopener">
+      QUERO COMEÇAR AGORA ✅
+    </a>
+
+    <hr class="divider">
+
+    <p class="body-text">🩷 <strong>Ela está vivendo o extraordinário</strong> com a sua família através do poder do Jejum e da Oração ⬇️</p>
+
+    <img
+      class="step-img"
+      src="https://media.inlead.cloud/uploads/38779/2025-12-23/EST3q-whatsapp-image-2025-12-23t201020-766-1.jpeg"
+      alt="Testemunho 1"
+      loading="lazy"
+    >
+
+    <p class="body-text">🙏🏼 <strong>Ela já entendeu o poder</strong> que existe no Jejum e na Oração ⬇️</p>
+
+    <img
+      class="step-img"
+      src="https://media.inlead.cloud/uploads/38779/2025-12-23/XH3wP-6544aa18-6f61-47d6-a1ac-0e7caf23dfe0.png"
+      alt="Testemunho 2"
+      loading="lazy"
+    >
+
+    <a class="btn btn-green btn-pulse" href="https://pay.hotmart.com/V103303064X?checkoutMode=10" target="_blank" rel="noopener">
+      QUERO COMEÇAR AGORA ✅
+    </a>
+
+    <hr class="divider">
+
+    <p class="body-text">🩷 <strong>Todas elas estão participando do grupo</strong> e compartilhando testemunhos</p>
+
+    <div class="carousel">
+      <img src="https://media.inlead.cloud/uploads/38779/2025-12-23/YObzz-3c8e5513-4d20-44cd-b561-de19c908a49f.png" alt="Testemunho" loading="lazy">
+      <img src="https://media.inlead.cloud/uploads/38779/2025-12-23/spEHK-59bb7a4c-0e1d-4efc-9005-51ee18e8a9bd.png" alt="Testemunho" loading="lazy">
+      <img src="https://media.inlead.cloud/uploads/38779/2025-12-23/DTbZF-a35e0e0b-f3b8-4991-acf1-292d338732b4.png" alt="Testemunho" loading="lazy">
+    </div>
+
+    <hr class="divider">
+
+    <h3 class="subheadline">Respostas que confirmam que essa é a melhor decisão que você vai tomar ⬇️</h3>
+
+    <div class="faq">
+      <div class="faq-item">
+        <p class="faq-q">1️⃣ Eu já estou orando por anos e nada mudou, porque agora seria diferente?</p>
+        <p class="faq-a">👉🏼 Porque o Devocional Filho Liberto surgiu da experiência real de uma mãe que também orou por anos sem direção — até descobrir o método de orar com PROPÓSITO e ver Deus agir.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">2️⃣ Tenho medo de começar e não terminar.</p>
+        <p class="faq-a">👉🏼 Por isso existe a comunidade! Você não vai estar sozinha. Seremos 26 mil mães orando juntas, se apoiando e compartilhando testemunhos todos os dias.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">3️⃣ Não tenho tempo para fazer o devocional todo dia.</p>
+        <p class="faq-a">👉🏼 O devocional é prático e direto. São apenas minutos por dia — e o investimento de tempo pela salvação do seu filho não tem preço.</p>
+      </div>
+    </div>
+
+    <img
+      class="step-img"
+      src="https://media.inlead.cloud/uploads/38779/2025-12-23/1LbjB-99d95cfa-dff7-4344-b80e-79bc3dcd7b65.png"
+      alt="Devocional Filho Liberto"
+      loading="lazy"
+    >
+
+    <div class="price-box">
+      <p class="price-was">De R$649,00 por apenas</p>
+      <p class="price-now">R$ 47,00</p>
+      <p class="price-installment">ou 12x de R$4,70 no cartão</p>
+    </div>
+
+    <a class="btn btn-green btn-pulse" href="https://pay.hotmart.com/V103303064X?checkoutMode=10" target="_blank" rel="noopener">
+      QUERO COMEÇAR AGORA ✅
+    </a>
+
+    <div class="guarantee">
+      <div class="guarantee-icon">🛡️</div>
+      <div class="guarantee-text">
+        <strong>Garantia de 7 dias</strong><br>
+        Se você não ficar satisfeita, devolvemos 100% do seu dinheiro sem perguntas.
+      </div>
+    </div>
+
+    <div class="security-bar">
+      <div class="security-item">🔒 Compra 100% Segura</div>
+      <div class="security-item">🛡️ Dados protegidos</div>
+      <div class="security-item">⚡ Acesso imediato</div>
+    </div>
+
+    <div class="contact-footer">
+      📲 Instagram: <strong>@devocionalfilholiberto</strong><br>
+      📩 devocionaldofilholiberto@gmail.com<br>
+      📲 (47) 99217-1989
+    </div>
+  </div>
+
+</div><!-- /quiz-wrapper -->
+
+<script>
+  // ── FLOW CONFIG ──
+  const TOTAL_STEPS = 15;
+
+  function getStepNum(id) {
+    return parseInt(id.replace('step-', ''));
+  }
+
+  function goTo(stepId) {
+    const current = document.querySelector('.step.active');
+    const next = document.getElementById(stepId);
+    if (!next || current === next) return;
+
+    current.classList.remove('active');
+    next.classList.add('active');
+
+    // Update progress bar
+    const n = getStepNum(stepId);
+    const pct = Math.round((n / TOTAL_STEPS) * 100);
+    document.getElementById('progress-bar').style.width = pct + '%';
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── MULTI-SELECT OPTIONS ──
+  function toggleOption(el) {
+    el.classList.toggle('selected');
+    const anySelected = document.querySelectorAll('.option-item.selected').length > 0;
+    const btn = document.getElementById('btn-options');
+    if (anySelected) {
+      btn.style.opacity = '1';
+      btn.style.pointerEvents = 'auto';
+    } else {
+      btn.style.opacity = '0.5';
+      btn.style.pointerEvents = 'none';
+    }
+  }
+</script>
+
+</body>
+</html>
