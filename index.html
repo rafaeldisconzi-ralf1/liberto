@@ -66,6 +66,7 @@
       flex-direction: column;
       position: relative;
       overflow: hidden;
+      isolation: isolate;
     }
 
     /* ── STEP ── */
@@ -74,6 +75,8 @@
       flex-direction: column;
       gap: 22px;
       padding: 32px 22px 56px;
+      position: relative;
+      z-index: 1;
       animation: rise 0.4s cubic-bezier(0.4,0,0.2,1) forwards;
     }
     .step.active { display: flex; }
@@ -648,6 +651,30 @@
     .age-emoji { font-size: 1.4rem; }
 
 
+
+    /* ── FLOATING CROSSES (remove #crosses-canvas + this block to disable) ── */
+    #crosses-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .cross-particle {
+      position: absolute;
+      color: var(--gold);
+      opacity: 0;
+      font-size: 0.75rem;
+      user-select: none;
+      animation: cross-float linear infinite;
+    }
+    @keyframes cross-float {
+      0%   { transform: translateY(0)   rotate(0deg);   opacity: 0; }
+      10%  { opacity: 0.18; }
+      90%  { opacity: 0.12; }
+      100% { transform: translateY(-110vh) rotate(25deg); opacity: 0; }
+    }
+
     /* ── PRAYER FLY ANIMATION (remove this block + flyPrayer() to disable) ── */
     .prayer-fly {
       position: fixed;
@@ -708,6 +735,9 @@
 
 
 <div id="quiz-wrapper">
+
+<div id="crosses-canvas"></div>
+
 
   <!-- ══════════════════════
        STEP NAME — BOAS-VINDAS
@@ -1437,6 +1467,25 @@
     goTo('step-1');
   }
 
+
+
+  // ── FLOATING CROSSES (remove this block + #crosses-canvas to disable) ──
+  (function(){
+    const canvas = document.getElementById('crosses-canvas');
+    if (!canvas) return;
+    const COUNT = 18;
+    for (let i = 0; i < COUNT; i++) {
+      const el = document.createElement('span');
+      el.className = 'cross-particle';
+      el.textContent = '✝';
+      const size   = 0.55 + Math.random() * 0.55;   // 0.55–1.1rem
+      const left   = Math.random() * 100;             // % across
+      const dur    = 14 + Math.random() * 22;         // 14–36s cycle
+      const delay  = -(Math.random() * dur);          // stagger start
+      el.style.cssText = `left:${left}%;bottom:-5%;font-size:${size}rem;animation-duration:${dur}s;animation-delay:${delay}s`;
+      canvas.appendChild(el);
+    }
+  })();
 
   // ── PRAYER FLY ANIMATION (remove flyPrayer() calls + this function to disable) ──
   function flyPrayer(e) {
