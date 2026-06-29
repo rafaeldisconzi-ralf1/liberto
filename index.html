@@ -670,8 +670,8 @@
     }
     @keyframes cross-float {
       0%   { transform: translateY(0)   rotate(0deg);   opacity: 0; }
-      10%  { opacity: 0.18; }
-      90%  { opacity: 0.12; }
+      10%  { opacity: 0.45; }
+      90%  { opacity: 0.32; }
       100% { transform: translateY(-110vh) rotate(25deg); opacity: 0; }
     }
 
@@ -1476,7 +1476,7 @@
       const el = document.createElement('span');
       el.className = 'cross-particle';
       el.textContent = '✝';
-      const size   = 0.55 + Math.random() * 0.55;   // 0.55–1.1rem
+      const size   = 0.9 + Math.random() * 0.8;   // 0.9–1.7rem
       const left   = Math.random() * 100;             // % across
       const dur    = 14 + Math.random() * 22;         // 14–36s cycle
       const delay  = -(Math.random() * dur);          // stagger start
