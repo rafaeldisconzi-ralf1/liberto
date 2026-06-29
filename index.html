@@ -73,7 +73,7 @@
       display: none;
       flex-direction: column;
       gap: 22px;
-      padding: 32px 22px 56px;
+      padding: 44px 22px 56px;
       position: relative;
       z-index: 1;
       animation: rise 0.4s cubic-bezier(0.4,0,0.2,1) forwards;
@@ -693,32 +693,26 @@
     /* ── PRAYER COUNTER ── */
     #prayer-bar {
       position: fixed;
-      top: 4px; left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: var(--max-w);
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      padding: 6px 16px 0;
+      top: 8px;
+      right: 12px;
       z-index: 101;
       pointer-events: none;
     }
     #prayer-display {
       display: flex;
       align-items: center;
-      gap: 5px;
-      background: rgba(61,107,79,0.92);
-      border: 1px solid rgba(201,151,58,0.5);
+      gap: 4px;
+      background: rgba(61,107,79,0.88);
+      border: 1px solid rgba(201,151,58,0.4);
       border-radius: 999px;
-      padding: 5px 13px 5px 9px;
-      font-size: 0.78rem;
-      font-weight: 800;
+      padding: 4px 10px 4px 8px;
+      font-size: 0.7rem;
+      font-weight: 700;
       color: #fff;
       backdrop-filter: blur(6px);
-      letter-spacing: 0.01em;
+      white-space: nowrap;
     }
-    #prayer-display .prayer-icon { font-size: 0.95rem; }
+    #prayer-display .prayer-icon { font-size: 0.82rem; }
     #prayer-count { transition: transform 0.15s ease; display: inline-block; }
     #prayer-count.bump { transform: scale(1.5); color: var(--gold-light); }
   </style>
