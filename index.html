@@ -663,14 +663,15 @@
       position: absolute;
       color: var(--gold);
       opacity: 0;
-      font-size: 0.75rem;
+      font-size: 1rem;
       user-select: none;
       animation: cross-float linear infinite;
+      font-weight: 900;
     }
     @keyframes cross-float {
       0%   { transform: translateY(0)   rotate(0deg);   opacity: 0; }
-      10%  { opacity: 0.45; }
-      90%  { opacity: 0.32; }
+      10%  { opacity: 0.7; }
+      90%  { opacity: 0.55; }
       100% { transform: translateY(-110vh) rotate(25deg); opacity: 0; }
     }
 
@@ -1470,12 +1471,12 @@
   (function(){
     const canvas = document.getElementById('crosses-canvas');
     if (!canvas) return;
-    const COUNT = 18;
+    const COUNT = 24;
     for (let i = 0; i < COUNT; i++) {
       const el = document.createElement('span');
       el.className = 'cross-particle';
       el.textContent = '✝';
-      const size   = 0.9 + Math.random() * 0.8;   // 0.9–1.7rem
+      const size   = 1.1 + Math.random() * 1.0;   // 1.1–2.1rem
       const left   = Math.random() * 100;             // % across
       const dur    = 14 + Math.random() * 22;         // 14–36s cycle
       const delay  = -(Math.random() * dur);          // stagger start
