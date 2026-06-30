@@ -43,7 +43,7 @@ jobs:
           server: 185.173.111.186
           username: u937190574
           password: ${{ secrets.SSH_PASSWORD }}
-          remote_path: /public_html/
+          remote_path: ~/public_html/
           local_path: ./*
           sftp_only: true
           port: 65002
