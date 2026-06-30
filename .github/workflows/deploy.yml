@@ -41,7 +41,7 @@ jobs:
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           server: 185.173.111.186
-          username: u937190574.devocionalfilholiberto.shop
+          username: u937190574
           password: ${{ secrets.FTP_PASSWORD }}
           remote_path: /public_html/
           local_path: ./*
