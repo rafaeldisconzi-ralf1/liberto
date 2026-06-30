@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy
 
 on:
   push:
@@ -14,7 +14,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  deploy-github-pages:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -31,3 +31,21 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  deploy-hostinger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Upload to Hostinger via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: 185.173.111.186
+          username: u937190574.devocionalfilholiberto.shop
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /public_html/
+          local-dir: ./
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .github/**
