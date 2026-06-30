@@ -45,4 +45,4 @@ jobs:
             --exclude='.git' \
             --exclude='.github' \
             -e "ssh -p 65002 -o StrictHostKeyChecking=no" \
-            ./ u937190574@185.173.111.186:/home/u937190574/public_html/
+            ./ u937190574@185.173.111.186:/home/u937190574/domains/devocionalfilholiberto.shop/public_html/
