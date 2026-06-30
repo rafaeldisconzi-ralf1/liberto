@@ -37,14 +37,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Upload to Hostinger via SFTP
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
-        with:
-          server: 185.173.111.186
-          username: u937190574
-          password: ${{ secrets.SSH_PASSWORD }}
-          remote_path: public_html/
-          local_path: ./*
-          sftp_only: true
-          port: 65002
-          args: '-o StrictHostKeyChecking=no'
+      - name: Install sshpass
+        run: sudo apt-get install -y sshpass rsync
+      - name: Deploy via rsync over SSH
+        run: |
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" rsync -avz \
+            --exclude='.git' \
+            --exclude='.github' \
+            -e "ssh -p 65002 -o StrictHostKeyChecking=no" \
+            ./ u937190574@185.173.111.186:/home/u937190574/public_html/
