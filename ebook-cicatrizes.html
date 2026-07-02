@@ -1,0 +1,1852 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cicatrizes Invisíveis da Infância</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8D08A;
+    --brown: #5C3D2E;
+    --brown-dark: #3D2B1F;
+    --cream: #FDFAF5;
+    --beige: #F5ECD7;
+    --beige-dark: #EAD9BF;
+    --text: #3D2B1F;
+    --text-light: #7A5C47;
+  }
+
+  body {
+    background: #E8E0D5;
+    font-family: 'Lato', sans-serif;
+    color: var(--text);
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto 8mm;
+    background: var(--cream);
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media print {
+    body { background: white; }
+    .page { margin: 0; box-shadow: none; page-break-after: always; }
+  }
+
+  @page { size: A4; margin: 0; }
+
+  /* ── DECORATIVE ELEMENTS ── */
+  .corner-tl, .corner-tr, .corner-bl, .corner-br {
+    position: absolute;
+    width: 28mm;
+    height: 28mm;
+    opacity: 0.18;
+  }
+  .corner-tl { top: 0; left: 0; border-top: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+  .corner-tr { top: 0; right: 0; border-top: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+  .corner-bl { bottom: 0; left: 0; border-bottom: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+  .corner-br { bottom: 0; right: 0; border-bottom: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+
+  .divider-gold {
+    width: 60mm;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    margin: 6mm auto;
+  }
+  .divider-slim {
+    width: 30mm;
+    height: 1px;
+    background: var(--gold);
+    margin: 4mm auto;
+    opacity: 0.5;
+  }
+
+  /* ── COVER ── */
+  .page-cover {
+    background: linear-gradient(160deg, #FDFAF5 0%, #F5ECD7 50%, #EAD9BF 100%);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .cover-ornament {
+    font-size: 36pt;
+    color: var(--gold);
+    opacity: 0.4;
+    letter-spacing: 8mm;
+    margin-bottom: 6mm;
+  }
+  .cover-image-placeholder {
+    width: 70mm;
+    height: 70mm;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #E8D08A33, #C9A84C22);
+    border: 1.5px solid var(--gold-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 8mm;
+    flex-direction: column;
+    gap: 3mm;
+  }
+  .cover-image-placeholder .icon { font-size: 28pt; opacity: 0.5; }
+  .cover-image-placeholder .hint { font-size: 6pt; color: var(--text-light); font-family: 'Lato'; letter-spacing: 0.5mm; }
+  .cover-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28pt;
+    font-weight: 700;
+    color: var(--brown-dark);
+    line-height: 1.2;
+    letter-spacing: 0.3mm;
+    padding: 0 20mm;
+  }
+  .cover-title em { color: var(--gold); font-style: italic; }
+  .cover-subtitle {
+    font-family: 'Lato', sans-serif;
+    font-size: 8.5pt;
+    color: var(--text-light);
+    font-weight: 300;
+    line-height: 1.6;
+    padding: 0 22mm;
+    margin-top: 5mm;
+  }
+  .cover-brand {
+    font-family: 'Lato', sans-serif;
+    font-size: 7.5pt;
+    letter-spacing: 3mm;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-top: 8mm;
+  }
+  .cover-bottom-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 12mm;
+    background: var(--brown);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cover-bottom-bar span {
+    color: var(--gold-light);
+    font-size: 7pt;
+    letter-spacing: 2mm;
+    text-transform: uppercase;
+  }
+
+  /* ── CONTENT PAGES ── */
+  .page-inner {
+    padding: 18mm 18mm 16mm;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chapter-label {
+    font-family: 'Lato', sans-serif;
+    font-size: 6.5pt;
+    letter-spacing: 3mm;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 3mm;
+  }
+  .chapter-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20pt;
+    font-weight: 700;
+    color: var(--brown-dark);
+    line-height: 1.25;
+    margin-bottom: 2mm;
+  }
+  .chapter-title em { color: var(--gold); font-style: italic; }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 13pt;
+    font-weight: 600;
+    color: var(--brown);
+    margin: 6mm 0 3mm;
+  }
+  p {
+    font-family: 'Lato', sans-serif;
+    font-size: 9.5pt;
+    line-height: 1.75;
+    color: var(--text);
+    margin-bottom: 4mm;
+  }
+  p.lead {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12pt;
+    font-style: italic;
+    color: var(--brown);
+    line-height: 1.6;
+  }
+
+  /* ── VERSE BOX ── */
+  .verse-box {
+    background: linear-gradient(135deg, #F5ECD7, #EAD9BF);
+    border-left: 3px solid var(--gold);
+    border-radius: 2mm;
+    padding: 5mm 6mm;
+    margin: 5mm 0;
+  }
+  .verse-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11pt;
+    font-style: italic;
+    color: var(--brown-dark);
+    line-height: 1.6;
+    margin-bottom: 2mm;
+  }
+  .verse-ref {
+    font-size: 7.5pt;
+    color: var(--gold);
+    letter-spacing: 1mm;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  /* ── HIGHLIGHT BOX ── */
+  .highlight-box {
+    background: var(--brown);
+    border-radius: 3mm;
+    padding: 6mm 7mm;
+    margin: 5mm 0;
+  }
+  .highlight-box p {
+    color: var(--beige);
+    font-size: 10pt;
+    line-height: 1.7;
+    margin: 0;
+  }
+  .highlight-box p strong { color: var(--gold-light); }
+
+  /* ── PULL QUOTE ── */
+  .pull-quote {
+    text-align: center;
+    padding: 6mm 10mm;
+    margin: 5mm 0;
+  }
+  .pull-quote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 13pt;
+    font-style: italic;
+    color: var(--brown);
+    line-height: 1.5;
+  }
+  .pull-quote::before, .pull-quote::after {
+    content: '';
+    display: block;
+    width: 40mm;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    margin: 3mm auto;
+  }
+
+  /* ── LIST ── */
+  .styled-list {
+    list-style: none;
+    margin: 3mm 0;
+  }
+  .styled-list li {
+    font-size: 9.5pt;
+    color: var(--text);
+    line-height: 1.7;
+    padding: 1.5mm 0 1.5mm 6mm;
+    position: relative;
+  }
+  .styled-list li::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 7pt;
+    top: 2.5mm;
+  }
+
+  /* ── NUMBERED LIST ── */
+  .num-list { list-style: none; counter-reset: num; margin: 3mm 0; }
+  .num-list li {
+    font-size: 9.5pt;
+    line-height: 1.7;
+    padding: 2mm 0 2mm 9mm;
+    position: relative;
+    counter-increment: num;
+  }
+  .num-list li::before {
+    content: counter(num);
+    position: absolute;
+    left: 0;
+    width: 6mm;
+    height: 6mm;
+    background: var(--gold);
+    color: white;
+    font-size: 7pt;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 2mm;
+  }
+
+  /* ── HEADER BAR ── */
+  .page-header {
+    background: var(--brown);
+    height: 10mm;
+    display: flex;
+    align-items: center;
+    padding: 0 18mm;
+    justify-content: space-between;
+  }
+  .page-header span {
+    font-size: 6.5pt;
+    color: var(--gold-light);
+    letter-spacing: 1.5mm;
+    text-transform: uppercase;
+  }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    height: 8mm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 0.5px solid var(--beige-dark);
+  }
+  .page-footer span {
+    font-size: 6pt;
+    color: var(--text-light);
+    letter-spacing: 1mm;
+  }
+
+  /* ── TWO COLUMNS ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin: 4mm 0; }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--beige);
+    border-radius: 3mm;
+    padding: 5mm;
+    border-top: 2px solid var(--gold);
+  }
+  .card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 10pt;
+    color: var(--brown-dark);
+    margin-bottom: 2mm;
+  }
+  .card p { font-size: 8.5pt; margin: 0; line-height: 1.6; }
+
+  /* ── CHAPTER OPENER ── */
+  .chapter-opener {
+    background: linear-gradient(160deg, var(--brown) 0%, #3D2B1F 100%);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 297mm;
+  }
+  .chapter-opener .ch-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 80pt;
+    color: var(--gold);
+    opacity: 0.2;
+    line-height: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -65%);
+  }
+  .chapter-opener .ch-label {
+    font-size: 7pt;
+    letter-spacing: 4mm;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 4mm;
+    position: relative;
+    z-index: 1;
+  }
+  .chapter-opener .ch-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22pt;
+    color: white;
+    line-height: 1.3;
+    padding: 0 20mm;
+    position: relative;
+    z-index: 1;
+  }
+  .chapter-opener .ch-title em { color: var(--gold-light); }
+  .chapter-opener .ch-verse {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 10pt;
+    color: var(--beige-dark);
+    font-style: italic;
+    margin-top: 6mm;
+    padding: 0 25mm;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── DIARY PAGE ── */
+  .diary-page { background: #FFFDF8; }
+  .diary-header {
+    background: var(--brown);
+    padding: 8mm 18mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .diary-header .dia { font-family:'Playfair Display',serif; font-size:18pt; color:var(--gold-light); font-style:italic; }
+  .diary-header .date-line { font-size:8pt; color:var(--beige-dark); letter-spacing:1mm; }
+  .diary-field {
+    border-bottom: 1px dashed var(--beige-dark);
+    min-height: 10mm;
+    margin: 1.5mm 0 3mm;
+    padding: 1mm 0;
+  }
+  .diary-label {
+    font-size: 6.5pt;
+    color: var(--gold);
+    letter-spacing: 1.5mm;
+    text-transform: uppercase;
+    margin-top: 4mm;
+  }
+  .diary-lines { display: flex; flex-direction: column; gap: 4mm; flex: 1; }
+  .diary-line { border-bottom: 1px solid var(--beige-dark); height: 5mm; }
+  .diary-verse-box {
+    background: var(--beige);
+    border-radius: 2mm;
+    padding: 4mm 5mm;
+    margin: 3mm 0;
+    border-left: 2px solid var(--gold);
+  }
+  .diary-verse-box .label { font-size:6pt; color:var(--gold); letter-spacing:1.5mm; text-transform:uppercase; margin-bottom:1mm; }
+  .diary-verse-box .verse { font-family:'Cormorant Garamond',serif; font-size:10pt; font-style:italic; color:var(--brown); }
+
+  /* ── PLAN 21 DAYS ── */
+  .day-card {
+    background: white;
+    border-radius: 3mm;
+    border: 1px solid var(--beige-dark);
+    border-top: 3px solid var(--gold);
+    padding: 5mm;
+    margin-bottom: 4mm;
+  }
+  .day-card .day-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 9pt;
+    color: var(--gold);
+    font-style: italic;
+    margin-bottom: 1.5mm;
+  }
+  .day-card .day-verse {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 9.5pt;
+    font-style: italic;
+    color: var(--brown);
+    border-left: 2px solid var(--gold-light);
+    padding-left: 3mm;
+    margin: 2mm 0;
+    line-height: 1.5;
+  }
+  .day-card .day-ref { font-size: 6.5pt; color: var(--gold); letter-spacing: 0.5mm; }
+  .day-card .day-reflection { font-size: 8.5pt; color: var(--text); line-height: 1.6; margin: 2mm 0; }
+  .day-card .day-activity {
+    background: var(--beige);
+    border-radius: 2mm;
+    padding: 3mm 4mm;
+    margin: 2mm 0;
+  }
+  .day-card .day-activity .act-label { font-size:6pt; color:var(--gold); letter-spacing:1mm; text-transform:uppercase; margin-bottom:1mm; }
+  .day-card .day-activity p { font-size: 8pt; margin: 0; line-height: 1.5; }
+  .day-card .day-prayer { font-size: 8.5pt; color: var(--brown); font-style: italic; line-height: 1.6; margin-top: 2mm; }
+  .day-card .pray-label { font-size:6pt; color:var(--text-light); letter-spacing:1mm; text-transform:uppercase; margin-bottom:1mm; }
+
+  /* ── DISCLAIMER ── */
+  .disclaimer-page { background: var(--brown); }
+  .disclaimer-page .page-inner { justify-content: center; }
+  .disclaimer-page p { color: var(--beige-dark); font-size: 8.5pt; line-height: 1.8; }
+  .disclaimer-page .d-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 14pt;
+    color: var(--gold-light);
+    margin-bottom: 5mm;
+  }
+
+  /* ── CONCLUSION ── */
+  .conclusion-page {
+    background: linear-gradient(170deg, #FDFAF5 0%, #F5ECD7 100%);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .conclusion-page .page-inner { justify-content: center; align-items: center; }
+
+  /* image prompt callout */
+  .img-prompt-box {
+    border: 1.5px dashed var(--gold);
+    border-radius: 3mm;
+    padding: 6mm 8mm;
+    margin: 5mm 0;
+    text-align: center;
+    background: #FFFDF8;
+  }
+  .img-prompt-box .label { font-size:6.5pt; color:var(--gold); letter-spacing:2mm; text-transform:uppercase; margin-bottom:2mm; }
+  .img-prompt-box p { font-size: 8pt; color: var(--text-light); margin: 0; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 1 — CAPA
+══════════════════════════════════════════════════════ -->
+<div class="page page-cover">
+  <div class="corner-tl"></div><div class="corner-tr"></div>
+  <div class="corner-bl"></div><div class="corner-br"></div>
+
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;padding:20mm;">
+    <div class="cover-ornament">✦ ✦ ✦</div>
+
+    <!-- Espaço para imagem da capa gerada por IA -->
+    <div class="cover-image-placeholder">
+      <span class="icon">🕊️</span>
+      <span class="hint">INSERIR IMAGEM DA CAPA</span>
+    </div>
+
+    <div class="divider-gold"></div>
+
+    <h1 class="cover-title">Cicatrizes <em>Invisíveis</em><br>da Infância</h1>
+
+    <div class="divider-gold"></div>
+
+    <p class="cover-subtitle">
+      Um guia cristão para fortalecer o vínculo entre pais e filhos,<br>
+      cultivar segurança emocional e caminhar com Deus<br>
+      em cada etapa do desenvolvimento.
+    </p>
+
+    <div style="margin-top:8mm;">
+      <span class="cover-brand">Devocional Filho Liberto</span>
+    </div>
+  </div>
+
+  <div class="cover-bottom-bar">
+    <span>Guia Cristão para Famílias</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 2 — COPYRIGHT / AVISO LEGAL
+══════════════════════════════════════════════════════ -->
+<div class="page disclaimer-page">
+  <div class="page-inner" style="justify-content:center;">
+    <p class="d-title">Aviso Importante</p>
+    <p>Este material tem fins exclusivamente informativos, educativos e de apoio espiritual. Ele não substitui, em nenhuma hipótese, o acompanhamento de profissionais da saúde — psicólogos, médicos, psiquiatras ou terapeutas.</p>
+    <br>
+    <p>As práticas, reflexões e sugestões apresentadas neste eBook <strong style="color:var(--gold-light)">podem contribuir</strong> para o fortalecimento do vínculo familiar e para o desenvolvimento emocional saudável da criança, mas não têm o objetivo de diagnosticar, tratar ou curar qualquer condição psicológica ou emocional.</p>
+    <br>
+    <p>Se você identificar sinais de sofrimento significativo em seu filho ou em outro membro da família, procure orientação profissional especializada.</p>
+    <br>
+    <div class="divider-slim"></div>
+    <br>
+    <p style="font-size:7.5pt;color:var(--text-light);">© Devocional Filho Liberto. Todos os direitos reservados.<br>
+    É proibida a reprodução total ou parcial deste material sem autorização.</p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 3 — APRESENTAÇÃO
+══════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <span>Cicatrizes Invisíveis da Infância</span>
+    <span>Apresentação</span>
+  </div>
+  <div class="page-inner">
+    <div class="chapter-label">✦ Apresentação</div>
+    <h2 class="chapter-title">Uma Carta<br>para <em>Você</em></h2>
+    <div class="divider-slim"></div>
+
+    <p class="lead">"Mãe, pai... você chegou até aqui porque ama profundamente seu filho. E isso já é o começo de tudo."</p>
+
+    <p>Há marcas que não aparecem em radiografias. Há feridas que não sangram, mas doem. E há uma geração de crianças carregando, em silêncio, aquilo que os adultos ao redor ainda não conseguiram ver.</p>
+
+    <p>Este eBook nasceu de um desejo sincero: oferecer a você — mãe, pai, avó ou cuidador — um guia acolhedor que ajude a <strong>enxergar o que está por trás do comportamento do seu filho</strong>, fortalecer o laço entre vocês e caminhar com Deus nessa jornada tão sagrada que é criar uma criança.</p>
+
+    <p>Aqui não encontrará julgamentos. Encontrará reflexões, ferramentas práticas, versículos que sustentam e orações que fortalecem.</p>
+
+    <div class="verse-box">
+      <p class="verse-text">"Instruí o menino no caminho em que deve andar; e até quando envelhecer não se desviará dele."</p>
+      <p class="verse-ref">Provérbios 22:6</p>
+    </div>
+
+    <p>Que cada página deste material <strong>contribua para que seu lar se torne um lugar mais seguro, mais amoroso e mais cheio da presença de Deus.</strong></p>
+
+    <p>Com carinho,<br><em>Devocional Filho Liberto</em></p>
+  </div>
+  <div class="page-footer"><span>3</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 4 — CAPÍTULO 1 OPENER
+══════════════════════════════════════════════════════ -->
+<div class="page chapter-opener">
+  <div class="ch-num">01</div>
+  <div class="page-inner" style="justify-content:center;align-items:center;text-align:center;">
+    <p class="ch-label">Capítulo Um</p>
+    <div class="divider-slim" style="background:var(--gold-light);opacity:0.4;"></div>
+    <h2 class="ch-title">O que são as<br><em>Cicatrizes Invisíveis?</em></h2>
+    <div class="divider-slim" style="background:var(--gold-light);opacity:0.4;"></div>
+    <p class="ch-verse">"O Senhor é próximo dos que têm o coração quebrantado<br>e salva os de espírito abatido."<br><span style="color:var(--gold);font-style:normal;font-size:8pt;letter-spacing:1mm;">SALMO 34:18</span></p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 5 — CAPÍTULO 1 CONTEÚDO
+══════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <span>Cicatrizes Invisíveis da Infância</span>
+    <span>Capítulo 1</span>
+  </div>
+  <div class="page-inner">
+    <div class="chapter-label">✦ Capítulo 1</div>
+    <h2 class="chapter-title">O que são as <em>Cicatrizes Invisíveis?</em></h2>
+    <div class="divider-slim"></div>
+
+    <p>Toda criança chega ao mundo com uma necessidade fundamental: <strong>ser amada, protegida e vista.</strong> Quando essas necessidades são plenamente atendidas, ela desenvolve uma base emocional sólida. Quando não são — ainda que sem intenção —, surgem as chamadas <em>cicatrizes invisíveis.</em></p>
+
+    <p>Essas marcas não são visíveis a olho nu. Não aparecem em exames médicos. Mas se manifestam em comportamentos, reações e padrões emocionais que podem acompanhar a criança por anos, e até mesmo na vida adulta.</p>
+
+    <div class="highlight-box">
+      <p>Cicatrizes invisíveis podem surgir de experiências como: <strong>ausência emocional, conflitos frequentes no lar, comparações, cobranças excessivas, falta de acolhimento</strong> ou situações que a criança vivenciou sem ter suporte para compreender ou processar.</p>
+    </div>
+
+    <p>É importante deixar claro: <strong>nenhum pai ou mãe é perfeito.</strong> Reconhecer que seu filho pode estar carregando alguma marca emocional não é um ato de culpa — é um ato de amor e coragem.</p>
+
+    <section-title class="section-title">O ambiente familiar como base</section-title>
+
+    <p>A ciência e a Bíblia convergem num ponto essencial: <strong>o lar é o primeiro e mais poderoso ambiente formador de uma criança.</strong> O que ela vê, sente e experimenta dentro de casa molda sua forma de enxergar o mundo, a si mesma e a Deus.</p>
+
+    <p>Ambientes seguros, amorosos e consistentes <strong>favorecem</strong> o desenvolvimento de crianças emocionalmente saudáveis. E a boa notícia é: nunca é tarde para começar a construir esse ambiente.</p>
+  </div>
+  <div class="page-footer"><span>5</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 6 — CAPÍTULO 2 OPENER
+══════════════════════════════════════════════════════ -->
+<div class="page chapter-opener">
+  <div class="ch-num">02</div>
+  <div class="page-inner" style="justify-content:center;align-items:center;text-align:center;">
+    <p class="ch-label">Capítulo Dois</p>
+    <div class="divider-slim" style="background:var(--gold-light);opacity:0.4;"></div>
+    <h2 class="ch-title">O Desenvolvimento<br><em>Emocional Infantil</em></h2>
+    <div class="divider-slim" style="background:var(--gold-light);opacity:0.4;"></div>
+    <p class="ch-verse">"Desde o ventre materno tu és o meu Deus."<br><span style="color:var(--gold);font-style:normal;font-size:8pt;letter-spacing:1mm;">SALMO 22:10</span></p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 7 — CAPÍTULO 2 CONTEÚDO
+══════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <span>Cicatrizes Invisíveis da Infância</span>
+    <span>Capítulo 2</span>
+  </div>
+  <div class="page-inner">
+    <div class="chapter-label">✦ Capítulo 2</div>
+    <h2 class="chapter-title">O Desenvolvimento <em>Emocional Infantil</em></h2>
+    <div class="divider-slim"></div>
+
+    <p>Para fortalecer o emocional do seu filho, é importante compreender como ele se desenvolve. A criança não nasce sabendo lidar com emoções — ela <strong>aprende</strong>, especialmente observando e sendo cuidada pelos adultos ao seu redor.</p>
+
+    <div class="two-col">
+      <div class="card">
+        <h4>🛡️ Segurança Emocional</h4>
+        <p>A criança precisa sentir que o mundo ao seu redor é previsível e seguro. Isso se constrói com rotina, presença e consistência.</p>
+      </div>
+      <div class="card">
+        <h4>🤝 Apego</h4>
+        <p>O vínculo afetivo com os pais é a base de toda relação futura. Um apego seguro favorece a confiança, a autonomia e a empatia.</p>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h4>💛 Afeto</h4>
+        <p>Demonstrações de carinho — abraços, palavras de encorajamento, tempo juntos — nutrem o emocional da criança de forma profunda.</p>
+      </div>
+      <div class="card">
+        <h4>🗣️ Comunicação</h4>
+        <p>Ensinar a criança a nomear e expressar o que sente é um presente que ela carregará por toda a vida.</p>
+      </div>
+    </div>
+
+    <div class="verse-box" style="margin-top:5mm;">
+      <p class="verse-text">"Não irriteis a ira de vossos filhos, mas criai-os na disciplina e admonição do Senhor."</p>
+      <p class="verse-ref">Efésios 6:4</p>
+    </div>
+
+    <p>Cada pequeno gesto de amor que você oferece ao seu filho hoje <strong>contribui para construir quem ele será amanhã.</strong></p>
+  </div>
+  <div class="page-footer"><span>7</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 8 — CAPÍTULO 3 OPENER
+══════════════════════════════════════════════════════ -->
+<div class="page chapter-opener">
+  <div class="ch-num">03</div>
+  <div class="page-inner" style="justify-content:center;align-items:center;text-align:center;">
+    <p class="ch-label">Capítulo Três</p>
+    <div class="divider-slim" style="background:var(--gold-light);opacity:0.4;"></div>
+    <h2 class="ch-title">Sinais que<br><em>Merecem Atenção</em></h2>
+    <div class="divider-slim" style="background:var(--gold-light);opacity:0.4;"></div>
+    <p class="ch-verse">"Vigiai e orai, para que não entreis em tentação."<br><span style="color:var(--gold);font-style:normal;font-size:8pt;letter-spacing:1mm;">MATEUS 26:41</span></p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 9 — CAPÍTULO 3 CONTEÚDO
+══════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <span>Cicatrizes Invisíveis da Infância</span>
+    <span>Capítulo 3</span>
+  </div>
+  <div class="page-inner">
+    <div class="chapter-label">✦ Capítulo 3</div>
+    <h2 class="chapter-title">Sinais que <em>Merecem Atenção</em></h2>
+    <div class="divider-slim"></div>
+
+    <p>Toda criança passa por momentos difíceis — isso é natural. Mas alguns comportamentos, quando persistentes, podem indicar que seu filho precisa de mais atenção emocional. <strong>Observar sem julgar é o primeiro passo.</strong></p>
+
+    <p style="font-size:8pt;color:var(--text-light);font-style:italic;">⚠️ Este conteúdo não tem fins diagnósticos. Ao identificar qualquer sinal preocupante, consulte um profissional de saúde.</p>
+
+    <ul class="styled-list">
+      <li><strong>Insegurança frequente</strong> — medo de errar, de ser abandonado, de não ser amado o suficiente.</li>
+      <li><strong>Medos intensos</strong> — receios que parecem desproporcionais à situação, especialmente ao dormir.</li>
+      <li><strong>Irritabilidade ou explosões emocionais</strong> — dificuldade de lidar com frustrações pequenas.</li>
+      <li><strong>Tristeza prolongada</strong> — períodos de desânimo que vão além do que seria esperado para a idade.</li>
+      <li><strong>Isolamento</strong> — afastamento dos amigos, da família ou de atividades que antes eram prazerosas.</li>
+      <li><strong>Dificuldade para expressar sentimentos</strong> — criança que "guarda tudo dentro" ou não consegue identificar o que sente.</li>
+    </ul>
+
+    <div class="pull-quote">
+      <p>"Quando seu filho se comporta de forma difícil, geralmente há um sentimento não expresso por trás. Seu papel é ser a ponte que o ajuda a atravessar."</p>
+    </div>
+
+    <p>Esses sinais são <strong>convites</strong> para se aproximar. Não causas de alarme, mas de atenção e amor.</p>
+  </div>
+  <div class="page-footer"><span>9</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 10 — CAPÍTULO 4 OPENER
+══════════════════════════════════════════════════════ -->
+<div class="page chapter-opener">
+  <div class="ch-num">04</div>
+  <div class="page-inner" style="justify-content:center;align-items:center;text-align:center;">
+    <p class="ch-label">Capítulo Quatro</p>
+    <div class="divider-slim" style="background:var(--gold-light);opacity:0.4;"></div>
+    <h2 class="ch-title">Como Fortalecer a<br><em>Segurança Emocional</em></h2>
+    <div class="divider-slim" style="background:var(--gold-light);opacity:0.4;"></div>
+    <p class="ch-verse">"Amarás o Senhor teu Deus de todo o coração... Estas palavras estarão no teu coração. Fala delas aos teus filhos."<br><span style="color:var(--gold);font-style:normal;font-size:8pt;letter-spacing:1mm;">DEUTERONÔMIO 6:5-7</span></p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 11 — CAPÍTULO 4 CONTEÚDO
+══════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <span>Cicatrizes Invisíveis da Infância</span>
+    <span>Capítulo 4</span>
+  </div>
+  <div class="page-inner">
+    <div class="chapter-label">✦ Capítulo 4</div>
+    <h2 class="chapter-title">Como Fortalecer a <em>Segurança Emocional</em></h2>
+    <div class="divider-slim"></div>
+
+    <p>Fortalecer a segurança emocional do seu filho não exige perfeição — exige <strong>presença, intenção e amor.</strong> Pequenas atitudes diárias podem contribuir de forma poderosa.</p>
+
+    <ol class="num-list">
+      <li><strong>Escuta ativa</strong> — Quando seu filho falar, pare tudo. Olhe nos olhos. Mostre que o que ele sente importa.</li>
+      <li><strong>Tempo de qualidade</strong> — Mesmo 20 minutos por dia, completamente presentes e sem celular, fazem diferença enorme.</li>
+      <li><strong>Validação das emoções</strong> — Em vez de dizer "não chore", diga "eu entendo que você está triste. É normal sentir isso."</li>
+      <li><strong>Acolhimento</strong> — Abrace antes de corrigir. Seu filho precisa saber que é amado incondicionalmente.</li>
+      <li><strong>Rotina</strong> — A previsibilidade cria segurança. Horários consistentes ajudam a criança a se sentir protegida.</li>
+      <li><strong>Demonstrações de amor</strong> — "Eu te amo", "Estou orgulhoso de você", "Você é especial para mim" — palavras que nutrem o coração.</li>
+    </ol>
+
+    <div class="verse-box">
+      <p class="verse-text">"O amor é paciente, é bondoso; o amor não arde em ciúmes, não se vangloria."</p>
+      <p class="verse-ref">1 Coríntios 13:4</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>11</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 12 — CAPÍTULO 5 OPENER
+══════════════════════════════════════════════════════ -->
+<div class="page chapter-opener">
+  <div class="ch-num">05</div>
+  <div class="page-inner" style="justify-content:center;align-items:center;text-align:center;">
+    <p class="ch-label">Capítulo Cinco</p>
+    <div class="divider-slim" style="background:var(--gold-light);opacity:0.4;"></div>
+    <h2 class="ch-title">O Papel<br><em>dos Pais</em></h2>
+    <div class="divider-slim" style="background:var(--gold-light);opacity:0.4;"></div>
+    <p class="ch-verse">"Pais e mães, não irriteis vossos filhos para que não se tornem desanimados."<br><span style="color:var(--gold);font-style:normal;font-size:8pt;letter-spacing:1mm;">COLOSSENSES 3:21</span></p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 13 — CAPÍTULO 5 CONTEÚDO
+══════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <span>Cicatrizes Invisíveis da Infância</span>
+    <span>Capítulo 5</span>
+  </div>
+  <div class="page-inner">
+    <div class="chapter-label">✦ Capítulo 5</div>
+    <h2 class="chapter-title">O Papel <em>dos Pais</em></h2>
+    <div class="divider-slim"></div>
+
+    <p>Os pais são os primeiros espelhos da criança. Antes mesmo de compreender palavras, ela lê expressões faciais, tom de voz e a energia do ambiente. <strong>Seu filho absorve muito mais do que você imagina.</strong></p>
+
+    <div class="highlight-box">
+      <p>Pesquisas mostram que crianças criadas com <strong>limites claros, afeto genuíno e comunicação aberta</strong> têm mais recursos emocionais para lidar com os desafios da vida — não porque foram poupadas das dificuldades, mas porque foram equipadas para enfrentá-las.</p>
+    </div>
+
+    <h3 class="section-title">Atitudes que favorecem o desenvolvimento</h3>
+
+    <ul class="styled-list">
+      <li>Reconhecer e pedir desculpas quando errar diante do seu filho</li>
+      <li>Ser um modelo de como lidar com emoções difíceis</li>
+      <li>Estabelecer limites com amor — sem gritos, com firmeza e carinho</li>
+      <li>Celebrar as conquistas, por menores que sejam</li>
+      <li>Contar histórias da Bíblia que mostrem que Deus cuida</li>
+      <li>Criar rituais familiares — jantares juntos, orações antes de dormir</li>
+    </ul>
+
+    <div class="pull-quote">
+      <p>"Você não precisa ser o pai ou a mãe perfeito. Precisa ser <em>presente.</em>"</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>13</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 14 — CAPÍTULO 6 OPENER
+══════════════════════════════════════════════════════ -->
+<div class="page chapter-opener">
+  <div class="ch-num">06</div>
+  <div class="page-inner" style="justify-content:center;align-items:center;text-align:center;">
+    <p class="ch-label">Capítulo Seis</p>
+    <div class="divider-slim" style="background:var(--gold-light);opacity:0.4;"></div>
+    <h2 class="ch-title">O que a Bíblia Ensina<br>sobre <em>Amor e Proteção</em></h2>
+    <div class="divider-slim" style="background:var(--gold-light);opacity:0.4;"></div>
+    <p class="ch-verse">"Não temas, porque eu sou contigo; não te assombres, porque eu sou o teu Deus."<br><span style="color:var(--gold);font-style:normal;font-size:8pt;letter-spacing:1mm;">ISAÍAS 41:10</span></p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 15 — CAPÍTULO 6 CONTEÚDO
+══════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <span>Cicatrizes Invisíveis da Infância</span>
+    <span>Capítulo 6</span>
+  </div>
+  <div class="page-inner">
+    <div class="chapter-label">✦ Capítulo 6</div>
+    <h2 class="chapter-title">O que a Bíblia Ensina sobre <em>Amor e Proteção</em></h2>
+    <div class="divider-slim"></div>
+
+    <p>A Bíblia não é apenas um livro de história ou doutrina — é um manual de cuidado humano. Deus, como Pai, nos ensina como ser pais.</p>
+
+    <div class="verse-box">
+      <p class="verse-text">"O Senhor é o meu pastor, nada me faltará... Ainda que eu ande pelo vale da sombra da morte, não temerei mal nenhum, porque tu estás comigo."</p>
+      <p class="verse-ref">Salmo 23:1,4 — <em>Deus cuida de nós como um pai cuida de seu filho.</em></p>
+    </div>
+
+    <div class="verse-box">
+      <p class="verse-text">"Aquele que habita no esconderijo do Altíssimo, à sombra do Onipotente descansará."</p>
+      <p class="verse-ref">Salmo 91:1 — <em>Nossos filhos estão sob a proteção de Deus.</em></p>
+    </div>
+
+    <div class="verse-box">
+      <p class="verse-text">"Deixai as crianças virem a mim e não as impeçais, porque o reino dos céus é delas."</p>
+      <p class="verse-ref">Mateus 19:14 — <em>Jesus valoriza e acolhe as crianças.</em></p>
+    </div>
+
+    <div class="verse-box">
+      <p class="verse-text">"Buscai a Deus e vós vivereis."</p>
+      <p class="verse-ref">Salmo 34:4 — <em>A busca por Deus é um presente que você pode dar ao seu filho.</em></p>
+    </div>
+
+    <p>Cada passagem acima não é apenas teologia — é <strong>instrução prática</strong> para como amar, proteger e criar nossos filhos à luz de Deus.</p>
+  </div>
+  <div class="page-footer"><span>15</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 16 — CAPÍTULO 7 OPENER
+══════════════════════════════════════════════════════ -->
+<div class="page chapter-opener">
+  <div class="ch-num">07</div>
+  <div class="page-inner" style="justify-content:center;align-items:center;text-align:center;">
+    <p class="ch-label">Capítulo Sete</p>
+    <div class="divider-slim" style="background:var(--gold-light);opacity:0.4;"></div>
+    <h2 class="ch-title">A Importância da<br><em>Oração em Família</em></h2>
+    <div class="divider-slim" style="background:var(--gold-light);opacity:0.4;"></div>
+    <p class="ch-verse">"Orai sem cessar."<br><span style="color:var(--gold);font-style:normal;font-size:8pt;letter-spacing:1mm;">1 TESSALONICENSES 5:17</span></p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 17 — CAPÍTULO 7 CONTEÚDO
+══════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <span>Cicatrizes Invisíveis da Infância</span>
+    <span>Capítulo 7</span>
+  </div>
+  <div class="page-inner">
+    <div class="chapter-label">✦ Capítulo 7</div>
+    <h2 class="chapter-title">A Importância da <em>Oração em Família</em></h2>
+    <div class="divider-slim"></div>
+
+    <p>A oração em família é uma das práticas mais transformadoras que uma casa pode cultivar. Ela <strong>aproxima corações, cria memórias sagradas</strong> e ensina a criança desde cedo que Deus está presente em cada detalhe da vida.</p>
+
+    <h3 class="section-title">Como criar momentos de oração</h3>
+
+    <ul class="styled-list">
+      <li><strong>Antes das refeições</strong> — Um momento simples de gratidão já forma o hábito.</li>
+      <li><strong>Ao deitar</strong> — Ore sobre o dia, agradeça e entregue a noite a Deus.</li>
+      <li><strong>Nos momentos difíceis</strong> — Quando seu filho estiver triste, com medo ou ansioso, ore com ele — não por ele.</li>
+      <li><strong>Nas conquistas</strong> — Ensine a agradecer a Deus pelas boas coisas.</li>
+      <li><strong>Em família, de mãos dadas</strong> — O toque físico durante a oração reforça o vínculo emocional e espiritual.</li>
+    </ul>
+
+    <div class="highlight-box">
+      <p>Quando uma criança vê seus pais orarem com sinceridade, ela aprende que <strong>Deus é real, próximo e confiável.</strong> Essa é uma das maiores heranças espirituais que você pode deixar.</p>
+    </div>
+
+    <div class="pull-quote">
+      <p>"A família que ora unida, <em>permanece unida.</em>"</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>17</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 18 — CAPÍTULO 8 OPENER
+══════════════════════════════════════════════════════ -->
+<div class="page chapter-opener">
+  <div class="ch-num">08</div>
+  <div class="page-inner" style="justify-content:center;align-items:center;text-align:center;">
+    <p class="ch-label">Capítulo Oito</p>
+    <div class="divider-slim" style="background:var(--gold-light);opacity:0.4;"></div>
+    <h2 class="ch-title"><em>Orações</em><br>Guiadas</h2>
+    <div class="divider-slim" style="background:var(--gold-light);opacity:0.4;"></div>
+    <p class="ch-verse">"Pedi e dar-se-vos-á; buscai e achareis; batei e abrir-se-vos-á."<br><span style="color:var(--gold);font-style:normal;font-size:8pt;letter-spacing:1mm;">MATEUS 7:7</span></p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 19 — ORAÇÕES GUIADAS
+══════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <span>Cicatrizes Invisíveis da Infância</span>
+    <span>Orações Guiadas</span>
+  </div>
+  <div class="page-inner">
+    <div class="chapter-label">✦ Capítulo 8</div>
+    <h2 class="chapter-title"><em>Orações</em> Guiadas</h2>
+    <div class="divider-slim"></div>
+
+    <div class="verse-box">
+      <p class="verse-text" style="font-size:9.5pt;font-style:normal;"><strong>🛡️ Oração pela Proteção</strong><br><br>
+      Senhor, cubro meu filho com o Teu sangue precioso. Que nenhuma arma formada contra ele prospere. Que os Teus anjos o guardem em todos os seus caminhos. Que ele cresça debaixo da sombra do Altíssimo. Em nome de Jesus. Amém.</p>
+      <p class="verse-ref">Salmo 91:11</p>
+    </div>
+
+    <div class="verse-box">
+      <p class="verse-text" style="font-size:9.5pt;font-style:normal;"><strong>☮️ Oração pela Paz</strong><br><br>
+      Pai, entrego os medos e as ansiedades do meu filho nas Tuas mãos. Que a Tua paz, que excede todo entendimento, guarde o coração e a mente dele. Que ele possa dormir em paz, sabendo que Tu estás com ele. Em nome de Jesus. Amém.</p>
+      <p class="verse-ref">Filipenses 4:7</p>
+    </div>
+
+    <div class="verse-box">
+      <p class="verse-text" style="font-size:9.5pt;font-style:normal;"><strong>🌿 Oração pela Sabedoria</strong><br><br>
+      Deus da sabedoria, derrama sobre nós a sabedoria que vem do alto. Que saibamos como criar nosso filho com amor, paciência e discernimento. Onde falhamos, cobre com a Tua graça. Em nome de Jesus. Amém.</p>
+      <p class="verse-ref">Tiago 1:5</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>19</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 20 — MAIS ORAÇÕES
+══════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <span>Cicatrizes Invisíveis da Infância</span>
+    <span>Orações Guiadas</span>
+  </div>
+  <div class="page-inner">
+    <div class="verse-box">
+      <p class="verse-text" style="font-size:9.5pt;font-style:normal;"><strong>💑 Oração pelo Fortalecimento da Família</strong><br><br>
+      Senhor Jesus, que o nosso lar seja um reflexo do Teu amor. Une nossos corações, cura nossas feridas e nos ensina a nos perdoar. Que nossa família seja um lugar onde cada membro se sente seguro, amado e valorizado. Amém.</p>
+      <p class="verse-ref">Josué 24:15</p>
+    </div>
+
+    <div class="verse-box">
+      <p class="verse-text" style="font-size:9.5pt;font-style:normal;"><strong>🙏 Oração pela Confiança em Deus</strong><br><br>
+      Pai, quando a vida parece incerta e os desafios são grandes demais, nos lembra de que Tu já tens o controle. Ensina nosso filho a confiar em Ti desde a infância, e que essa confiança seja a âncora da sua vida. Em nome de Jesus. Amém.</p>
+      <p class="verse-ref">Provérbios 3:5-6</p>
+    </div>
+
+    <div class="verse-box">
+      <p class="verse-text" style="font-size:9.5pt;font-style:normal;"><strong>✨ Oração de Gratidão</strong><br><br>
+      Senhor, obrigado por esse filho que o Senhor nos confiou. Obrigado pelos dias difíceis que nos fazem crescer e pelos dias de alegria que nos fazem sorrir. Que nossa casa transborde em gratidão. Em nome de Jesus. Amém.</p>
+      <p class="verse-ref">1 Tessalonicenses 5:18</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>20</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 21 — CAPÍTULO 9 OPENER
+══════════════════════════════════════════════════════ -->
+<div class="page chapter-opener">
+  <div class="ch-num">09</div>
+  <div class="page-inner" style="justify-content:center;align-items:center;text-align:center;">
+    <p class="ch-label">Capítulo Nove</p>
+    <div class="divider-slim" style="background:var(--gold-light);opacity:0.4;"></div>
+    <h2 class="ch-title">Hábitos que Fortalecem<br><em>o Vínculo Familiar</em></h2>
+    <div class="divider-slim" style="background:var(--gold-light);opacity:0.4;"></div>
+    <p class="ch-verse">"Antes sede uns para com os outros benignos, misericordiosos, perdoando-vos uns aos outros."<br><span style="color:var(--gold);font-style:normal;font-size:8pt;letter-spacing:1mm;">EFÉSIOS 4:32</span></p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 22 — CAPÍTULO 9 CONTEÚDO
+══════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <span>Cicatrizes Invisíveis da Infância</span>
+    <span>Capítulo 9</span>
+  </div>
+  <div class="page-inner">
+    <div class="chapter-label">✦ Capítulo 9</div>
+    <h2 class="chapter-title">Hábitos que Fortalecem <em>o Vínculo Familiar</em></h2>
+    <div class="divider-slim"></div>
+
+    <p>O vínculo familiar não se constrói apenas nos grandes momentos — ele se tece nos pequenos, cotidianos e aparentemente simples gestos do dia a dia.</p>
+
+    <div class="two-col" style="margin-top:4mm;">
+      <div class="card">
+        <h4>🍽️ Mesa em família</h4>
+        <p>Reserve ao menos uma refeição por dia para estarem juntos, sem telas. Compartilhem como foi o dia de cada um.</p>
+      </div>
+      <div class="card">
+        <h4>📖 Leitura bíblica</h4>
+        <p>Escolha histórias bíblicas adequadas para a idade do seu filho. A Palavra de Deus cria raízes profundas.</p>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h4>🎮 Brinque junto</h4>
+        <p>Entrar no mundo do seu filho, brincando com ele, é uma das formas mais poderosas de criar conexão.</p>
+      </div>
+      <div class="card">
+        <h4>🤗 O abraço diário</h4>
+        <p>Estudos mostram que ao menos 8 abraços por dia favorecem o bem-estar emocional de crianças e adultos.</p>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h4>✏️ Cartas e bilhetes</h4>
+        <p>Deixe bilhetinhos na mochila ou no quarto do seu filho. Palavras de amor escritas têm um poder especial.</p>
+      </div>
+      <div class="card">
+        <h4>🌙 Ritual do sono</h4>
+        <p>Ler, orar e conversar antes de dormir cria um momento sagrado que a criança guardará na memória para sempre.</p>
+      </div>
+    </div>
+
+    <div class="verse-box" style="margin-top:5mm;">
+      <p class="verse-text">"Porque onde estiverem dois ou três reunidos em meu nome, aí estou no meio deles."</p>
+      <p class="verse-ref">Mateus 18:20</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>22</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 23 — CAPÍTULO 10 OPENER
+══════════════════════════════════════════════════════ -->
+<div class="page chapter-opener">
+  <div class="ch-num">10</div>
+  <div class="page-inner" style="justify-content:center;align-items:center;text-align:center;">
+    <p class="ch-label">Capítulo Dez</p>
+    <div class="divider-slim" style="background:var(--gold-light);opacity:0.4;"></div>
+    <h2 class="ch-title">Quando Buscar<br><em>Ajuda Profissional</em></h2>
+    <div class="divider-slim" style="background:var(--gold-light);opacity:0.4;"></div>
+    <p class="ch-verse">"Os sábios preveem o perigo e se preparam; os ingênuos seguem em frente e são punidos."<br><span style="color:var(--gold);font-style:normal;font-size:8pt;letter-spacing:1mm;">PROVÉRBIOS 27:12 (NVI)</span></p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 24 — CAPÍTULO 10 CONTEÚDO
+══════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <span>Cicatrizes Invisíveis da Infância</span>
+    <span>Capítulo 10</span>
+  </div>
+  <div class="page-inner">
+    <div class="chapter-label">✦ Capítulo 10</div>
+    <h2 class="chapter-title">Quando Buscar <em>Ajuda Profissional</em></h2>
+    <div class="divider-slim"></div>
+
+    <p>Buscar ajuda profissional não é sinal de fraqueza — é um ato de <strong>amor e sabedoria.</strong> Assim como levamos nosso filho ao médico quando ele está com febre, há momentos em que o cuidado emocional também pede o olhar de um especialista.</p>
+
+    <div class="highlight-box">
+      <p>Considere buscar orientação de um psicólogo infantil ou terapeuta quando seu filho apresentar sinais persistentes que afetam sua qualidade de vida, relacionamentos ou aprendizado — e quando essas situações não melhoram com o tempo e com amor em casa.</p>
+    </div>
+
+    <h3 class="section-title">Sinais que indicam que é hora de buscar ajuda</h3>
+
+    <ul class="styled-list">
+      <li>Comportamentos agressivos frequentes e intensos</li>
+      <li>Regressão significativa (ex: parou de falar, voltou a fazer xixi na cama)</li>
+      <li>Sintomas físicos sem causa médica (dores, náuseas antes da escola)</li>
+      <li>Tristeza ou ansiedade prolongada por mais de 2 semanas</li>
+      <li>Recusa persistente de atividades cotidianas</li>
+      <li>Situações de violência, abuso ou luto não elaborado</li>
+    </ul>
+
+    <div class="pull-quote">
+      <p>"Pedir ajuda é, muitas vezes, o maior ato de amor que um pai pode oferecer ao seu filho."</p>
+    </div>
+
+    <p style="font-size:8pt;color:var(--text-light);">Este eBook não substitui acompanhamento profissional. Ele é um recurso de apoio, inspiração e fortalecimento espiritual.</p>
+  </div>
+  <div class="page-footer"><span>24</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 25 — PLANO 21 DIAS OPENER
+══════════════════════════════════════════════════════ -->
+<div class="page chapter-opener">
+  <div class="ch-num" style="font-size:60pt;">21</div>
+  <div class="page-inner" style="justify-content:center;align-items:center;text-align:center;">
+    <p class="ch-label">Plano Especial</p>
+    <div class="divider-slim" style="background:var(--gold-light);opacity:0.4;"></div>
+    <h2 class="ch-title">21 Dias de<br><em>Transformação Familiar</em></h2>
+    <div class="divider-slim" style="background:var(--gold-light);opacity:0.4;"></div>
+    <p class="ch-verse">Um versículo, uma reflexão, uma atividade e uma oração<br>para cada dia desta jornada.</p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 26 — DIAS 1-3
+══════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header"><span>Cicatrizes Invisíveis da Infância</span><span>Plano de 21 Dias</span></div>
+  <div class="page-inner">
+
+    <div class="day-card">
+      <p class="day-num">✦ Dia 1 — Presença</p>
+      <p class="day-verse">"Sede fortes e corajosos. Não temais, nem vos assusteis, porque o Senhor, vosso Deus, vai convosco."</p>
+      <p class="day-ref">Deuteronômio 31:6</p>
+      <p class="day-reflection">Assim como Deus promete estar conosco, nossos filhos precisam sentir nossa presença — não apenas física, mas emocional.</p>
+      <div class="day-activity">
+        <p class="act-label">✦ Atividade</p>
+        <p>Reserve 20 minutos hoje sem tela. Pergunte ao seu filho: "O que te deixou feliz hoje?" e escute com atenção.</p>
+      </div>
+      <p class="pray-label">✦ Oração do Dia</p>
+      <p class="day-prayer">Senhor, que eu seja um lar de paz para meu filho. Que minha presença o faça se sentir seguro. Amém.</p>
+    </div>
+
+    <div class="day-card">
+      <p class="day-num">✦ Dia 2 — Escuta</p>
+      <p class="day-verse">"Sede velozes para ouvir, tardios para falar."</p>
+      <p class="day-ref">Tiago 1:19</p>
+      <p class="day-reflection">Ouvir de verdade é um ato de amor. Quando seu filho se sente ouvido, ele aprende a confiar.</p>
+      <div class="day-activity">
+        <p class="act-label">✦ Atividade</p>
+        <p>Hoje, quando seu filho falar, faça uma pausa. Não interrompa. Apenas ouça e diga: "Eu entendo o que você está sentindo."</p>
+      </div>
+      <p class="pray-label">✦ Oração do Dia</p>
+      <p class="day-prayer">Pai, abre meus ouvidos para ouvir meu filho como o Senhor me ouve. Que meu coração seja um lugar seguro para ele. Amém.</p>
+    </div>
+
+    <div class="day-card">
+      <p class="day-num">✦ Dia 3 — Perdão</p>
+      <p class="day-verse">"Perdoai-vos uns aos outros, como Deus também em Cristo vos perdoou."</p>
+      <p class="day-ref">Efésios 4:32</p>
+      <p class="day-reflection">Ensinar seu filho a pedir desculpas começa em você. Quando erramos e nos desculpamos com nossos filhos, mostramos que o perdão é possível.</p>
+      <div class="day-activity">
+        <p class="act-label">✦ Atividade</p>
+        <p>Converse sobre o perdão. Pergunte: "Há algo que você ainda está magoado?" e acolha a resposta sem julgamento.</p>
+      </div>
+      <p class="pray-label">✦ Oração do Dia</p>
+      <p class="day-prayer">Senhor, ensina-nos a perdoar como o Senhor perdoa. Que nosso lar seja um lugar onde erros são reconhecidos com amor. Amém.</p>
+    </div>
+
+  </div>
+  <div class="page-footer"><span>26</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 27 — DIAS 4-6
+══════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header"><span>Cicatrizes Invisíveis da Infância</span><span>Plano de 21 Dias</span></div>
+  <div class="page-inner">
+
+    <div class="day-card">
+      <p class="day-num">✦ Dia 4 — Gratidão</p>
+      <p class="day-verse">"Em tudo dai graças, porque esta é a vontade de Deus."</p>
+      <p class="day-ref">1 Tessalonicenses 5:18</p>
+      <p class="day-reflection">A gratidão é um músculo. Quanto mais exercitamos, mais enxergamos as bênçãos ao redor — mesmo nas pequenas coisas.</p>
+      <div class="day-activity"><p class="act-label">✦ Atividade</p><p>Criem juntos uma "lista de gratidão". Cada um escreve 3 coisas pelas quais é grato hoje. Compartilhem e orem.</p></div>
+      <p class="pray-label">✦ Oração do Dia</p>
+      <p class="day-prayer">Obrigado, Senhor, por este filho. Por cada dia, por cada aprendizado. Que nossos corações sempre encontrem razão para agradecer. Amém.</p>
+    </div>
+
+    <div class="day-card">
+      <p class="day-num">✦ Dia 5 — Identidade</p>
+      <p class="day-verse">"Porque somos feitura sua, criados em Cristo Jesus para boas obras."</p>
+      <p class="day-ref">Efésios 2:10</p>
+      <p class="day-reflection">Seu filho precisa saber quem ele é. Uma criança que conhece sua identidade em Deus tem raízes que nenhuma tempestade derruba.</p>
+      <div class="day-activity"><p class="act-label">✦ Atividade</p><p>Diga ao seu filho: "Você é criação de Deus, especial e amado." Escreva juntos 5 qualidades que ele tem.</p></div>
+      <p class="pray-label">✦ Oração do Dia</p>
+      <p class="day-prayer">Pai, que meu filho saiba quem é em Ti. Que nenhuma voz do mundo apague a Tua voz que diz: "Tu és meu filho amado." Amém.</p>
+    </div>
+
+    <div class="day-card">
+      <p class="day-num">✦ Dia 6 — Proteção</p>
+      <p class="day-verse">"O anjo do Senhor acampa-se ao redor dos que o temem e os livra."</p>
+      <p class="day-ref">Salmo 34:7</p>
+      <p class="day-reflection">Cubrir seus filhos em oração é o ato mais poderoso de proteção que um pai pode exercer.</p>
+      <div class="day-activity"><p class="act-label">✦ Atividade</p><p>Coloque as mãos sobre a cabeça do seu filho e ore uma oração de proteção e bênção sobre a vida dele.</p></div>
+      <p class="pray-label">✦ Oração do Dia</p>
+      <p class="day-prayer">Senhor, cubro meu filho com Teu sangue. Que os Teus anjos o guardem em todos os seus caminhos. Amém.</p>
+    </div>
+
+  </div>
+  <div class="page-footer"><span>27</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 28 — DIAS 7-9
+══════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header"><span>Cicatrizes Invisíveis da Infância</span><span>Plano de 21 Dias</span></div>
+  <div class="page-inner">
+
+    <div class="day-card">
+      <p class="day-num">✦ Dia 7 — Descanso</p>
+      <p class="day-verse">"Vinde a mim, todos os que estais cansados e oprimidos, e eu vos aliviarei."</p>
+      <p class="day-ref">Mateus 11:28</p>
+      <p class="day-reflection">Crianças sobrecarregadas com atividades, pressão e expectativas precisam de espaço para simplesmente ser.</p>
+      <div class="day-activity"><p class="act-label">✦ Atividade</p><p>Cancele uma atividade hoje. Passem a tarde juntos sem compromissos: jogo de tabuleiro, desenho ou simplesmente conversa.</p></div>
+      <p class="pray-label">✦ Oração do Dia</p>
+      <p class="day-prayer">Jesus, que meu filho encontre descanso em Ti. Que nossa casa seja um lugar de paz, não de pressão. Amém.</p>
+    </div>
+
+    <div class="day-card">
+      <p class="day-num">✦ Dia 8 — Fé</p>
+      <p class="day-verse">"A fé é a certeza daquilo que esperamos e a prova das coisas que não vemos."</p>
+      <p class="day-ref">Hebreus 11:1</p>
+      <p class="day-reflection">Ensinar fé não é falar sobre Deus — é viver de uma forma que demonstre que você acredita Nele.</p>
+      <div class="day-activity"><p class="act-label">✦ Atividade</p><p>Conte ao seu filho um momento em que Deus respondeu uma oração sua. Compartilhe sua fé através das suas histórias.</p></div>
+      <p class="pray-label">✦ Oração do Dia</p>
+      <p class="day-prayer">Pai, aumenta a nossa fé. Que meu filho veja em mim um exemplo de confiança em Ti. Amém.</p>
+    </div>
+
+    <div class="day-card">
+      <p class="day-num">✦ Dia 9 — Alegria</p>
+      <p class="day-verse">"A alegria do Senhor é a nossa força."</p>
+      <p class="day-ref">Neemias 8:10</p>
+      <p class="day-reflection">A alegria não depende de circunstâncias — ela é fruto do Espírito. E ela pode ser cultivada em família.</p>
+      <div class="day-activity"><p class="act-label">✦ Atividade</p><p>Façam algo que traga risadas hoje. Dance com seu filho, crie uma brincadeira boba, ria junto. A alegria cura.</p></div>
+      <p class="pray-label">✦ Oração do Dia</p>
+      <p class="day-prayer">Senhor, que Tua alegria habite em nossa casa. Que nossos filhos cresçam sabendo que seguir a Deus é cheio de vida. Amém.</p>
+    </div>
+
+  </div>
+  <div class="page-footer"><span>28</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 29 — DIAS 10-12
+══════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header"><span>Cicatrizes Invisíveis da Infância</span><span>Plano de 21 Dias</span></div>
+  <div class="page-inner">
+    <div class="day-card">
+      <p class="day-num">✦ Dia 10 — Paciência</p>
+      <p class="day-verse">"O amor é sofredor e benigno..."</p>
+      <p class="day-ref">1 Coríntios 13:4</p>
+      <p class="day-reflection">A paciência não nasce naturalmente — ela é cultivada. E é uma das maiores heranças que podemos deixar aos nossos filhos.</p>
+      <div class="day-activity"><p class="act-label">✦ Atividade</p><p>Quando sentir impaciência hoje, respire fundo 3 vezes antes de responder. Depois, reflita: o que meu filho estava precisando naquele momento?</p></div>
+      <p class="pray-label">✦ Oração do Dia</p>
+      <p class="day-prayer">Pai, cobre minha impaciência com Tua graça. Que eu possa ser paciente com meu filho da forma que o Senhor é paciente comigo. Amém.</p>
+    </div>
+
+    <div class="day-card">
+      <p class="day-num">✦ Dia 11 — Esperança</p>
+      <p class="day-verse">"Porque sou eu que conheço os planos que tenho para vocês... planos de prosperidade e não de calamidade, planos de dar-lhes futuro e esperança."</p>
+      <p class="day-ref">Jeremias 29:11</p>
+      <p class="day-reflection">Seu filho precisa acreditar que tem um futuro. Suas palavras de encorajamento plantam essa esperança.</p>
+      <div class="day-activity"><p class="act-label">✦ Atividade</p><p>Pergunte ao seu filho: "O que você sonha ser quando crescer?" Ouça sem julgamento e encoraje cada sonho com palavras de fé.</p></div>
+      <p class="pray-label">✦ Oração do Dia</p>
+      <p class="day-prayer">Senhor, que os planos que tens para meu filho sejam maiores do que eu possa imaginar. Guia os sonhos dele, Pai. Amém.</p>
+    </div>
+
+    <div class="day-card">
+      <p class="day-num">✦ Dia 12 — Honestidade</p>
+      <p class="day-verse">"A verdade vos libertará."</p>
+      <p class="day-ref">João 8:32</p>
+      <p class="day-reflection">Um lar onde a verdade é recebida com amor cria crianças seguras para serem quem realmente são.</p>
+      <div class="day-activity"><p class="act-label">✦ Atividade</p><p>Crie um "momento de honestidade" — cada um pode dizer algo que está sentindo, sem ser julgado. Comece você.</p></div>
+      <p class="pray-label">✦ Oração do Dia</p>
+      <p class="day-prayer">Pai da verdade, que nosso lar seja um lugar onde a honestidade é acolhida. Que meu filho nunca sinta medo de ser verdadeiro. Amém.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>29</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 30 — DIAS 13-15
+══════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header"><span>Cicatrizes Invisíveis da Infância</span><span>Plano de 21 Dias</span></div>
+  <div class="page-inner">
+    <div class="day-card">
+      <p class="day-num">✦ Dia 13 — Cura</p>
+      <p class="day-verse">"O Senhor sana os de coração quebrantado e lhes cura as feridas."</p>
+      <p class="day-ref">Salmo 147:3</p>
+      <p class="day-reflection">Deus não ignora a dor. Ele a vê, se aproxima e sana. Quando levamos nossos filhos a Ele, abrimos a porta para essa cura.</p>
+      <div class="day-activity"><p class="act-label">✦ Atividade</p><p>Ore com seu filho entregando a Deus qualquer mágoa, medo ou tristeza que ele esteja carregando. Deixem cair nas mãos de Deus.</p></div>
+      <p class="pray-label">✦ Oração do Dia</p>
+      <p class="day-prayer">Senhor curador, toca o coração do meu filho. Alcança os lugares que eu não consigo ver. Faz a obra que só Tu podes fazer. Amém.</p>
+    </div>
+
+    <div class="day-card">
+      <p class="day-num">✦ Dia 14 — Amizade</p>
+      <p class="day-verse">"O amigo verdadeiro ama em todos os momentos."</p>
+      <p class="day-ref">Provérbios 17:17</p>
+      <p class="day-reflection">Ser amigo do seu filho — além de pai ou mãe — cria uma conexão que atravessa todas as fases da vida.</p>
+      <div class="day-activity"><p class="act-label">✦ Atividade</p><p>Hoje, seja o amigo do seu filho. Jogue o jogo favorito dele, ouça a música que ele gosta, entre no mundo dele por um dia.</p></div>
+      <p class="pray-label">✦ Oração do Dia</p>
+      <p class="day-prayer">Senhor, que meu filho me veja como um porto seguro, um amigo. Que nosso vínculo seja forte e cheio de amor verdadeiro. Amém.</p>
+    </div>
+
+    <div class="day-card">
+      <p class="day-num">✦ Dia 15 — Propósito</p>
+      <p class="day-verse">"Antes que te formasse no ventre materno, eu te conheci; e antes que saísses da madre, eu te santifiquei."</p>
+      <p class="day-ref">Jeremias 1:5</p>
+      <p class="day-reflection">Seu filho não é um acidente. Ele veio ao mundo com um propósito único, plantado por Deus. Ajude-o a descobrir isso.</p>
+      <div class="day-activity"><p class="act-label">✦ Atividade</p><p>Converse sobre dons e talentos. Pergunte: "O que você faz que faz outras pessoas felizes?" Celebre esses dons.</p></div>
+      <p class="pray-label">✦ Oração do Dia</p>
+      <p class="day-prayer">Pai, revela o propósito do meu filho. Que cada dom que puseste nele floresça para a Tua glória. Amém.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>30</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 31 — DIAS 16-18
+══════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header"><span>Cicatrizes Invisíveis da Infância</span><span>Plano de 21 Dias</span></div>
+  <div class="page-inner">
+    <div class="day-card">
+      <p class="day-num">✦ Dia 16 — Coragem</p>
+      <p class="day-verse">"Sede corajosos e fortes. Não temais, nem vos espanteis, porque o Senhor vosso Deus está convosco."</p>
+      <p class="day-ref">Josué 1:9</p>
+      <p class="day-reflection">A coragem não é a ausência do medo — é agir mesmo com medo, sabendo que Deus está ao lado.</p>
+      <div class="day-activity"><p class="act-label">✦ Atividade</p><p>Pergunte ao seu filho: "Qual é o seu maior medo?" Acolha a resposta e ore juntos contra esse medo.</p></div>
+      <p class="pray-label">✦ Oração do Dia</p>
+      <p class="day-prayer">Pai, enche meu filho de coragem sobrenatural. Que ele saiba que nunca está sozinho, pois Tu caminhas com ele. Amém.</p>
+    </div>
+
+    <div class="day-card">
+      <p class="day-num">✦ Dia 17 — Generosidade</p>
+      <p class="day-verse">"Dai e ser-vos-á dado; boa medida, recalcada e transbordando vos darão."</p>
+      <p class="day-ref">Lucas 6:38</p>
+      <p class="day-reflection">Crianças que aprendem a ser generosas desenvolvem empatia, conexão e uma relação saudável com o próximo.</p>
+      <div class="day-activity"><p class="act-label">✦ Atividade</p><p>Escolham juntos um brinquedo ou item para doar a alguém que precisa. Deixem seu filho fazer a escolha.</p></div>
+      <p class="pray-label">✦ Oração do Dia</p>
+      <p class="day-prayer">Senhor, que meu filho tenha um coração generoso. Que ele aprenda desde cedo que é mais abençoado dar do que receber. Amém.</p>
+    </div>
+
+    <div class="day-card">
+      <p class="day-num">✦ Dia 18 — Memórias</p>
+      <p class="day-verse">"Lembra-te dos dias de outrora; considera os anos de muitas gerações."</p>
+      <p class="day-ref">Deuteronômio 32:7</p>
+      <p class="day-reflection">As memórias que criamos com nossos filhos são o fundamento da relação ao longo de toda a vida.</p>
+      <div class="day-activity"><p class="act-label">✦ Atividade</p><p>Reúnam fotos antigas e contem histórias familiares. Deixem seu filho saber de onde ele veio e o amor que o cerca.</p></div>
+      <p class="pray-label">✦ Oração do Dia</p>
+      <p class="day-prayer">Pai, que cada memória que criarmos juntos seja cheia de Tua presença. Que meu filho sempre lembre do amor que vivemos. Amém.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>31</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 32 — DIAS 19-21
+══════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header"><span>Cicatrizes Invisíveis da Infância</span><span>Plano de 21 Dias</span></div>
+  <div class="page-inner">
+    <div class="day-card">
+      <p class="day-num">✦ Dia 19 — Autoestima</p>
+      <p class="day-verse">"Graças te dou pelo modo formidável e maravilhoso como fui feito."</p>
+      <p class="day-ref">Salmo 139:14</p>
+      <p class="day-reflection">Uma criança que se ama é uma criança que consegue amar. A autoestima saudável começa com o que os pais refletem sobre ela.</p>
+      <div class="day-activity"><p class="act-label">✦ Atividade</p><p>Façam um "espelho de qualidades": escrevam no espelho do quarto do seu filho palavras como CORAJOSO, AMADO, ESPECIAL.</p></div>
+      <p class="pray-label">✦ Oração do Dia</p>
+      <p class="day-prayer">Senhor, que meu filho se veja com os Teus olhos — como criação perfeita, amada e cheia de propósito. Amém.</p>
+    </div>
+
+    <div class="day-card">
+      <p class="day-num">✦ Dia 20 — Renovação</p>
+      <p class="day-verse">"Não vos conformeis com este mundo, mas transformai-vos pela renovação do vosso entendimento."</p>
+      <p class="day-ref">Romanos 12:2</p>
+      <p class="day-reflection">Cada dia é uma oportunidade de começar de novo. Renovação não é apagar o passado — é não deixar que ele defina o futuro.</p>
+      <div class="day-activity"><p class="act-label">✦ Atividade</p><p>Escrevam juntos 3 hábitos que querem cultivar como família nos próximos meses. Coloquem em um lugar visível.</p></div>
+      <p class="pray-label">✦ Oração do Dia</p>
+      <p class="day-prayer">Pai, renova nossa família a cada manhã. Que cada dia seja uma nova chance de amar melhor, de ser melhor. Amém.</p>
+    </div>
+
+    <div class="day-card">
+      <p class="day-num">✦ Dia 21 — Celebração</p>
+      <p class="day-verse">"Esta é a alegria que estava destinada para nós — que nos amamos uns aos outros."</p>
+      <p class="day-ref">1 João 4:7</p>
+      <p class="day-reflection">Você chegou ao fim de 21 dias. Isso não é pouca coisa — é um testemunho de amor e comprometimento com seu filho.</p>
+      <div class="day-activity"><p class="act-label">✦ Atividade</p><p>Celebrem! Faça algo especial com seu filho para marcar essa jornada. Um jantar especial, um passeio, um presente com um bilhete de amor.</p></div>
+      <p class="pray-label">✦ Oração do Dia</p>
+      <p class="day-prayer">Senhor, obrigado por cada dia desta jornada. Que o que foi plantado aqui cresça forte, com raízes profundas em Ti. Amém.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>32</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 33 — DIÁRIO OPENER
+══════════════════════════════════════════════════════ -->
+<div class="page chapter-opener">
+  <div class="page-inner" style="justify-content:center;align-items:center;text-align:center;">
+    <p class="ch-label">Para Preencher</p>
+    <div class="divider-slim" style="background:var(--gold-light);opacity:0.4;"></div>
+    <h2 class="ch-title">Diário<br><em>Espiritual</em></h2>
+    <div class="divider-slim" style="background:var(--gold-light);opacity:0.4;"></div>
+    <p class="ch-verse">Um espaço sagrado para registrar<br>sua caminhada com Deus e com seu filho.</p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINAS 34-40 — DIÁRIO (7 páginas)
+══════════════════════════════════════════════════════ -->
+<!-- DIÁRIO DIA 1 -->
+<div class="page diary-page">
+  <div class="diary-header">
+    <span class="dia">Dia 1</span>
+    <span class="date-line">Data: _____ / _____ / _________</span>
+  </div>
+  <div class="page-inner" style="padding-top:8mm;">
+
+    <div class="diary-verse-box">
+      <p class="label">✦ Versículo do Dia</p>
+      <p class="verse">_____________________________________________________________<br>_____________________________________________________________</p>
+    </div>
+
+    <p class="diary-label">✦ Motivo da Oração de Hoje</p>
+    <div class="diary-field"></div>
+    <div class="diary-field"></div>
+
+    <p class="diary-label">✦ Reflexão — O que Deus está me mostrando?</p>
+    <div class="diary-lines">
+      <div class="diary-line"></div>
+      <div class="diary-line"></div>
+      <div class="diary-line"></div>
+    </div>
+
+    <p class="diary-label">✦ Gratidão de Hoje</p>
+    <div class="diary-field"></div>
+    <div class="diary-field"></div>
+
+    <p class="diary-label">✦ Como está meu filho hoje?</p>
+    <div class="diary-field"></div>
+    <div class="diary-field"></div>
+
+    <p class="diary-label">✦ Resposta ou Sinal Recebido de Deus</p>
+    <div class="diary-field"></div>
+    <div class="diary-field"></div>
+
+    <div style="text-align:center;margin-top:auto;padding-top:4mm;">
+      <span style="font-size:6.5pt;color:var(--gold);letter-spacing:2mm;">✦ DEVOCIONAL FILHO LIBERTO ✦</span>
+    </div>
+  </div>
+  <div class="page-footer"><span>34</span></div>
+</div>
+
+<!-- DIÁRIO DIA 2 -->
+<div class="page diary-page">
+  <div class="diary-header">
+    <span class="dia">Dia 2</span>
+    <span class="date-line">Data: _____ / _____ / _________</span>
+  </div>
+  <div class="page-inner" style="padding-top:8mm;">
+
+    <div class="diary-verse-box">
+      <p class="label">✦ Versículo do Dia</p>
+      <p class="verse">_____________________________________________________________<br>_____________________________________________________________</p>
+    </div>
+
+    <p class="diary-label">✦ Motivo da Oração de Hoje</p>
+    <div class="diary-field"></div>
+    <div class="diary-field"></div>
+
+    <p class="diary-label">✦ Reflexão — O que Deus está me mostrando?</p>
+    <div class="diary-lines">
+      <div class="diary-line"></div>
+      <div class="diary-line"></div>
+      <div class="diary-line"></div>
+    </div>
+
+    <p class="diary-label">✦ Gratidão de Hoje</p>
+    <div class="diary-field"></div>
+    <div class="diary-field"></div>
+
+    <p class="diary-label">✦ Como está meu filho hoje?</p>
+    <div class="diary-field"></div>
+    <div class="diary-field"></div>
+
+    <p class="diary-label">✦ Resposta ou Sinal Recebido de Deus</p>
+    <div class="diary-field"></div>
+    <div class="diary-field"></div>
+
+    <div style="text-align:center;margin-top:auto;padding-top:4mm;">
+      <span style="font-size:6.5pt;color:var(--gold);letter-spacing:2mm;">✦ DEVOCIONAL FILHO LIBERTO ✦</span>
+    </div>
+  </div>
+  <div class="page-footer"><span>35</span></div>
+</div>
+
+<!-- DIÁRIO DIA 3 -->
+<div class="page diary-page">
+  <div class="diary-header">
+    <span class="dia">Dia 3</span>
+    <span class="date-line">Data: _____ / _____ / _________</span>
+  </div>
+  <div class="page-inner" style="padding-top:8mm;">
+
+    <div class="diary-verse-box">
+      <p class="label">✦ Versículo do Dia</p>
+      <p class="verse">_____________________________________________________________<br>_____________________________________________________________</p>
+    </div>
+
+    <p class="diary-label">✦ Motivo da Oração de Hoje</p>
+    <div class="diary-field"></div>
+    <div class="diary-field"></div>
+
+    <p class="diary-label">✦ Reflexão — O que Deus está me mostrando?</p>
+    <div class="diary-lines">
+      <div class="diary-line"></div>
+      <div class="diary-line"></div>
+      <div class="diary-line"></div>
+    </div>
+
+    <p class="diary-label">✦ Gratidão de Hoje</p>
+    <div class="diary-field"></div>
+    <div class="diary-field"></div>
+
+    <p class="diary-label">✦ Como está meu filho hoje?</p>
+    <div class="diary-field"></div>
+    <div class="diary-field"></div>
+
+    <p class="diary-label">✦ Resposta ou Sinal Recebido de Deus</p>
+    <div class="diary-field"></div>
+    <div class="diary-field"></div>
+
+    <div style="text-align:center;margin-top:auto;padding-top:4mm;">
+      <span style="font-size:6.5pt;color:var(--gold);letter-spacing:2mm;">✦ DEVOCIONAL FILHO LIBERTO ✦</span>
+    </div>
+  </div>
+  <div class="page-footer"><span>36</span></div>
+</div>
+
+<!-- DIÁRIO DIA 4 -->
+<div class="page diary-page">
+  <div class="diary-header">
+    <span class="dia">Dia 4</span>
+    <span class="date-line">Data: _____ / _____ / _________</span>
+  </div>
+  <div class="page-inner" style="padding-top:8mm;">
+
+    <div class="diary-verse-box">
+      <p class="label">✦ Versículo do Dia</p>
+      <p class="verse">_____________________________________________________________<br>_____________________________________________________________</p>
+    </div>
+
+    <p class="diary-label">✦ Motivo da Oração de Hoje</p>
+    <div class="diary-field"></div>
+    <div class="diary-field"></div>
+
+    <p class="diary-label">✦ Reflexão — O que Deus está me mostrando?</p>
+    <div class="diary-lines">
+      <div class="diary-line"></div>
+      <div class="diary-line"></div>
+      <div class="diary-line"></div>
+    </div>
+
+    <p class="diary-label">✦ Gratidão de Hoje</p>
+    <div class="diary-field"></div>
+    <div class="diary-field"></div>
+
+    <p class="diary-label">✦ Como está meu filho hoje?</p>
+    <div class="diary-field"></div>
+    <div class="diary-field"></div>
+
+    <p class="diary-label">✦ Resposta ou Sinal Recebido de Deus</p>
+    <div class="diary-field"></div>
+    <div class="diary-field"></div>
+
+    <div style="text-align:center;margin-top:auto;padding-top:4mm;">
+      <span style="font-size:6.5pt;color:var(--gold);letter-spacing:2mm;">✦ DEVOCIONAL FILHO LIBERTO ✦</span>
+    </div>
+  </div>
+  <div class="page-footer"><span>37</span></div>
+</div>
+
+<!-- DIÁRIO DIA 5 -->
+<div class="page diary-page">
+  <div class="diary-header">
+    <span class="dia">Dia 5</span>
+    <span class="date-line">Data: _____ / _____ / _________</span>
+  </div>
+  <div class="page-inner" style="padding-top:8mm;">
+
+    <div class="diary-verse-box">
+      <p class="label">✦ Versículo do Dia</p>
+      <p class="verse">_____________________________________________________________<br>_____________________________________________________________</p>
+    </div>
+
+    <p class="diary-label">✦ Motivo da Oração de Hoje</p>
+    <div class="diary-field"></div>
+    <div class="diary-field"></div>
+
+    <p class="diary-label">✦ Reflexão — O que Deus está me mostrando?</p>
+    <div class="diary-lines">
+      <div class="diary-line"></div>
+      <div class="diary-line"></div>
+      <div class="diary-line"></div>
+    </div>
+
+    <p class="diary-label">✦ Gratidão de Hoje</p>
+    <div class="diary-field"></div>
+    <div class="diary-field"></div>
+
+    <p class="diary-label">✦ Como está meu filho hoje?</p>
+    <div class="diary-field"></div>
+    <div class="diary-field"></div>
+
+    <p class="diary-label">✦ Resposta ou Sinal Recebido de Deus</p>
+    <div class="diary-field"></div>
+    <div class="diary-field"></div>
+
+    <div style="text-align:center;margin-top:auto;padding-top:4mm;">
+      <span style="font-size:6.5pt;color:var(--gold);letter-spacing:2mm;">✦ DEVOCIONAL FILHO LIBERTO ✦</span>
+    </div>
+  </div>
+  <div class="page-footer"><span>38</span></div>
+</div>
+
+<!-- DIÁRIO DIA 6 -->
+<div class="page diary-page">
+  <div class="diary-header">
+    <span class="dia">Dia 6</span>
+    <span class="date-line">Data: _____ / _____ / _________</span>
+  </div>
+  <div class="page-inner" style="padding-top:8mm;">
+
+    <div class="diary-verse-box">
+      <p class="label">✦ Versículo do Dia</p>
+      <p class="verse">_____________________________________________________________<br>_____________________________________________________________</p>
+    </div>
+
+    <p class="diary-label">✦ Motivo da Oração de Hoje</p>
+    <div class="diary-field"></div>
+    <div class="diary-field"></div>
+
+    <p class="diary-label">✦ Reflexão — O que Deus está me mostrando?</p>
+    <div class="diary-lines">
+      <div class="diary-line"></div>
+      <div class="diary-line"></div>
+      <div class="diary-line"></div>
+    </div>
+
+    <p class="diary-label">✦ Gratidão de Hoje</p>
+    <div class="diary-field"></div>
+    <div class="diary-field"></div>
+
+    <p class="diary-label">✦ Como está meu filho hoje?</p>
+    <div class="diary-field"></div>
+    <div class="diary-field"></div>
+
+    <p class="diary-label">✦ Resposta ou Sinal Recebido de Deus</p>
+    <div class="diary-field"></div>
+    <div class="diary-field"></div>
+
+    <div style="text-align:center;margin-top:auto;padding-top:4mm;">
+      <span style="font-size:6.5pt;color:var(--gold);letter-spacing:2mm;">✦ DEVOCIONAL FILHO LIBERTO ✦</span>
+    </div>
+  </div>
+  <div class="page-footer"><span>39</span></div>
+</div>
+
+<!-- DIÁRIO DIA 7 -->
+<div class="page diary-page">
+  <div class="diary-header">
+    <span class="dia">Dia 7</span>
+    <span class="date-line">Data: _____ / _____ / _________</span>
+  </div>
+  <div class="page-inner" style="padding-top:8mm;">
+
+    <div class="diary-verse-box">
+      <p class="label">✦ Versículo do Dia</p>
+      <p class="verse">_____________________________________________________________<br>_____________________________________________________________</p>
+    </div>
+
+    <p class="diary-label">✦ Motivo da Oração de Hoje</p>
+    <div class="diary-field"></div>
+    <div class="diary-field"></div>
+
+    <p class="diary-label">✦ Reflexão — O que Deus está me mostrando?</p>
+    <div class="diary-lines">
+      <div class="diary-line"></div>
+      <div class="diary-line"></div>
+      <div class="diary-line"></div>
+    </div>
+
+    <p class="diary-label">✦ Gratidão de Hoje</p>
+    <div class="diary-field"></div>
+    <div class="diary-field"></div>
+
+    <p class="diary-label">✦ Como está meu filho hoje?</p>
+    <div class="diary-field"></div>
+    <div class="diary-field"></div>
+
+    <p class="diary-label">✦ Resposta ou Sinal Recebido de Deus</p>
+    <div class="diary-field"></div>
+    <div class="diary-field"></div>
+
+    <div style="text-align:center;margin-top:auto;padding-top:4mm;">
+      <span style="font-size:6.5pt;color:var(--gold);letter-spacing:2mm;">✦ DEVOCIONAL FILHO LIBERTO ✦</span>
+    </div>
+  </div>
+  <div class="page-footer"><span>40</span></div>
+</div>
+
+<!-- CONCLUSÃO -->
+<div class="page conclusion-page">
+  <div class="corner-tl"></div><div class="corner-tr"></div>
+  <div class="corner-bl"></div><div class="corner-br"></div>
+  <div class="page-inner" style="justify-content:center;align-items:center;text-align:center;padding:20mm;">
+    <div class="chapter-label" style="text-align:center;">✦ Conclusão</div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:22pt;color:var(--brown-dark);margin:4mm 0;line-height:1.3;">
+      Você Não Está<br><em style="color:var(--gold);">Sozinho</em>
+    </h2>
+    <div class="divider-gold"></div>
+
+    <p style="font-family:'Cormorant Garamond',serif;font-size:13pt;font-style:italic;color:var(--brown);line-height:1.7;max-width:150mm;">
+      "A mesma mão que criou as estrelas é a mão que guia o coração do seu filho."
+    </p>
+
+    <div class="divider-gold"></div>
+
+    <p style="font-size:10pt;line-height:1.8;color:var(--text);max-width:150mm;">
+      Ao longo destas páginas, você foi convidado a olhar mais fundo — para dentro do coração do seu filho, e para dentro do seu próprio. Essa coragem de enxergar, acolher e agir é o que transforma famílias.
+    </p>
+
+    <p style="font-size:10pt;line-height:1.8;color:var(--text);max-width:150mm;margin-top:4mm;">
+      <strong>Pequenos gestos de amor, praticados com consistência e fé, fazem diferença.</strong> Não porque você é perfeito — mas porque você está presente, disposto e ancorado em Deus.
+    </p>
+
+    <div class="verse-box" style="text-align:left;margin-top:6mm;">
+      <p class="verse-text">"Aquele que em vós começou a boa obra há de completá-la até ao dia de Jesus Cristo."</p>
+      <p class="verse-ref">Filipenses 1:6</p>
+    </div>
+
+    <p style="font-size:9.5pt;color:var(--text-light);margin-top:5mm;font-style:italic;">
+      Que Deus abençoe cada passo da sua jornada como pai e como mãe.<br>
+      Que Ele cure o que precisa ser curado, fortaleça o que precisa de força<br>
+      e complete o que ainda está por fazer.
+    </p>
+
+    <div class="cover-brand" style="margin-top:8mm;">Devocional Filho Liberto</div>
+  </div>
+</div>
+
+</body>
+</html>
