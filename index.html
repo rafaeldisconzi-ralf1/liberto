@@ -513,6 +513,93 @@
     @supports (padding-bottom: env(safe-area-inset-bottom)) {
       .step { padding-bottom: calc(56px + env(safe-area-inset-bottom)); }
     }
+
+    /* ── FLOATING CROSSES ── */
+    .cross-float {
+      position: fixed;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0;
+      font-size: 1.4rem;
+      color: var(--gold);
+      filter: drop-shadow(0 0 3px rgba(201,151,58,0.3));
+      animation: floatCross linear infinite;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 480px;
+    }
+    @keyframes floatCross {
+      0%   { opacity: 0;    transform: translateX(var(--cx)) translateY(100vh) rotate(0deg); }
+      8%   { opacity: var(--co); }
+      85%  { opacity: var(--co); }
+      100% { opacity: 0;    transform: translateX(var(--cx)) translateY(-60px) rotate(var(--cr)); }
+    }
+
+    /* ── PRAYER COUNTER ── */
+    #prayer-counter {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      z-index: 200;
+      background: linear-gradient(135deg, var(--olive-dark), var(--olive));
+      border: 1.5px solid rgba(201,151,58,0.5);
+      border-radius: 50px;
+      padding: 6px 14px 6px 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+      transition: transform 0.15s ease;
+      max-width: calc(var(--max-w) - 24px);
+    }
+    #prayer-counter.pop {
+      animation: counterPop 0.45s cubic-bezier(0.4,0,0.2,1);
+    }
+    @keyframes counterPop {
+      0%   { transform: scale(1); }
+      40%  { transform: scale(1.18); }
+      70%  { transform: scale(0.94); }
+      100% { transform: scale(1); }
+    }
+    #prayer-counter .pc-icon { font-size: 1rem; line-height: 1; }
+    #prayer-counter .pc-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.8);
+      white-space: nowrap;
+    }
+    #prayer-counter .pc-count {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold-light);
+    }
+
+    /* ── PRAYER TOAST ── */
+    #prayer-toast {
+      position: fixed;
+      top: 60px;
+      right: 12px;
+      z-index: 199;
+      background: rgba(61,107,79,0.95);
+      border: 1px solid rgba(201,151,58,0.4);
+      border-radius: 10px;
+      padding: 7px 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      pointer-events: none;
+    }
+    #prayer-toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
@@ -520,6 +607,17 @@
 <div id="progress-wrap"><div id="progress-bar"></div></div>
 
 <div id="quiz-wrapper">
+
+  <!-- Prayer Counter -->
+  <div id="prayer-counter">
+    <span class="pc-icon">🙏</span>
+    <span class="pc-text">Orações enviadas</span>
+    <span class="pc-count" id="pc-num">0</span>
+  </div>
+  <div id="prayer-toast">+1 oração enviada ✝</div>
+
+  <!-- Floating Crosses -->
+  <div id="crosses-container"></div>
 
   <!-- ══════════════════════
        STEP 1 — HOOK
@@ -1083,6 +1181,41 @@
 
 <script>
   const TOTAL = 15;
+  let prayerCount = 0;
+
+  // ── FLOATING CROSSES ──
+  (function initCrosses() {
+    const container = document.getElementById('crosses-container');
+    const symbols = ['✝', '✞', '✟', '✠'];
+    const count = 9;
+    for (let i = 0; i < count; i++) {
+      const el = document.createElement('div');
+      el.className = 'cross-float';
+      const offsetX = Math.round((Math.random() - 0.5) * 420);
+      const rotation = Math.round((Math.random() - 0.5) * 40);
+      const opacity = (0.04 + Math.random() * 0.07).toFixed(2);
+      const duration = (18 + Math.random() * 22).toFixed(1);
+      const delay = (Math.random() * -30).toFixed(1);
+      const size = (1.1 + Math.random() * 1.2).toFixed(2);
+      el.style.cssText = `--cx:${offsetX}px; --co:${opacity}; --cr:${rotation}deg; font-size:${size}rem; animation-duration:${duration}s; animation-delay:${delay}s;`;
+      el.textContent = symbols[i % symbols.length];
+      container.appendChild(el);
+    }
+  })();
+
+  // ── PRAYER COUNTER ──
+  function addPrayer() {
+    prayerCount++;
+    const numEl = document.getElementById('pc-num');
+    numEl.textContent = prayerCount;
+    const counter = document.getElementById('prayer-counter');
+    counter.classList.remove('pop');
+    void counter.offsetWidth;
+    counter.classList.add('pop');
+    const toast = document.getElementById('prayer-toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 1800);
+  }
 
   function goTo(id) {
     const cur = document.querySelector('.step.active');
@@ -1093,6 +1226,7 @@
     const n = parseInt(id.replace('step-', ''));
     document.getElementById('progress-bar').style.width = Math.round((n / TOTAL) * 100) + '%';
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    addPrayer();
   }
 
   function toggleOption(el) {
