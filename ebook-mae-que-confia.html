@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Mãe que Confia</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --rose: #C49A8A;
+  --rose-light: #E8C4B8;
+  --rose-pale: #F9F0EB;
+  --gold: #C9A84C;
+  --gold-light: #E8D08A;
+  --brown: #6B4C3B;
+  --brown-dark: #3D2B1F;
+  --cream: #FDFAF5;
+  --beige: #F5ECD7;
+  --beige-dark: #EAD9BF;
+  --text: #3D2B1F;
+  --text-light: #8B6B5A;
+}
+body { background:#E0D5CC; font-family:'Lato',sans-serif; color:var(--text); }
+.page {
+  width:210mm; height:297mm; margin:0 auto 8mm;
+  background:var(--cream); position:relative; overflow:hidden;
+  page-break-after:always; display:flex; flex-direction:column;
+}
+@media print { body{background:white;} .page{margin:0;box-shadow:none;} }
+@page { size:A4; margin:0; }
+
+/* DECORATIVE */
+.corner-tl,.corner-tr,.corner-bl,.corner-br { position:absolute; width:24mm; height:24mm; opacity:.2; }
+.corner-tl { top:0;left:0; border-top:1.5px solid var(--rose); border-left:1.5px solid var(--rose); }
+.corner-tr { top:0;right:0; border-top:1.5px solid var(--rose); border-right:1.5px solid var(--rose); }
+.corner-bl { bottom:0;left:0; border-bottom:1.5px solid var(--rose); border-left:1.5px solid var(--rose); }
+.corner-br { bottom:0;right:0; border-bottom:1.5px solid var(--rose); border-right:1.5px solid var(--rose); }
+
+.divider-rose { width:55mm; height:1px; background:linear-gradient(to right,transparent,var(--rose),transparent); margin:6mm auto; }
+.divider-gold { width:55mm; height:1px; background:linear-gradient(to right,transparent,var(--gold),transparent); margin:6mm auto; }
+.divider-slim { width:28mm; height:1px; background:var(--rose); margin:4mm auto; opacity:.5; }
+
+/* HEADER / FOOTER */
+.page-header {
+  background:var(--brown); height:10mm; display:flex; align-items:center;
+  padding:0 16mm; justify-content:space-between;
+}
+.page-header span { font-size:6.5pt; color:var(--rose-light); letter-spacing:1.5mm; text-transform:uppercase; }
+.page-footer { height:8mm; display:flex; align-items:center; justify-content:center; border-top:.5px solid var(--beige-dark); }
+.page-footer span { font-size:6pt; color:var(--text-light); letter-spacing:1mm; }
+
+/* INNER */
+.page-inner {
+  padding:14mm 16mm 12mm; flex:1; display:flex;
+  flex-direction:column; justify-content:space-between;
+}
+
+/* TYPOGRAPHY */
+.chapter-label { font-size:6.5pt; letter-spacing:3mm; text-transform:uppercase; color:var(--rose); margin-bottom:3mm; }
+.chapter-title { font-family:'Playfair Display',serif; font-size:20pt; font-weight:700; color:var(--brown-dark); line-height:1.25; margin-bottom:2mm; }
+.chapter-title em { color:var(--rose); font-style:italic; }
+.section-title { font-family:'Playfair Display',serif; font-size:13pt; font-weight:600; color:var(--brown); margin:6mm 0 3mm; }
+p { font-size:10.5pt; line-height:1.85; color:var(--text); margin-bottom:5mm; }
+p.lead { font-family:'Cormorant Garamond',serif; font-size:12.5pt; font-style:italic; color:var(--brown); line-height:1.65; }
+
+/* VERSE BOX */
+.verse-box {
+  background:linear-gradient(135deg,var(--rose-pale),#F5ECD7);
+  border-left:3px solid var(--rose); border-radius:2mm; padding:7mm 8mm; margin:6mm 0;
+}
+.verse-text { font-family:'Cormorant Garamond',serif; font-size:13pt; font-style:italic; color:var(--brown-dark); line-height:1.7; margin-bottom:3mm; }
+.verse-ref { font-size:7.5pt; color:var(--rose); letter-spacing:1mm; text-transform:uppercase; font-weight:700; }
+
+/* GOLD VERSE BOX */
+.verse-box-gold { background:linear-gradient(135deg,#F5ECD7,#EAD9BF); border-left:3px solid var(--gold); border-radius:2mm; padding:7mm 8mm; margin:6mm 0; }
+
+/* HIGHLIGHT */
+.highlight-box { background:var(--brown); border-radius:3mm; padding:8mm 9mm; margin:6mm 0; }
+.highlight-box p { color:var(--rose-pale); font-size:11pt; line-height:1.8; margin:0; }
+.highlight-box p strong { color:var(--gold-light); }
+
+/* ROSE HIGHLIGHT */
+.rose-box { background:linear-gradient(135deg,var(--rose-light),var(--rose-pale)); border-radius:3mm; padding:8mm 9mm; margin:6mm 0; border:1px solid var(--rose-light); }
+.rose-box p { color:var(--brown-dark); font-size:10.5pt; line-height:1.8; margin:0; }
+
+/* PULL QUOTE */
+.pull-quote { text-align:center; padding:7mm 10mm; margin:5mm 0; }
+.pull-quote p { font-family:'Playfair Display',serif; font-size:14pt; font-style:italic; color:var(--brown); line-height:1.6; }
+.pull-quote::before,.pull-quote::after { content:''; display:block; width:38mm; height:1px; background:linear-gradient(to right,transparent,var(--rose),transparent); margin:4mm auto; }
+
+/* LISTS */
+.styled-list { list-style:none; margin:3mm 0; }
+.styled-list li { font-size:10.5pt; color:var(--text); line-height:1.8; padding:2.5mm 0 2.5mm 7mm; position:relative; }
+.styled-list li::before { content:'✿'; position:absolute; left:0; color:var(--rose); font-size:7pt; top:3mm; }
+
+/* CHAPTER OPENER */
+.chapter-opener { background:linear-gradient(160deg,var(--brown) 0%,#3D2B1F 100%); justify-content:center; align-items:center; text-align:center; }
+.chapter-opener .ch-num { font-family:'Playfair Display',serif; font-size:80pt; color:var(--rose); opacity:.15; line-height:1; position:absolute; top:50%; left:50%; transform:translate(-50%,-65%); }
+.chapter-opener .ch-label { font-size:7pt; letter-spacing:4mm; color:var(--rose-light); text-transform:uppercase; margin-bottom:4mm; position:relative; z-index:1; }
+.chapter-opener .ch-title { font-family:'Playfair Display',serif; font-size:22pt; color:white; line-height:1.3; padding:0 20mm; position:relative; z-index:1; }
+.chapter-opener .ch-title em { color:var(--rose-light); }
+.chapter-opener .ch-verse { font-family:'Cormorant Garamond',serif; font-size:10pt; color:var(--beige-dark); font-style:italic; margin-top:6mm; padding:0 25mm; line-height:1.6; position:relative; z-index:1; }
+
+/* COVER */
+.page-cover { background:linear-gradient(160deg,#FDFAF5 0%,var(--rose-pale) 50%,#F0DDD6 100%); justify-content:center; align-items:center; text-align:center; }
+.cover-title { font-family:'Playfair Display',serif; font-size:30pt; font-weight:700; color:var(--brown-dark); line-height:1.2; letter-spacing:.3mm; padding:0 18mm; }
+.cover-title em { color:var(--rose); font-style:italic; }
+.cover-subtitle { font-size:8.5pt; color:var(--text-light); font-weight:300; line-height:1.65; padding:0 20mm; margin-top:5mm; }
+.cover-brand { font-size:7.5pt; letter-spacing:3mm; color:var(--rose); text-transform:uppercase; margin-top:8mm; }
+.cover-bottom-bar { position:absolute; bottom:0; left:0; right:0; height:12mm; background:var(--brown); display:flex; align-items:center; justify-content:center; }
+.cover-bottom-bar span { color:var(--rose-light); font-size:7pt; letter-spacing:2mm; text-transform:uppercase; }
+
+/* DISCLAIMER */
+.disclaimer-page { background:var(--brown); }
+.disclaimer-page p { color:var(--beige-dark); font-size:8.5pt; line-height:1.8; }
+.disclaimer-page .d-title { font-family:'Playfair Display',serif; font-size:14pt; color:var(--rose-light); margin-bottom:5mm; }
+
+/* DEVOCIONAL 40 DIAS */
+.dev-card { background:white; border-radius:3mm; border:1px solid var(--beige-dark); border-top:3px solid var(--rose); padding:5mm; margin-bottom:5mm; }
+.dev-card .day-num { font-family:'Playfair Display',serif; font-size:9pt; color:var(--rose); font-style:italic; margin-bottom:1.5mm; }
+.dev-card .day-title { font-family:'Playfair Display',serif; font-size:11pt; color:var(--brown-dark); font-weight:600; margin-bottom:2mm; }
+.dev-card .day-verse { font-family:'Cormorant Garamond',serif; font-size:9.5pt; font-style:italic; color:var(--brown); border-left:2px solid var(--rose-light); padding-left:3mm; margin:2mm 0; line-height:1.5; }
+.dev-card .day-ref { font-size:6.5pt; color:var(--rose); letter-spacing:.5mm; margin-bottom:2mm; }
+.dev-card .day-reflection { font-size:8.5pt; color:var(--text); line-height:1.65; margin:2mm 0; }
+.dev-card .day-action { background:var(--rose-pale); border-radius:2mm; padding:2.5mm 4mm; margin:2mm 0; }
+.dev-card .day-action .act-label { font-size:6pt; color:var(--rose); letter-spacing:1mm; text-transform:uppercase; margin-bottom:1mm; }
+.dev-card .day-action p { font-size:8pt; margin:0; line-height:1.5; }
+.dev-card .day-prayer { font-size:8.5pt; color:var(--brown); font-style:italic; line-height:1.6; margin-top:2mm; }
+.dev-card .pray-label { font-size:6pt; color:var(--text-light); letter-spacing:1mm; text-transform:uppercase; margin-bottom:1mm; }
+
+/* DIARY */
+.diary-page { background:#FFFDF8; }
+.diary-header { background:var(--brown); padding:8mm 16mm; display:flex; justify-content:space-between; align-items:center; }
+.diary-header .dia { font-family:'Playfair Display',serif; font-size:18pt; color:var(--rose-light); font-style:italic; }
+.diary-header .date-line { font-size:8pt; color:var(--beige-dark); letter-spacing:1mm; }
+.diary-field { border-bottom:1px dashed var(--beige-dark); min-height:10mm; margin:1.5mm 0 3mm; }
+.diary-label { font-size:6.5pt; color:var(--rose); letter-spacing:1.5mm; text-transform:uppercase; margin-top:4mm; }
+.diary-line { border-bottom:1px solid var(--beige-dark); height:5mm; }
+.diary-verse-box { background:var(--rose-pale); border-radius:2mm; padding:4mm 5mm; margin:3mm 0; border-left:2px solid var(--rose); }
+.diary-verse-box .label { font-size:6pt; color:var(--rose); letter-spacing:1.5mm; text-transform:uppercase; margin-bottom:1mm; }
+.diary-verse-box .verse { font-family:'Cormorant Garamond',serif; font-size:10pt; font-style:italic; color:var(--brown); }
+
+/* PROMISE PAGE */
+.promise-page { background:linear-gradient(170deg,var(--rose-pale),#FDFAF5); }
+.promise-page .page-inner { justify-content:center; align-items:center; text-align:center; }
+
+/* 2-COL */
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:5mm; margin:4mm 0; }
+.card { background:var(--rose-pale); border-radius:3mm; padding:6mm; border-top:2px solid var(--rose); }
+.card h4 { font-family:'Playfair Display',serif; font-size:11pt; color:var(--brown-dark); margin-bottom:3mm; }
+.card p { font-size:9.5pt; margin:0; line-height:1.7; }
+
+/* ORAÇÕES */
+.prayer-box { background:linear-gradient(135deg,var(--rose-pale),#FDFAF5); border:1px solid var(--rose-light); border-radius:3mm; padding:7mm 8mm; margin:5mm 0; }
+.prayer-box .pray-title { font-family:'Playfair Display',serif; font-size:11pt; color:var(--brown); margin-bottom:3mm; font-style:italic; }
+.prayer-box p { font-size:9.5pt; line-height:1.8; margin:0; color:var(--brown-dark); }
+
+/* CONCLUSION */
+.conclusion-page { background:linear-gradient(170deg,var(--rose-pale) 0%,#FDFAF5 100%); }
+
+/* VERSICULOS PAGE */
+.theme-section { margin-bottom:6mm; }
+.theme-label { font-size:7pt; letter-spacing:2mm; text-transform:uppercase; color:var(--rose); margin-bottom:2mm; display:flex; align-items:center; gap:2mm; }
+.theme-verse { font-family:'Cormorant Garamond',serif; font-size:11.5pt; font-style:italic; color:var(--brown-dark); line-height:1.6; border-left:2px solid var(--rose-light); padding-left:4mm; margin-bottom:1.5mm; }
+.theme-mini { font-size:8pt; color:var(--text-light); line-height:1.6; padding-left:4mm; }
+.theme-ref { font-size:6.5pt; color:var(--rose); letter-spacing:.5mm; margin-top:1mm; padding-left:4mm; }
+</style>
+</head>
+<body>
+
+<!-- CAPA -->
+<div class="page page-cover">
+  <div class="corner-tl"></div><div class="corner-tr"></div>
+  <div class="corner-bl"></div><div class="corner-br"></div>
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;padding:18mm;">
+    <div style="font-size:26pt;color:var(--rose);opacity:.35;letter-spacing:6mm;margin-bottom:5mm;">✿ ✿ ✿</div>
+
+    <!-- PLACEHOLDER IMAGEM CAPA -->
+    <div style="width:75mm;height:75mm;border-radius:50%;background:linear-gradient(135deg,#E8C4B822,#C49A8A22);border:1.5px solid var(--rose-light);display:flex;align-items:center;justify-content:center;flex-direction:column;margin:0 auto 8mm;gap:3mm;">
+      <span style="font-size:28pt;opacity:.4;">🌸</span>
+      <span style="font-size:5.5pt;color:var(--text-light);letter-spacing:.5mm;">INSERIR IMAGEM DA CAPA</span>
+    </div>
+
+    <div class="divider-rose"></div>
+    <h1 class="cover-title"><em>Mãe</em> que<br>Confia</h1>
+    <div class="divider-rose"></div>
+    <p class="cover-subtitle">40 dias fortalecendo sua fé, encontrando paz e<br>aprendendo a descansar em Deus durante<br>a caminhada com seu filho.</p>
+    <div class="cover-brand">Devocional Filho Liberto</div>
+  </div>
+  <div class="cover-bottom-bar"><span>Devocional Cristão para Mães</span></div>
+</div>
+
+<!-- COPYRIGHT -->
+<div class="page disclaimer-page">
+  <div class="page-inner" style="justify-content:center;">
+    <p class="d-title">Aviso Importante</p>
+    <p>Este material foi criado com o objetivo de oferecer apoio espiritual, reflexão e encorajamento para mães em sua caminhada de fé. Ele não substitui, em nenhuma hipótese, acompanhamento médico, psicológico ou psiquiátrico.</p>
+    <br>
+    <p>As reflexões e orações aqui presentes <strong style="color:var(--gold-light)">podem contribuir</strong> para o fortalecimento da fé e para o acolhimento emocional, mas não têm o objetivo de diagnosticar, tratar ou curar qualquer condição de saúde.</p>
+    <br>
+    <p>Se você ou alguém próximo estiver passando por sofrimento intenso, procure orientação de um profissional de saúde qualificado.</p>
+    <br>
+    <div class="divider-slim"></div>
+    <br>
+    <p style="font-size:7.5pt;color:var(--text-light);">© Devocional Filho Liberto. Todos os direitos reservados.<br>Reprodução proibida sem autorização.</p>
+  </div>
+</div>
+
+<!-- CARTA DE BOAS-VINDAS -->
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Carta de Boas-vindas</span></div>
+  <div class="page-inner">
+    <div class="chapter-label">✿ Para você</div>
+    <h2 class="chapter-title">Uma Carta<br>para a <em>Mãe que Confia</em></h2>
+    <div class="divider-slim"></div>
+    <p class="lead">"Querida mãe — você chegou até aqui, e isso já é um ato de fé."</p>
+    <p>Talvez você esteja cansada. Talvez as noites tenham sido longas, as preocupações muitas e a sensação de que não está fazendo o suficiente tenha aparecido mais vezes do que você gostaria de admitir.</p>
+    <p>Este devocional foi criado especialmente para você. Não para dar respostas prontas, mas para <strong>caminhar ao seu lado</strong> nesses 40 dias — lembrando você de que Deus está presente mesmo quando tudo parece incerto.</p>
+    <div class="verse-box">
+      <p class="verse-text">"Não temas, porque eu sou contigo; não te assombres, porque eu sou o teu Deus; eu te fortaleço, e te ajudo."</p>
+      <p class="verse-ref">Isaías 41:10</p>
+    </div>
+    <p>Que cada página deste livro seja um lugar de descanso para o seu coração. Que você encontre aqui a paz que só Deus pode dar — e a coragem de continuar confiando, mesmo sem ver o fim do caminho.</p>
+    <p>Com carinho,<br><em>Devocional Filho Liberto</em></p>
+  </div>
+  <div class="page-footer"><span>3</span></div>
+</div>
+
+<!-- CAP 1 OPENER -->
+<div class="page chapter-opener">
+  <div class="ch-num">01</div>
+  <div class="page-inner" style="justify-content:center;align-items:center;text-align:center;">
+    <p class="ch-label">Capítulo Um</p>
+    <div class="divider-slim" style="background:var(--rose-light);opacity:.5;"></div>
+    <h2 class="ch-title">Quando a Ansiedade<br><em>Bate à Porta</em></h2>
+    <div class="divider-slim" style="background:var(--rose-light);opacity:.5;"></div>
+    <p class="ch-verse">"Lançando sobre ele toda a vossa ansiedade, porque ele tem cuidado de vós."<br><span style="color:var(--rose-light);font-style:normal;font-size:8pt;letter-spacing:1mm;">1 PEDRO 5:7</span></p>
+  </div>
+</div>
+
+<!-- CAP 1 CONTEÚDO -->
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Capítulo 1</span></div>
+  <div class="page-inner">
+    <div class="chapter-label">✿ Capítulo 1</div>
+    <h2 class="chapter-title">Quando a Ansiedade <em>Bate à Porta</em></h2>
+    <div class="divider-slim"></div>
+    <p>Existe uma preocupação que só uma mãe conhece. Ela aparece às 3 da manhã, se esconde atrás de um sorriso no café da manhã e insiste em voltar nos momentos mais quietos do dia. Não é fraqueza — é amor, carregado de incerteza.</p>
+    <div class="rose-box">
+      <p>A ansiedade materna não é um sinal de falta de fé. É um lembrete de que você ama profundamente. Mas Deus te convida a <strong>não carregar esse peso sozinha.</strong></p>
+    </div>
+    <p>O medo do futuro do seu filho, a insegurança sobre estar fazendo certo, o desgaste emocional de dar o melhor de si todos os dias — tudo isso é real. E Deus vê cada lágrima, cada noite difícil, cada oração sussurrada em silêncio.</p>
+    <ul class="styled-list">
+      <li><strong>O medo</strong> de não ser suficiente como mãe</li>
+      <li><strong>A insegurança</strong> diante das escolhas difíceis</li>
+      <li><strong>O excesso de preocupação</strong> que drena a alegria</li>
+      <li><strong>A culpa</strong> que aparece sem ser convidada</li>
+      <li><strong>O desgaste</strong> de cuidar de todos e esquecer de si</li>
+    </ul>
+    <div class="pull-quote">
+      <p>"Você não precisa ter tudo resolvido para ser uma boa mãe. Você precisa confiar em quem tem tudo nas mãos."</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>5</span></div>
+</div>
+
+<!-- CAP 2 OPENER -->
+<div class="page chapter-opener">
+  <div class="ch-num">02</div>
+  <div class="page-inner" style="justify-content:center;align-items:center;text-align:center;">
+    <p class="ch-label">Capítulo Dois</p>
+    <div class="divider-slim" style="background:var(--rose-light);opacity:.5;"></div>
+    <h2 class="ch-title">Deus Continua Trabalhando<br><em>Quando Você Não Enxerga</em></h2>
+    <div class="divider-slim" style="background:var(--rose-light);opacity:.5;"></div>
+    <p class="ch-verse">"Porque eu sei os planos que tenho para vós, diz o Senhor, planos de paz e não de mal."<br><span style="color:var(--rose-light);font-style:normal;font-size:8pt;letter-spacing:1mm;">JEREMIAS 29:11</span></p>
+  </div>
+</div>
+
+<!-- CAP 2 CONTEÚDO -->
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Capítulo 2</span></div>
+  <div class="page-inner">
+    <div class="chapter-label">✿ Capítulo 2</div>
+    <h2 class="chapter-title">Deus Continua Trabalhando <em>Quando Você Não Enxerga</em></h2>
+    <div class="divider-slim"></div>
+    <p>Há momentos na vida de uma mãe em que o silêncio de Deus parece ensurdecedor. A oração foi feita, a lágrima foi derramada — e a resposta ainda não chegou. Nesses momentos, a fé é colocada à prova da forma mais real possível.</p>
+    <p>Mas a Bíblia está cheia de histórias de mães que confiaram sem ver. <strong>Ana</strong> chorou diante do Senhor sem parar — e Deus a ouviu. <strong>Maria</strong> não entendeu o caminho que Deus havia escolhido para seu filho — e ainda assim disse: "Faça-se em mim segundo a Tua palavra."</p>
+    <div class="verse-box">
+      <p class="verse-text">"Fiei-me no Senhor, e ele se inclinou para mim e ouviu o meu clamor."</p>
+      <p class="verse-ref">Salmo 40:1</p>
+    </div>
+    <p>Deus está trabalhando nos bastidores do que você ainda não consegue ver. Cada oração sua é recebida por Ele. Cada lágrima é anotada. Nenhum momento de entrega passa despercebido diante d'Ele.</p>
+    <div class="highlight-box">
+      <p>Confiar não significa entender. Significa <strong>escolher acreditar</strong> que Deus é bom, mesmo quando as circunstâncias não parecem boas. E essa escolha, feita dia após dia, é o que a Bíblia chama de fé.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>7</span></div>
+</div>
+
+<!-- CAP 3 OPENER -->
+<div class="page chapter-opener">
+  <div class="ch-num">03</div>
+  <div class="page-inner" style="justify-content:center;align-items:center;text-align:center;">
+    <p class="ch-label">Capítulo Três</p>
+    <div class="divider-slim" style="background:var(--rose-light);opacity:.5;"></div>
+    <h2 class="ch-title">O Peso que Você<br><em>Não Precisa Carregar</em></h2>
+    <div class="divider-slim" style="background:var(--rose-light);opacity:.5;"></div>
+    <p class="ch-verse">"Vinde a mim, todos os que estais cansados e oprimidos, e eu vos aliviarei."<br><span style="color:var(--rose-light);font-style:normal;font-size:8pt;letter-spacing:1mm;">MATEUS 11:28</span></p>
+  </div>
+</div>
+
+<!-- CAP 3 CONTEÚDO -->
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Capítulo 3</span></div>
+  <div class="page-inner">
+    <div class="chapter-label">✿ Capítulo 3</div>
+    <h2 class="chapter-title">O Peso que Você <em>Não Precisa Carregar</em></h2>
+    <div class="divider-slim"></div>
+    <p>Mães carregam. É quase uma definição. Carregam nas costas, no coração, na mente — a lista de preocupações, o peso das responsabilidades, os medos que não conseguem nomear.</p>
+    <p>Mas Jesus não chamou as pessoas fortes para descansar nEle — Ele chamou os <strong>cansados e oprimidos.</strong> Ele te chama exatamente como você está: com o coração pesado, as mãos cheias e as forças no limite.</p>
+    <div class="rose-box">
+      <p>Confiar em Deus com os seus filhos não é abandoná-los — é <strong>colocá-los nas mãos do único que pode verdadeiramente protegê-los.</strong> Você cuida; Deus sustenta.</p>
+    </div>
+    <h3 class="section-title">Como entregar o que te pesa</h3>
+    <ul class="styled-list">
+      <li>Nomear em voz alta o que você está sentindo — para Deus e para si mesma</li>
+      <li>Orar especificamente sobre cada medo, ao invés de carregá-lo em silêncio</li>
+      <li>Lembrar de momentos em que Deus já cuidou — e deixar isso fortalecer sua fé</li>
+      <li>Pedir ajuda — a Deus e às pessoas ao seu redor</li>
+    </ul>
+    <div class="verse-box">
+      <p class="verse-text">"O Senhor é a minha força e o meu escudo; nele confiou o meu coração."</p>
+      <p class="verse-ref">Salmo 28:7</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>9</span></div>
+</div>
+
+<!-- CAP 4 OPENER -->
+<div class="page chapter-opener">
+  <div class="ch-num">04</div>
+  <div class="page-inner" style="justify-content:center;align-items:center;text-align:center;">
+    <p class="ch-label">Capítulo Quatro</p>
+    <div class="divider-slim" style="background:var(--rose-light);opacity:.5;"></div>
+    <h2 class="ch-title">Encontrando Paz<br><em>Durante a Espera</em></h2>
+    <div class="divider-slim" style="background:var(--rose-light);opacity:.5;"></div>
+    <p class="ch-verse">"E a paz de Deus, que excede todo o entendimento, guardará os vossos corações."<br><span style="color:var(--rose-light);font-style:normal;font-size:8pt;letter-spacing:1mm;">FILIPENSES 4:7</span></p>
+  </div>
+</div>
+
+<!-- CAP 4 CONTEÚDO -->
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Capítulo 4</span></div>
+  <div class="page-inner">
+    <div class="chapter-label">✿ Capítulo 4</div>
+    <h2 class="chapter-title">Encontrando Paz <em>Durante a Espera</em></h2>
+    <div class="divider-slim"></div>
+    <p>A espera é talvez o maior desafio da fé. Esperar pela cura, pela mudança, pela resposta — enquanto a vida continua acontecendo ao redor. A paz que Deus promete não é a ausência de problemas; é uma <strong>paz que coexiste com eles.</strong></p>
+    <div class="two-col">
+      <div class="card">
+        <h4>🌿 Oração</h4>
+        <p>Reserve 10 minutos do seu dia apenas para falar com Deus. Sem lista de pedidos — apenas presença.</p>
+      </div>
+      <div class="card">
+        <h4>📖 Palavra</h4>
+        <p>Leia um salmo por dia. A Bíblia tem 150 — e cada um foi escrito por alguém que também passou por momentos difíceis.</p>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="card">
+        <h4>✨ Silêncio</h4>
+        <p>Em meio à agitação, encontre um momento de quietude. Deus fala em voz mansa — mas fala.</p>
+      </div>
+      <div class="card">
+        <h4>🙏 Gratidão</h4>
+        <p>Liste 3 coisas pelas quais você é grata hoje. A gratidão recalibra o coração para enxergar o que Deus está fazendo.</p>
+      </div>
+    </div>
+    <div class="pull-quote">
+      <p>"A paz não é encontrada quando os problemas acabam. É <em>cultivada</em> enquanto eles ainda existem."</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>11</span></div>
+</div>
+
+<!-- CAP 5 OPENER -->
+<div class="page chapter-opener">
+  <div class="ch-num">05</div>
+  <div class="page-inner" style="justify-content:center;align-items:center;text-align:center;">
+    <p class="ch-label">Capítulo Cinco</p>
+    <div class="divider-slim" style="background:var(--rose-light);opacity:.5;"></div>
+    <h2 class="ch-title">O Poder da<br><em>Oração de uma Mãe</em></h2>
+    <div class="divider-slim" style="background:var(--rose-light);opacity:.5;"></div>
+    <p class="ch-verse">"A oração fervorosa do justo pode muito em seus efeitos."<br><span style="color:var(--rose-light);font-style:normal;font-size:8pt;letter-spacing:1mm;">TIAGO 5:16</span></p>
+  </div>
+</div>
+
+<!-- CAP 5 CONTEÚDO -->
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Capítulo 5</span></div>
+  <div class="page-inner">
+    <div class="chapter-label">✿ Capítulo 5</div>
+    <h2 class="chapter-title">O Poder da <em>Oração de uma Mãe</em></h2>
+    <div class="divider-slim"></div>
+    <p>Não existe oração mais poderosa, mais persistente e mais cheia de amor do que a de uma mãe intercedendo por seu filho. A Bíblia registra a oração de Ana, que mesmo sem palavras — apenas com o coração — foi ouvida por Deus.</p>
+    <div class="highlight-box">
+      <p>Sua oração não precisa ser elaborada para ser poderosa. Ela precisa ser <strong>sincera.</strong> Deus não mede as palavras — Ele mede a entrega do coração.</p>
+    </div>
+    <h3 class="section-title">Formas de orar pelo seu filho</h3>
+    <ul class="styled-list">
+      <li><strong>Oração de cobertura</strong> — cubra seu filho pelo nome com o sangue de Jesus diariamente</li>
+      <li><strong>Oração de declaração</strong> — declare promessas bíblicas sobre a vida dele</li>
+      <li><strong>Oração de intercessão</strong> — ore pelos amigos, professores, pelo ambiente ao redor</li>
+      <li><strong>Oração de gratidão</strong> — agradeça por quem ele é, não apenas por quem você quer que ele seja</li>
+      <li><strong>Oração silenciosa</strong> — simplesmente entregue, sem palavras, apenas presença</li>
+    </ul>
+    <div class="verse-box">
+      <p class="verse-text">"Aquele que habita no esconderijo do Altíssimo, à sombra do Onipotente descansará."</p>
+      <p class="verse-ref">Salmo 91:1</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>13</span></div>
+</div>
+
+<!-- VERSÍCULOS POR TEMA - PÁG 1 -->
+<div class="page chapter-opener">
+  <div class="page-inner" style="justify-content:center;align-items:center;text-align:center;">
+    <p class="ch-label">Para Guardar no Coração</p>
+    <div class="divider-slim" style="background:var(--rose-light);opacity:.5;"></div>
+    <h2 class="ch-title">Versículos que<br><em>Fortalecem a Mãe</em></h2>
+    <div class="divider-slim" style="background:var(--rose-light);opacity:.5;"></div>
+    <p class="ch-verse">Palavras de Deus para cada momento da caminhada.</p>
+  </div>
+</div>
+
+<!-- VERSÍCULOS CONTEÚDO 1 -->
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Versículos para o Coração</span></div>
+  <div class="page-inner">
+    <div class="theme-section">
+      <p class="theme-label">🌸 Ansiedade</p>
+      <p class="theme-verse">"Não andeis ansiosos por coisa alguma; em tudo, porém, sejam conhecidas, diante de Deus, as vossas petições."</p>
+      <p class="theme-ref">Filipenses 4:6</p>
+      <p class="theme-mini">A ansiedade é real — mas há um lugar para depositá-la: nos pés de Deus, em oração.</p>
+    </div>
+    <div class="theme-section">
+      <p class="theme-label">🕊️ Paz</p>
+      <p class="theme-verse">"Deixo-vos a paz, a minha paz vos dou; não vo-la dou como o mundo a dá."</p>
+      <p class="theme-ref">João 14:27</p>
+      <p class="theme-mini">A paz de Jesus é diferente. Ela não depende de circunstâncias — ela vem de dentro para fora.</p>
+    </div>
+    <div class="theme-section">
+      <p class="theme-label">🛡️ Proteção</p>
+      <p class="theme-verse">"O anjo do Senhor acampa-se ao redor dos que o temem e os livra."</p>
+      <p class="theme-ref">Salmo 34:7</p>
+      <p class="theme-mini">Seu filho não está sozinho. Há uma proteção invisível ao redor de quem é entregue nas mãos de Deus.</p>
+    </div>
+    <div class="theme-section">
+      <p class="theme-label">🌱 Esperança</p>
+      <p class="theme-verse">"Os que esperam no Senhor renovam as forças, sobem com asas como águias."</p>
+      <p class="theme-ref">Isaías 40:31</p>
+      <p class="theme-mini">A espera na fé não é passividade — é a fonte de onde a força para continuar brota.</p>
+    </div>
+    <div class="theme-section">
+      <p class="theme-label">💛 Confiança</p>
+      <p class="theme-verse">"Confia no Senhor de todo o teu coração e não te estribes no teu próprio entendimento."</p>
+      <p class="theme-ref">Provérbios 3:5</p>
+      <p class="theme-mini">Nem sempre entenderemos o caminho — mas podemos confiar em quem o traçou.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>15</span></div>
+</div>
+
+<!-- VERSÍCULOS CONTEÚDO 2 -->
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Versículos para o Coração</span></div>
+  <div class="page-inner">
+    <div class="theme-section">
+      <p class="theme-label">💪 Força</p>
+      <p class="theme-verse">"Tudo posso em Cristo que me fortalece."</p>
+      <p class="theme-ref">Filipenses 4:13</p>
+      <p class="theme-mini">Inclusive os dias difíceis, as noites longas e os momentos em que parece não haver saída.</p>
+    </div>
+    <div class="theme-section">
+      <p class="theme-label">🌙 Descanso</p>
+      <p class="theme-verse">"Em vão vos levantais de madrugada, repousais tarde e comeis o pão de dores; pois assim dará ele sono ao seu amado."</p>
+      <p class="theme-ref">Salmo 127:2</p>
+      <p class="theme-mini">Deus concede descanso — não como preguiça, mas como graça. Você pode descansar.</p>
+    </div>
+    <div class="theme-section">
+      <p class="theme-label">🙌 Sabedoria</p>
+      <p class="theme-verse">"Se algum de vós tem falta de sabedoria, peça-a a Deus, que a todos dá liberalmente."</p>
+      <p class="theme-ref">Tiago 1:5</p>
+      <p class="theme-mini">Quando não souber o que fazer, pergunte. Deus responde a quem pede com sinceridade.</p>
+    </div>
+    <div class="theme-section">
+      <p class="theme-label">🌟 Perseverança</p>
+      <p class="theme-verse">"Não nos cansemos de fazer o bem, pois no tempo próprio colheremos, se não desanimarmos."</p>
+      <p class="theme-ref">Gálatas 6:9</p>
+      <p class="theme-mini">A colheita vem — mas exige que você não desista antes do tempo certo.</p>
+    </div>
+    <div class="theme-section">
+      <p class="theme-label">🏠 Família</p>
+      <p class="theme-verse">"Quanto a mim e à minha casa, serviremos ao Senhor."</p>
+      <p class="theme-ref">Josué 24:15</p>
+      <p class="theme-mini">Uma decisão de fé que começa em você pode mudar o rumo de gerações inteiras.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>16</span></div>
+</div>
+<!-- DEVOCIONAL 40 DIAS OPENER -->
+<div class="page chapter-opener">
+  <div class="ch-num" style="font-size:60pt;">40</div>
+  <div class="page-inner" style="justify-content:center;align-items:center;text-align:center;">
+    <p class="ch-label">Devocional</p>
+    <div class="divider-slim" style="background:var(--rose-light);opacity:.5;"></div>
+    <h2 class="ch-title">40 Dias de<br><em>Fé e Confiança</em></h2>
+    <div class="divider-slim" style="background:var(--rose-light);opacity:.5;"></div>
+    <p class="ch-verse">Um versículo, uma reflexão, uma ação e uma oração<br>para cada dia dessa caminhada com Deus.</p>
+  </div>
+</div>
+
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Devocional de 40 Dias</span></div>
+  <div class="page-inner">
+
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 1 — A Fé que Sustenta</p>
+      <p class="day-verse">Ora, a fé é a certeza daquilo que esperamos e a prova das coisas que não vemos.</p>
+      <p class="day-ref">Hebreus 11:1</p>
+      <p class="day-reflection">Há dias em que acreditar parece difícil. Mas a fé não é um sentimento — é uma decisão. Mesmo nos dias cinzas, você pode escolher confiar.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Escreva uma coisa em que você está escolhendo confiar hoje, mesmo sem ver a resposta.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, a fé que sustenta — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 2 — Deus Ouve Cada Oração</p>
+      <p class="day-verse">Antes que clamem, eu responderei; ainda estarão falando, e eu já terei ouvido.</p>
+      <p class="day-ref">Isaías 65:24</p>
+      <p class="day-reflection">Sua oração nunca se perde. Antes de você terminar de falar, Deus já está respondendo — muitas vezes de formas que você ainda não consegue ver.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Ore hoje por uma coisa específica e escreva aqui para lembrar quando a resposta chegar.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, deus ouve cada oração — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>18</span></div>
+</div>
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Devocional de 40 Dias</span></div>
+  <div class="page-inner">
+
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 3 — O Descanso que Deus Oferece</p>
+      <p class="day-verse">Vinde a mim, todos os que estais cansados e oprimidos, e eu vos aliviarei.</p>
+      <p class="day-ref">Mateus 11:28</p>
+      <p class="day-reflection">Mãe, você pode parar. Por 10 minutos, por uma tarde, por um momento — sem culpa. Deus não está pedindo que você seja perfeita. Está pedindo que você venha.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Faça uma pausa hoje. Apenas respire e entregue esse dia nas mãos de Deus.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, o descanso que deus oferece — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 4 — Quando o Medo Aparece</p>
+      <p class="day-verse">Não temas, porque eu sou contigo; não te assombres, porque eu sou o teu Deus.</p>
+      <p class="day-ref">Isaías 41:10</p>
+      <p class="day-reflection">O medo é uma das emoções mais honestas que existem. Ele mostra o que amamos. Mas Deus fala direto ao medo: 'Eu estou aqui. Não temas.'</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Nomeie hoje um medo que você está carregando. Depois, entregue-o a Deus em oração.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, quando o medo aparece — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>19</span></div>
+</div>
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Devocional de 40 Dias</span></div>
+  <div class="page-inner">
+
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 5 — Gratidão como Hábito</p>
+      <p class="day-verse">Em tudo dai graças, porque esta é a vontade de Deus em Cristo Jesus para convosco.</p>
+      <p class="day-ref">1 Tessalonicenses 5:18</p>
+      <p class="day-reflection">A gratidão não nega a dificuldade — ela encontra a graça dentro dela. Mesmo nos dias difíceis, há algo pelo qual agradecer.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Liste 3 coisas pequenas pelas quais você é grata hoje. O café, a respiração, o sorriso do seu filho.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, gratidão como hábito — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 6 — A Proteção que Você Não Vê</p>
+      <p class="day-verse">Porque aos seus anjos dará ordem a teu respeito para te guardarem em todos os teus caminhos.</p>
+      <p class="day-ref">Salmo 91:11</p>
+      <p class="day-reflection">Há uma proteção invisível ao redor da vida do seu filho. Aquela que você implora em oração — Deus a envia. Não vemos os anjos, mas a Bíblia os confirma.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Ore uma oração de proteção sobre cada membro da sua família, chamando-os pelo nome.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, a proteção que você não vê — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>20</span></div>
+</div>
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Devocional de 40 Dias</span></div>
+  <div class="page-inner">
+
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 7 — Esperança para o Amanhã</p>
+      <p class="day-verse">Porque sou eu que conheço os planos que tenho para vocês, planos de paz e não de calamidade.</p>
+      <p class="day-ref">Jeremias 29:11</p>
+      <p class="day-reflection">O futuro do seu filho não está nas suas mãos — está nas mãos de Deus. Isso não é uma ameaça; é a maior segurança que existe.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Escreva uma esperança que você tem para o futuro do seu filho e ore sobre ela.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, esperança para o amanhã — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 8 — A Força que Vem de Cima</p>
+      <p class="day-verse">O Senhor é a minha luz e a minha salvação; a quem temerei? O Senhor é a força da minha vida.</p>
+      <p class="day-ref">Salmo 27:1</p>
+      <p class="day-reflection">Nos dias em que suas forças acabam, há uma fonte que não seca. Você não precisa ter força própria — precisa saber onde buscá-la.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Hoje, antes de começar o dia, peça forças a Deus especificamente para os desafios que virão.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, a força que vem de cima — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>21</span></div>
+</div>
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Devocional de 40 Dias</span></div>
+  <div class="page-inner">
+
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 9 — Amor Incondicional</p>
+      <p class="day-verse">Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito.</p>
+      <p class="day-ref">João 3:16</p>
+      <p class="day-reflection">O amor que você sente pelo seu filho é um reflexo, ainda que imperfeito, do amor que Deus sente por você. Imensurável. Incondicional. Que nunca desiste.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Diga ao seu filho hoje que você o ama — e mostre de uma forma prática, não apenas com palavras.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, amor incondicional — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 10 — Paz na Tempestade</p>
+      <p class="day-verse">Disse-lhes: Por que estais tão amedrontados? Como não tendes fé?</p>
+      <p class="day-ref">Marcos 4:40</p>
+      <p class="day-reflection">Os discípulos estavam no barco com Jesus — e ainda assim entraram em pânico. Jesus estava presente e a tempestade não parou imediatamente. Mas Ele falou, e houve calmaria.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Identifique a 'tempestade' que está vivendo hoje. Imagine Jesus no barco com você.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, paz na tempestade — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>22</span></div>
+</div>
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Devocional de 40 Dias</span></div>
+  <div class="page-inner">
+
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 11 — O Suficiente de Cada Dia</p>
+      <p class="day-verse">Não andeis, pois, ansiosos pelo dia de amanhã, porque o amanhã trará os seus próprios cuidados.</p>
+      <p class="day-ref">Mateus 6:34</p>
+      <p class="day-reflection">Você não precisa resolver o amanhã hoje. Deus deu maná no deserto — suficiente para um dia de cada vez. Ele fará o mesmo com você.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Foque apenas hoje. O que você precisa enfrentar hoje, e somente hoje?</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, o suficiente de cada dia — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 12 — A Voz que Guia</p>
+      <p class="day-verse">Os teus ouvidos ouvirão atrás de ti uma voz que dirá: Este é o caminho, andai por ele.</p>
+      <p class="day-ref">Isaías 30:21</p>
+      <p class="day-reflection">Quando não souber que decisão tomar em relação ao seu filho, pare. Ore. Espere. Deus é fiel em guiar quem pede direção com coração sincero.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Traga uma decisão difícil diante de Deus em oração. Peça sabedoria e espere.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, a voz que guia — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>23</span></div>
+</div>
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Devocional de 40 Dias</span></div>
+  <div class="page-inner">
+
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 13 — Perseverança que Honra</p>
+      <p class="day-verse">Não nos cansemos de fazer o bem, pois no tempo próprio colheremos, se não desanimarmos.</p>
+      <p class="day-ref">Gálatas 6:9</p>
+      <p class="day-reflection">Cada dia que você continua amando, cuidando e orando pelo seu filho — mesmo exausta — é um dia que conta. A colheita vem para quem persevera.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Escreva uma área em que você não vai desistir, mesmo sem ver resultados imediatos.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, perseverança que honra — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 14 — Sua Identidade em Deus</p>
+      <p class="day-verse">Vede que grande amor nos tem concedido o Pai, a ponto de sermos chamados filhos de Deus.</p>
+      <p class="day-ref">1 João 3:1</p>
+      <p class="day-reflection">Antes de ser mãe, você é filha. E filha amada de Deus. Cuidar de si mesma não é egoísmo — é honrar quem Deus criou.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Faça algo hoje que cuide de você. Um banho demorado, uma leitura, uma caminhada. Sem culpa.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, sua identidade em deus — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>24</span></div>
+</div>
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Devocional de 40 Dias</span></div>
+  <div class="page-inner">
+
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 15 — A Cura que Pertence a Deus</p>
+      <p class="day-verse">O Senhor sana os de coração quebrantado e lhes cura as feridas.</p>
+      <p class="day-ref">Salmo 147:3</p>
+      <p class="day-reflection">Há feridas em nós que só o tempo e a presença de Deus conseguem alcançar. Permita-se ser cuidada enquanto cuida.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Ore pedindo a Deus que cure uma área do seu coração que ainda dói.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, a cura que pertence a deus — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 16 — Fé Visível nos Atos</p>
+      <p class="day-verse">Assim também a fé, se não tiver obras, é morta em si mesma.</p>
+      <p class="day-ref">Tiago 2:17</p>
+      <p class="day-reflection">A fé que seu filho vai lembrar não é a que você pregou — é a que ele viu. Em como você tratou as pessoas, em como você orou, em como você se levantou depois de cair.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Que ato de fé você pode demonstrar hoje, de forma que seu filho consiga ver?</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, fé visível nos atos — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>25</span></div>
+</div>
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Devocional de 40 Dias</span></div>
+  <div class="page-inner">
+
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 17 — A Beleza da Dependência</p>
+      <p class="day-verse">Sem mim, nada podeis fazer.</p>
+      <p class="day-ref">João 15:5</p>
+      <p class="day-reflection">Em uma cultura que valoriza a autossuficiência, a fé nos convida ao oposto: dependência. Não de fraqueza, mas de sabedoria — reconhecer de onde vem a verdadeira força.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Em que área da sua vida você ainda está tentando resolver tudo sozinha?</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, a beleza da dependência — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 18 — Quando Você Errar</p>
+      <p class="day-verse">Misericordioso e clemente é o Senhor, tardio em irar-se e grande em bondade.</p>
+      <p class="day-ref">Salmo 103:8</p>
+      <p class="day-reflection">Você vai errar como mãe. Vai falar algo no tom errado, vai tomar uma decisão que depois vai querer rever. E Deus, que é pai, entende. A graça existe para você também.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Se houver algo pelo qual você precisa se perdoar, faça isso hoje. Deus já perdoou.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, quando você errar — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>26</span></div>
+</div>
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Devocional de 40 Dias</span></div>
+  <div class="page-inner">
+
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 19 — A Família como Ministério</p>
+      <p class="day-verse">Quanto a mim e à minha casa, serviremos ao Senhor.</p>
+      <p class="day-ref">Josué 24:15</p>
+      <p class="day-reflection">Criar um filho no amor de Deus é um dos chamados mais sagrados que existem. Sua casa é seu ministério. Cada refeição, cada abraço, cada oração em família é um ato de serviço a Deus.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Crie um pequeno ritual espiritual em família esta semana — pode ser orar antes de dormir ou ler um versículo juntos.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, a família como ministério — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 20 — O Testemunho que Você Deixa</p>
+      <p class="day-verse">E estas palavras que hoje te ordeno estarão no teu coração; fala delas a teus filhos.</p>
+      <p class="day-ref">Deuteronômio 6:6-7</p>
+      <p class="day-reflection">As histórias de fé que você conta ao seu filho plantam raízes que nenhuma tempestade consegue arrancar. Seu testemunho é um presente geracional.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Conte ao seu filho uma história de como Deus cuidou da sua vida. Uma que ele nunca tenha ouvido.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, o testemunho que você deixa — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>27</span></div>
+</div>
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Devocional de 40 Dias</span></div>
+  <div class="page-inner">
+
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 21 — Oração como Respiração</p>
+      <p class="day-verse">Orai sem cessar.</p>
+      <p class="day-ref">1 Tessalonicenses 5:17</p>
+      <p class="day-reflection">A oração não precisa ser formal ou longa. Pode ser um 'Pai, me ajuda' no trânsito, um 'Obrigada' antes de dormir, um 'Cuida dele' enquanto você o vê sair pela porta.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Ao longo de hoje, ore pequenas orações em voz baixa em cada situação que surgir.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, oração como respiração — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 22 — A Beleza do Imperfeito</p>
+      <p class="day-verse">Pois a minha força se aperfeiçoa na fraqueza.</p>
+      <p class="day-ref">2 Coríntios 12:9</p>
+      <p class="day-reflection">A mãe perfeita não existe — e ainda bem. Porque é nas brechas da nossa fraqueza que a graça de Deus tem espaço para entrar e agir.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Escreva uma imperfeição sua que você tem julgado. Agora entregue ela a Deus.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, a beleza do imperfeito — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>28</span></div>
+</div>
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Devocional de 40 Dias</span></div>
+  <div class="page-inner">
+
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 23 — Alegria como Força</p>
+      <p class="day-verse">A alegria do Senhor é a nossa força.</p>
+      <p class="day-ref">Neemias 8:10</p>
+      <p class="day-reflection">A alegria bíblica não é felicidade superficial — é uma ancoragem profunda na certeza de que Deus é bom. Essa alegria sustenta mesmo nos dias difíceis.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Faça algo hoje que traga alegria genuína — para você e para seu filho.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, alegria como força — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 24 — Sonhos Entregues a Deus</p>
+      <p class="day-verse">Entrega o teu caminho ao Senhor, confia nele, e ele agirá.</p>
+      <p class="day-ref">Salmo 37:5</p>
+      <p class="day-reflection">Os sonhos que você tem para o seu filho são bonitos. Mas Deus tem sonhos ainda maiores. Quando entregamos nossos planos, abrimos espaço para os Dele.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Escreva seus sonhos para a vida do seu filho. Depois ore entregando cada um a Deus.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, sonhos entregues a deus — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>29</span></div>
+</div>
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Devocional de 40 Dias</span></div>
+  <div class="page-inner">
+
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 25 — A Mão que Guia</p>
+      <p class="day-verse">Pois eu, o Senhor teu Deus, te seguro pela tua mão direita e te digo: Não temas, eu te ajudo.</p>
+      <p class="day-ref">Isaías 41:13</p>
+      <p class="day-reflection">Imagine a mão de Deus segurando a sua. Não te puxando — apenas segurando. Presente. Firme. Sem pressa.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Em algum momento hoje, feche os olhos e visualize a mão de Deus segurando a sua.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, a mão que guia — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 26 — Bênção sobre a Casa</p>
+      <p class="day-verse">O Senhor te abençoe e te guarde; o Senhor faça resplandecer o seu rosto sobre ti.</p>
+      <p class="day-ref">Números 6:24-25</p>
+      <p class="day-reflection">Você pode abençoar sua casa. Pode declarar paz sobre cada cômodo, proteger cada pessoa que mora ali. Suas palavras têm poder quando ancoradas na Palavra de Deus.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Ande pela sua casa hoje e ore em cada cômodo, pedindo a presença de Deus.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, bênção sobre a casa — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>30</span></div>
+</div>
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Devocional de 40 Dias</span></div>
+  <div class="page-inner">
+
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 27 — Quando a Noite é Longa</p>
+      <p class="day-verse">Ao anoitecer pode surgir o choro, mas ao amanhecer vem a alegria.</p>
+      <p class="day-ref">Salmo 30:5</p>
+      <p class="day-reflection">A noite mais longa tem fim. O choro mais profundo é seguido por uma manhã. Deus não abandona você nas trevas — Ele está lá também, esperando o amanhecer contigo.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Se esta tem sido uma 'noite longa' na sua vida, escreva o que você está esperando que o amanhecer traga.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, quando a noite é longa — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 28 — Filhos como Bênção</p>
+      <p class="day-verse">Herança do Senhor são os filhos; o fruto do ventre, um galardão.</p>
+      <p class="day-ref">Salmo 127:3</p>
+      <p class="day-reflection">Em meio ao cansaço, é fácil esquecer que seu filho é um presente. Hoje, olhe para ele com olhos de gratidão — pelos gestos, pelo riso, pelo jeito único que ele é.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Escreva 5 coisas que você ama especificamente no seu filho.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, filhos como bênção — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>31</span></div>
+</div>
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Devocional de 40 Dias</span></div>
+  <div class="page-inner">
+
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 29 — Renovação Diária</p>
+      <p class="day-verse">As misericórdias do Senhor certamente não têm fim; as suas misericórdias se renovam todas as manhãs.</p>
+      <p class="day-ref">Lamentações 3:22-23</p>
+      <p class="day-reflection">Ontem foi difícil? Hoje é um novo dia. A misericórdia de Deus não depende de você ter acertado tudo. Ela se renova independentemente de como foi ontem.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Comece o dia dizendo em voz alta: 'Hoje é um novo dia. A misericórdia de Deus é nova para mim.'</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, renovação diária — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 30 — O Amor que Nunca Falta</p>
+      <p class="day-verse">Quem nos separará do amor de Cristo?</p>
+      <p class="day-ref">Romanos 8:35</p>
+      <p class="day-reflection">Nada — nem a ansiedade, nem o erro, nem o cansaço, nem o medo. O amor de Deus não tem condição, não tem prazo de validade, não tem limite. Você está segura nesse amor.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Medite hoje nesta certeza: nada pode separar você do amor de Deus.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, o amor que nunca falta — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>32</span></div>
+</div>
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Devocional de 40 Dias</span></div>
+  <div class="page-inner">
+
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 31 — Pai que Supre</p>
+      <p class="day-verse">O meu Deus, segundo as suas riquezas em glória, suprirá todas as vossas necessidades.</p>
+      <p class="day-ref">Filipenses 4:19</p>
+      <p class="day-reflection">Quando a preocupação material aperta o coração, lembre-se: o mesmo Deus que alimentou cinco mil pessoas com cinco pães cuida das necessidades da sua família.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Identifique uma necessidade que você está carregando e ore especificamente sobre ela.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, pai que supre — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 32 — Semeando Amor</p>
+      <p class="day-verse">Pois tudo quanto o homem semear, isso também ceifará.</p>
+      <p class="day-ref">Gálatas 6:7</p>
+      <p class="day-reflection">Cada palavra de amor que você fala ao seu filho, cada abraço, cada momento de presença — você está semeando. A colheita pode demorar, mas vem.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Plante uma semente intencional de amor hoje. Pode ser uma carta, um abraço longo, um elogio genuíno.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, semeando amor — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>33</span></div>
+</div>
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Devocional de 40 Dias</span></div>
+  <div class="page-inner">
+
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 33 — Confiar no Tempo de Deus</p>
+      <p class="day-verse">Há tempo determinado para tudo, e tempo para todo propósito debaixo do céu.</p>
+      <p class="day-ref">Eclesiastes 3:1</p>
+      <p class="day-reflection">Deus não está atrasado — Ele está no tempo perfeito. O que parece demora para nós é providência para Ele. Sua fé na espera é mais poderosa do que você imagina.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Em que área você está impaciente com o tempo de Deus? Entregue essa pressa hoje.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, confiar no tempo de deus — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 34 — A Igreja como Família</p>
+      <p class="day-verse">E não deixemos de congregar-nos, como é costume de alguns, antes exortando uns aos outros.</p>
+      <p class="day-ref">Hebreus 10:25</p>
+      <p class="day-reflection">Você não foi criada para caminhar sozinha. A comunidade de fé é um presente — pessoas que oram com você, que carregam o fardo junto, que te lembram de Deus quando você esquece.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Conecte-se com outra mãe de fé essa semana. Pergunte como ela está de verdade.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, a igreja como família — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>34</span></div>
+</div>
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Devocional de 40 Dias</span></div>
+  <div class="page-inner">
+
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 35 — O Sorriso de Deus sobre Você</p>
+      <p class="day-verse">O Senhor teu Deus está no meio de ti, como poderoso para salvar; ele se deleitará em ti com alegria.</p>
+      <p class="day-ref">Sofonias 3:17</p>
+      <p class="day-reflection">Deus não apenas te tolera — Ele se alegra com você. Você, com seus erros, suas dúvidas, suas noites insones. Ele canta sobre você.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Receba hoje esse amor. Não faça nada, apenas receba: Deus se alegra com você.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, o sorriso de deus sobre você — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 36 — O Fim da Caminhada</p>
+      <p class="day-verse">Combati o bom combate, terminei a corrida, guardei a fé.</p>
+      <p class="day-ref">2 Timóteo 4:7</p>
+      <p class="day-reflection">Um dia você vai olhar para trás e ver todos os dias em que escolheu confiar, orar e amar — mesmo sem forças. E vai saber que valeu. Cada dia valeu.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Escreva uma carta para você mesma, da perspectiva de quem chegou ao fim dessa temporada. O que ela diria?</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, o fim da caminhada — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>35</span></div>
+</div>
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Devocional de 40 Dias</span></div>
+  <div class="page-inner">
+
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 37 — A Paz que Permanece</p>
+      <p class="day-verse">Paz vos deixo, a minha paz vos dou.</p>
+      <p class="day-ref">João 14:27</p>
+      <p class="day-reflection">Essa paz não é prometida para depois que tudo se resolver. É prometida para agora — no meio da incerteza, no meio da espera, no meio da vida real.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Antes de dormir hoje, repita em voz baixa: 'A paz de Jesus guarda o meu coração.'</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, a paz que permanece — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 38 — Você Foi Escolhida</p>
+      <p class="day-verse">Antes que te formasse no ventre materno, eu te conheci.</p>
+      <p class="day-ref">Jeremias 1:5</p>
+      <p class="day-reflection">Deus te conheceu antes de você nascer — e escolheu você para ser a mãe desse filho específico. Não foi acidente. Foi escolha divina.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Escreva: 'Fui escolhida por Deus para ser mãe de _____. Isso não é um erro.' Guarde.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, você foi escolhida — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>36</span></div>
+</div>
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Devocional de 40 Dias</span></div>
+  <div class="page-inner">
+
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 39 — A Força dos Pequenos Passos</p>
+      <p class="day-verse">Não desprezeis o dia das coisas pequenas.</p>
+      <p class="day-ref">Zacarias 4:10</p>
+      <p class="day-reflection">O devocional lido às 6h, a oração sussurrada às 23h, o versículo decorado no caminho para o trabalho — esses pequenos passos constroem uma vida de fé sólida.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Qual pequeno hábito espiritual você pode começar (ou retomar) esta semana?</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, a força dos pequenos passos — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+    <div class="dev-card">
+      <p class="day-num">✿ Dia 40 — A Mãe que Você Está Sendo</p>
+      <p class="day-verse">Seus filhos se levantam e a chamam bem-aventurada.</p>
+      <p class="day-ref">Provérbios 31:28</p>
+      <p class="day-reflection">Não a mãe perfeita — mas a mãe presente, amorosa, que ora e persevera. Essa é a mãe que seus filhos vão lembrar e honrar.</p>
+      <div class="day-action"><p class="act-label">✿ Aplicação</p><p>Escreva o tipo de mãe que você quer ser lembrada como. Use isso como sua declaração.</p></div>
+      <p class="pray-label">✿ Oração</p>
+      <p class="day-prayer">Pai, a mãe que você está sendo — que essa verdade governe meu coração hoje. Amém.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>37</span></div>
+</div>
+<!-- ORAÇÕES GUIADAS OPENER -->
+<div class="page chapter-opener">
+  <div class="page-inner" style="justify-content:center;align-items:center;text-align:center;">
+    <p class="ch-label">Para Orar</p>
+    <div class="divider-slim" style="background:var(--rose-light);opacity:.5;"></div>
+    <h2 class="ch-title"><em>Orações</em><br>Guiadas</h2>
+    <div class="divider-slim" style="background:var(--rose-light);opacity:.5;"></div>
+    <p class="ch-verse">"Pedi e dar-se-vos-á; buscai e achareis."<br><span style="color:var(--rose-light);font-style:normal;font-size:8pt;letter-spacing:1mm;">MATEUS 7:7</span></p>
+  </div>
+</div>
+
+<!-- ORAÇÕES PÁG 1 -->
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Orações Guiadas</span></div>
+  <div class="page-inner">
+    <div class="prayer-box">
+      <p class="pray-title">🕊️ Oração pela Paz</p>
+      <p>Senhor Jesus, quando a ansiedade aperta o meu peito e os pensamentos não param, eu venho até Ti. Tu prometeste uma paz que excede todo entendimento — e eu quero essa paz agora. Guarda o meu coração. Guarda a minha mente. Que eu possa respirar sabendo que Tu tens tudo nas Tuas mãos. Em nome de Jesus. Amém.</p>
+    </div>
+    <div class="prayer-box">
+      <p class="pray-title">😨 Oração Quando Sentir Medo</p>
+      <p>Pai, o medo bateu à minha porta hoje. Não vou fingir que não sinto — mas escolho não deixar ele me governar. Tu disseste: "Não temas, porque Eu sou contigo." Me ajuda a acreditar nisso agora. Que o Teu amor perfeito lance fora esse medo. Amém.</p>
+    </div>
+    <div class="prayer-box">
+      <p class="pray-title">🌙 Oração Antes de Dormir</p>
+      <p>Senhor, entrego esta noite nas Tuas mãos. Entrego meu filho, minha casa, meus medos. Que eu descanse sabendo que Tu não dormitas nem dormes. Guarda cada membro da minha família enquanto eu descanso. Amém.</p>
+    </div>
+    <div class="prayer-box">
+      <p class="pray-title">💛 Oração pela Saúde do Filho</p>
+      <p>Pai, cubro meu filho com Teu sangue precioso. Que nenhuma doença, nenhum mal e nenhuma arma formada contra ele prospere. Pela Tua Palavra, "pela Tua ferida fomos sarados." Que a saúde habite no corpo e na mente do meu filho. Em nome de Jesus. Amém.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>39</span></div>
+</div>
+
+<!-- ORAÇÕES PÁG 2 -->
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Orações Guiadas</span></div>
+  <div class="page-inner">
+    <div class="prayer-box">
+      <p class="pray-title">🏠 Oração pela Família</p>
+      <p>Senhor, que a minha casa seja um lugar onde a Tua presença habita. Une os corações da minha família. Cura o que precisa ser curado. Restaura o que precisa ser restaurado. Que em nossa casa se possa dizer: "Aqui habita o amor de Deus." Amém.</p>
+    </div>
+    <div class="prayer-box">
+      <p class="pray-title">🙌 Oração por Sabedoria</p>
+      <p>Pai da sabedoria, não sei o que fazer. A decisão é grande e o caminho não está claro. Tu prometeste dar sabedoria a todos que pedem sem hesitar. Então peço: ilumina meu entendimento, guia meus passos e que eu ouça Tua voz dizendo: "Este é o caminho." Amém.</p>
+    </div>
+    <div class="prayer-box">
+      <p class="pray-title">🌱 Oração pela Confiança em Deus</p>
+      <p>Senhor, aumenta a minha fé. Há partes do meu coração que ainda resistem em confiar. Mostra-me que Tu és digno de toda a minha confiança. Que eu possa me apoiar em Ti como um filho se apoia nos braços do pai. Amém.</p>
+    </div>
+    <div class="prayer-box">
+      <p class="pray-title">✨ Oração de Gratidão</p>
+      <p>Obrigada, Senhor. Por esse filho que o Senhor me confiou. Pelos dias difíceis que me ensinaram a depender mais de Ti. Pelos dias de alegria que me lembraram da Tua bondade. Por cada manhã que o Senhor renovou. Obrigada. Amém.</p>
+    </div>
+    <div class="prayer-box">
+      <p class="pray-title">💪 Oração para Momentos Difíceis</p>
+      <p>Pai, este momento está além das minhas forças. Não sei mais o que fazer, o que sentir ou como continuar. Mas sei que Tu sabes. Vem, Senhor. Sê a minha força onde eu não tenho nenhuma. Carrega-me quando eu não consigo caminhar. Amém.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>40</span></div>
+</div>
+
+<!-- DIÁRIO DE GRATIDÃO OPENER -->
+<div class="page chapter-opener">
+  <div class="page-inner" style="justify-content:center;align-items:center;text-align:center;">
+    <p class="ch-label">Para Preencher</p>
+    <div class="divider-slim" style="background:var(--rose-light);opacity:.5;"></div>
+    <h2 class="ch-title">Diário de<br><em>Gratidão</em></h2>
+    <div class="divider-slim" style="background:var(--rose-light);opacity:.5;"></div>
+    <p class="ch-verse">"Em tudo dai graças."<br><span style="color:var(--rose-light);font-style:normal;font-size:8pt;letter-spacing:1mm;">1 TESSALONICENSES 5:18</span></p>
+  </div>
+</div>
+
+<div class="page diary-page">
+  <div class="diary-header">
+    <span class="dia">Gratidão 1</span>
+    <span class="date-line">Data: _____ / _____ / _________</span>
+  </div>
+  <div class="page-inner" style="padding-top:7mm;">
+    <p class="diary-label">✿ Hoje sou grata por...</p>
+    <div class="diary-field"></div><div class="diary-field"></div><div class="diary-field"></div>
+
+    <p class="diary-label">✿ Como Deus cuidou de mim hoje?</p>
+    <div class="diary-field"></div><div class="diary-field"></div>
+
+    <p class="diary-label">✿ O que aprendi hoje?</p>
+    <div class="diary-field"></div><div class="diary-field"></div>
+
+    <div class="diary-verse-box">
+      <p class="label">✿ Versículo do Dia</p>
+      <p class="verse">_____________________________________________________________<br>_____________________________________________________________</p>
+    </div>
+
+    <p class="diary-label">✿ Minha Oração</p>
+    <div style="display:flex;flex-direction:column;gap:4mm;flex:1;">
+      <div class="diary-line"></div><div class="diary-line"></div><div class="diary-line"></div><div class="diary-line"></div>
+    </div>
+
+    <div style="text-align:center;margin-top:auto;padding-top:4mm;">
+      <span style="font-size:6.5pt;color:var(--rose);letter-spacing:2mm;">✿ MÃE QUE CONFIA ✿</span>
+    </div>
+  </div>
+  <div class="page-footer"><span>41</span></div>
+</div>
+
+<div class="page diary-page">
+  <div class="diary-header">
+    <span class="dia">Gratidão 2</span>
+    <span class="date-line">Data: _____ / _____ / _________</span>
+  </div>
+  <div class="page-inner" style="padding-top:7mm;">
+    <p class="diary-label">✿ Hoje sou grata por...</p>
+    <div class="diary-field"></div><div class="diary-field"></div><div class="diary-field"></div>
+
+    <p class="diary-label">✿ Como Deus cuidou de mim hoje?</p>
+    <div class="diary-field"></div><div class="diary-field"></div>
+
+    <p class="diary-label">✿ O que aprendi hoje?</p>
+    <div class="diary-field"></div><div class="diary-field"></div>
+
+    <div class="diary-verse-box">
+      <p class="label">✿ Versículo do Dia</p>
+      <p class="verse">_____________________________________________________________<br>_____________________________________________________________</p>
+    </div>
+
+    <p class="diary-label">✿ Minha Oração</p>
+    <div style="display:flex;flex-direction:column;gap:4mm;flex:1;">
+      <div class="diary-line"></div><div class="diary-line"></div><div class="diary-line"></div><div class="diary-line"></div>
+    </div>
+
+    <div style="text-align:center;margin-top:auto;padding-top:4mm;">
+      <span style="font-size:6.5pt;color:var(--rose);letter-spacing:2mm;">✿ MÃE QUE CONFIA ✿</span>
+    </div>
+  </div>
+  <div class="page-footer"><span>42</span></div>
+</div>
+
+<div class="page diary-page">
+  <div class="diary-header">
+    <span class="dia">Gratidão 3</span>
+    <span class="date-line">Data: _____ / _____ / _________</span>
+  </div>
+  <div class="page-inner" style="padding-top:7mm;">
+    <p class="diary-label">✿ Hoje sou grata por...</p>
+    <div class="diary-field"></div><div class="diary-field"></div><div class="diary-field"></div>
+
+    <p class="diary-label">✿ Como Deus cuidou de mim hoje?</p>
+    <div class="diary-field"></div><div class="diary-field"></div>
+
+    <p class="diary-label">✿ O que aprendi hoje?</p>
+    <div class="diary-field"></div><div class="diary-field"></div>
+
+    <div class="diary-verse-box">
+      <p class="label">✿ Versículo do Dia</p>
+      <p class="verse">_____________________________________________________________<br>_____________________________________________________________</p>
+    </div>
+
+    <p class="diary-label">✿ Minha Oração</p>
+    <div style="display:flex;flex-direction:column;gap:4mm;flex:1;">
+      <div class="diary-line"></div><div class="diary-line"></div><div class="diary-line"></div><div class="diary-line"></div>
+    </div>
+
+    <div style="text-align:center;margin-top:auto;padding-top:4mm;">
+      <span style="font-size:6.5pt;color:var(--rose);letter-spacing:2mm;">✿ MÃE QUE CONFIA ✿</span>
+    </div>
+  </div>
+  <div class="page-footer"><span>43</span></div>
+</div>
+
+<div class="page diary-page">
+  <div class="diary-header">
+    <span class="dia">Gratidão 4</span>
+    <span class="date-line">Data: _____ / _____ / _________</span>
+  </div>
+  <div class="page-inner" style="padding-top:7mm;">
+    <p class="diary-label">✿ Hoje sou grata por...</p>
+    <div class="diary-field"></div><div class="diary-field"></div><div class="diary-field"></div>
+
+    <p class="diary-label">✿ Como Deus cuidou de mim hoje?</p>
+    <div class="diary-field"></div><div class="diary-field"></div>
+
+    <p class="diary-label">✿ O que aprendi hoje?</p>
+    <div class="diary-field"></div><div class="diary-field"></div>
+
+    <div class="diary-verse-box">
+      <p class="label">✿ Versículo do Dia</p>
+      <p class="verse">_____________________________________________________________<br>_____________________________________________________________</p>
+    </div>
+
+    <p class="diary-label">✿ Minha Oração</p>
+    <div style="display:flex;flex-direction:column;gap:4mm;flex:1;">
+      <div class="diary-line"></div><div class="diary-line"></div><div class="diary-line"></div><div class="diary-line"></div>
+    </div>
+
+    <div style="text-align:center;margin-top:auto;padding-top:4mm;">
+      <span style="font-size:6.5pt;color:var(--rose);letter-spacing:2mm;">✿ MÃE QUE CONFIA ✿</span>
+    </div>
+  </div>
+  <div class="page-footer"><span>44</span></div>
+</div>
+
+<div class="page diary-page">
+  <div class="diary-header">
+    <span class="dia">Gratidão 5</span>
+    <span class="date-line">Data: _____ / _____ / _________</span>
+  </div>
+  <div class="page-inner" style="padding-top:7mm;">
+    <p class="diary-label">✿ Hoje sou grata por...</p>
+    <div class="diary-field"></div><div class="diary-field"></div><div class="diary-field"></div>
+
+    <p class="diary-label">✿ Como Deus cuidou de mim hoje?</p>
+    <div class="diary-field"></div><div class="diary-field"></div>
+
+    <p class="diary-label">✿ O que aprendi hoje?</p>
+    <div class="diary-field"></div><div class="diary-field"></div>
+
+    <div class="diary-verse-box">
+      <p class="label">✿ Versículo do Dia</p>
+      <p class="verse">_____________________________________________________________<br>_____________________________________________________________</p>
+    </div>
+
+    <p class="diary-label">✿ Minha Oração</p>
+    <div style="display:flex;flex-direction:column;gap:4mm;flex:1;">
+      <div class="diary-line"></div><div class="diary-line"></div><div class="diary-line"></div><div class="diary-line"></div>
+    </div>
+
+    <div style="text-align:center;margin-top:auto;padding-top:4mm;">
+      <span style="font-size:6.5pt;color:var(--rose);letter-spacing:2mm;">✿ MÃE QUE CONFIA ✿</span>
+    </div>
+  </div>
+  <div class="page-footer"><span>45</span></div>
+</div>
+
+<div class="page diary-page">
+  <div class="diary-header">
+    <span class="dia">Gratidão 6</span>
+    <span class="date-line">Data: _____ / _____ / _________</span>
+  </div>
+  <div class="page-inner" style="padding-top:7mm;">
+    <p class="diary-label">✿ Hoje sou grata por...</p>
+    <div class="diary-field"></div><div class="diary-field"></div><div class="diary-field"></div>
+
+    <p class="diary-label">✿ Como Deus cuidou de mim hoje?</p>
+    <div class="diary-field"></div><div class="diary-field"></div>
+
+    <p class="diary-label">✿ O que aprendi hoje?</p>
+    <div class="diary-field"></div><div class="diary-field"></div>
+
+    <div class="diary-verse-box">
+      <p class="label">✿ Versículo do Dia</p>
+      <p class="verse">_____________________________________________________________<br>_____________________________________________________________</p>
+    </div>
+
+    <p class="diary-label">✿ Minha Oração</p>
+    <div style="display:flex;flex-direction:column;gap:4mm;flex:1;">
+      <div class="diary-line"></div><div class="diary-line"></div><div class="diary-line"></div><div class="diary-line"></div>
+    </div>
+
+    <div style="text-align:center;margin-top:auto;padding-top:4mm;">
+      <span style="font-size:6.5pt;color:var(--rose);letter-spacing:2mm;">✿ MÃE QUE CONFIA ✿</span>
+    </div>
+  </div>
+  <div class="page-footer"><span>46</span></div>
+</div>
+
+<div class="page diary-page">
+  <div class="diary-header">
+    <span class="dia">Gratidão 7</span>
+    <span class="date-line">Data: _____ / _____ / _________</span>
+  </div>
+  <div class="page-inner" style="padding-top:7mm;">
+    <p class="diary-label">✿ Hoje sou grata por...</p>
+    <div class="diary-field"></div><div class="diary-field"></div><div class="diary-field"></div>
+
+    <p class="diary-label">✿ Como Deus cuidou de mim hoje?</p>
+    <div class="diary-field"></div><div class="diary-field"></div>
+
+    <p class="diary-label">✿ O que aprendi hoje?</p>
+    <div class="diary-field"></div><div class="diary-field"></div>
+
+    <div class="diary-verse-box">
+      <p class="label">✿ Versículo do Dia</p>
+      <p class="verse">_____________________________________________________________<br>_____________________________________________________________</p>
+    </div>
+
+    <p class="diary-label">✿ Minha Oração</p>
+    <div style="display:flex;flex-direction:column;gap:4mm;flex:1;">
+      <div class="diary-line"></div><div class="diary-line"></div><div class="diary-line"></div><div class="diary-line"></div>
+    </div>
+
+    <div style="text-align:center;margin-top:auto;padding-top:4mm;">
+      <span style="font-size:6.5pt;color:var(--rose);letter-spacing:2mm;">✿ MÃE QUE CONFIA ✿</span>
+    </div>
+  </div>
+  <div class="page-footer"><span>47</span></div>
+</div>
+
+<!-- DIÁRIO DE ORAÇÃO OPENER -->
+<div class="page chapter-opener">
+  <div class="page-inner" style="justify-content:center;align-items:center;text-align:center;">
+    <p class="ch-label">Para Preencher</p>
+    <div class="divider-slim" style="background:var(--rose-light);opacity:.5;"></div>
+    <h2 class="ch-title">Diário de<br><em>Oração</em></h2>
+    <div class="divider-slim" style="background:var(--rose-light);opacity:.5;"></div>
+    <p class="ch-verse">"A oração fervorosa do justo pode muito em seus efeitos."<br><span style="color:var(--rose-light);font-style:normal;font-size:8pt;letter-spacing:1mm;">TIAGO 5:16</span></p>
+  </div>
+</div>
+
+<div class="page diary-page">
+  <div class="diary-header">
+    <span class="dia">Oração 1</span>
+    <span class="date-line">Data: _____ / _____ / _________</span>
+  </div>
+  <div class="page-inner" style="padding-top:7mm;">
+    <p class="diary-label">✿ Pedido de Oração</p>
+    <div class="diary-field"></div><div class="diary-field"></div><div class="diary-field"></div>
+
+    <div class="diary-verse-box">
+      <p class="label">✿ Versículo Escolhido</p>
+      <p class="verse">_____________________________________________________________<br>_____________________________________________________________</p>
+    </div>
+
+    <p class="diary-label">✿ Reflexão</p>
+    <div class="diary-field"></div><div class="diary-field"></div>
+
+    <p class="diary-label">✿ Resposta Recebida</p>
+    <div class="diary-field"></div><div class="diary-field"></div>
+
+    <p class="diary-label">✿ Como me sinto após orar?</p>
+    <div style="display:flex;flex-direction:column;gap:4mm;flex:1;">
+      <div class="diary-line"></div><div class="diary-line"></div><div class="diary-line"></div>
+    </div>
+
+    <div style="text-align:center;margin-top:auto;padding-top:4mm;">
+      <span style="font-size:6.5pt;color:var(--rose);letter-spacing:2mm;">✿ MÃE QUE CONFIA ✿</span>
+    </div>
+  </div>
+  <div class="page-footer"><span>49</span></div>
+</div>
+
+<div class="page diary-page">
+  <div class="diary-header">
+    <span class="dia">Oração 2</span>
+    <span class="date-line">Data: _____ / _____ / _________</span>
+  </div>
+  <div class="page-inner" style="padding-top:7mm;">
+    <p class="diary-label">✿ Pedido de Oração</p>
+    <div class="diary-field"></div><div class="diary-field"></div><div class="diary-field"></div>
+
+    <div class="diary-verse-box">
+      <p class="label">✿ Versículo Escolhido</p>
+      <p class="verse">_____________________________________________________________<br>_____________________________________________________________</p>
+    </div>
+
+    <p class="diary-label">✿ Reflexão</p>
+    <div class="diary-field"></div><div class="diary-field"></div>
+
+    <p class="diary-label">✿ Resposta Recebida</p>
+    <div class="diary-field"></div><div class="diary-field"></div>
+
+    <p class="diary-label">✿ Como me sinto após orar?</p>
+    <div style="display:flex;flex-direction:column;gap:4mm;flex:1;">
+      <div class="diary-line"></div><div class="diary-line"></div><div class="diary-line"></div>
+    </div>
+
+    <div style="text-align:center;margin-top:auto;padding-top:4mm;">
+      <span style="font-size:6.5pt;color:var(--rose);letter-spacing:2mm;">✿ MÃE QUE CONFIA ✿</span>
+    </div>
+  </div>
+  <div class="page-footer"><span>50</span></div>
+</div>
+
+<div class="page diary-page">
+  <div class="diary-header">
+    <span class="dia">Oração 3</span>
+    <span class="date-line">Data: _____ / _____ / _________</span>
+  </div>
+  <div class="page-inner" style="padding-top:7mm;">
+    <p class="diary-label">✿ Pedido de Oração</p>
+    <div class="diary-field"></div><div class="diary-field"></div><div class="diary-field"></div>
+
+    <div class="diary-verse-box">
+      <p class="label">✿ Versículo Escolhido</p>
+      <p class="verse">_____________________________________________________________<br>_____________________________________________________________</p>
+    </div>
+
+    <p class="diary-label">✿ Reflexão</p>
+    <div class="diary-field"></div><div class="diary-field"></div>
+
+    <p class="diary-label">✿ Resposta Recebida</p>
+    <div class="diary-field"></div><div class="diary-field"></div>
+
+    <p class="diary-label">✿ Como me sinto após orar?</p>
+    <div style="display:flex;flex-direction:column;gap:4mm;flex:1;">
+      <div class="diary-line"></div><div class="diary-line"></div><div class="diary-line"></div>
+    </div>
+
+    <div style="text-align:center;margin-top:auto;padding-top:4mm;">
+      <span style="font-size:6.5pt;color:var(--rose);letter-spacing:2mm;">✿ MÃE QUE CONFIA ✿</span>
+    </div>
+  </div>
+  <div class="page-footer"><span>51</span></div>
+</div>
+
+<div class="page diary-page">
+  <div class="diary-header">
+    <span class="dia">Oração 4</span>
+    <span class="date-line">Data: _____ / _____ / _________</span>
+  </div>
+  <div class="page-inner" style="padding-top:7mm;">
+    <p class="diary-label">✿ Pedido de Oração</p>
+    <div class="diary-field"></div><div class="diary-field"></div><div class="diary-field"></div>
+
+    <div class="diary-verse-box">
+      <p class="label">✿ Versículo Escolhido</p>
+      <p class="verse">_____________________________________________________________<br>_____________________________________________________________</p>
+    </div>
+
+    <p class="diary-label">✿ Reflexão</p>
+    <div class="diary-field"></div><div class="diary-field"></div>
+
+    <p class="diary-label">✿ Resposta Recebida</p>
+    <div class="diary-field"></div><div class="diary-field"></div>
+
+    <p class="diary-label">✿ Como me sinto após orar?</p>
+    <div style="display:flex;flex-direction:column;gap:4mm;flex:1;">
+      <div class="diary-line"></div><div class="diary-line"></div><div class="diary-line"></div>
+    </div>
+
+    <div style="text-align:center;margin-top:auto;padding-top:4mm;">
+      <span style="font-size:6.5pt;color:var(--rose);letter-spacing:2mm;">✿ MÃE QUE CONFIA ✿</span>
+    </div>
+  </div>
+  <div class="page-footer"><span>52</span></div>
+</div>
+
+<div class="page diary-page">
+  <div class="diary-header">
+    <span class="dia">Oração 5</span>
+    <span class="date-line">Data: _____ / _____ / _________</span>
+  </div>
+  <div class="page-inner" style="padding-top:7mm;">
+    <p class="diary-label">✿ Pedido de Oração</p>
+    <div class="diary-field"></div><div class="diary-field"></div><div class="diary-field"></div>
+
+    <div class="diary-verse-box">
+      <p class="label">✿ Versículo Escolhido</p>
+      <p class="verse">_____________________________________________________________<br>_____________________________________________________________</p>
+    </div>
+
+    <p class="diary-label">✿ Reflexão</p>
+    <div class="diary-field"></div><div class="diary-field"></div>
+
+    <p class="diary-label">✿ Resposta Recebida</p>
+    <div class="diary-field"></div><div class="diary-field"></div>
+
+    <p class="diary-label">✿ Como me sinto após orar?</p>
+    <div style="display:flex;flex-direction:column;gap:4mm;flex:1;">
+      <div class="diary-line"></div><div class="diary-line"></div><div class="diary-line"></div>
+    </div>
+
+    <div style="text-align:center;margin-top:auto;padding-top:4mm;">
+      <span style="font-size:6.5pt;color:var(--rose);letter-spacing:2mm;">✿ MÃE QUE CONFIA ✿</span>
+    </div>
+  </div>
+  <div class="page-footer"><span>53</span></div>
+</div>
+
+<div class="page diary-page">
+  <div class="diary-header">
+    <span class="dia">Oração 6</span>
+    <span class="date-line">Data: _____ / _____ / _________</span>
+  </div>
+  <div class="page-inner" style="padding-top:7mm;">
+    <p class="diary-label">✿ Pedido de Oração</p>
+    <div class="diary-field"></div><div class="diary-field"></div><div class="diary-field"></div>
+
+    <div class="diary-verse-box">
+      <p class="label">✿ Versículo Escolhido</p>
+      <p class="verse">_____________________________________________________________<br>_____________________________________________________________</p>
+    </div>
+
+    <p class="diary-label">✿ Reflexão</p>
+    <div class="diary-field"></div><div class="diary-field"></div>
+
+    <p class="diary-label">✿ Resposta Recebida</p>
+    <div class="diary-field"></div><div class="diary-field"></div>
+
+    <p class="diary-label">✿ Como me sinto após orar?</p>
+    <div style="display:flex;flex-direction:column;gap:4mm;flex:1;">
+      <div class="diary-line"></div><div class="diary-line"></div><div class="diary-line"></div>
+    </div>
+
+    <div style="text-align:center;margin-top:auto;padding-top:4mm;">
+      <span style="font-size:6.5pt;color:var(--rose);letter-spacing:2mm;">✿ MÃE QUE CONFIA ✿</span>
+    </div>
+  </div>
+  <div class="page-footer"><span>54</span></div>
+</div>
+
+<div class="page diary-page">
+  <div class="diary-header">
+    <span class="dia">Oração 7</span>
+    <span class="date-line">Data: _____ / _____ / _________</span>
+  </div>
+  <div class="page-inner" style="padding-top:7mm;">
+    <p class="diary-label">✿ Pedido de Oração</p>
+    <div class="diary-field"></div><div class="diary-field"></div><div class="diary-field"></div>
+
+    <div class="diary-verse-box">
+      <p class="label">✿ Versículo Escolhido</p>
+      <p class="verse">_____________________________________________________________<br>_____________________________________________________________</p>
+    </div>
+
+    <p class="diary-label">✿ Reflexão</p>
+    <div class="diary-field"></div><div class="diary-field"></div>
+
+    <p class="diary-label">✿ Resposta Recebida</p>
+    <div class="diary-field"></div><div class="diary-field"></div>
+
+    <p class="diary-label">✿ Como me sinto após orar?</p>
+    <div style="display:flex;flex-direction:column;gap:4mm;flex:1;">
+      <div class="diary-line"></div><div class="diary-line"></div><div class="diary-line"></div>
+    </div>
+
+    <div style="text-align:center;margin-top:auto;padding-top:4mm;">
+      <span style="font-size:6.5pt;color:var(--rose);letter-spacing:2mm;">✿ MÃE QUE CONFIA ✿</span>
+    </div>
+  </div>
+  <div class="page-footer"><span>55</span></div>
+</div>
+
+<!-- PROMESSAS BÍBLICAS OPENER -->
+<div class="page chapter-opener">
+  <div class="page-inner" style="justify-content:center;align-items:center;text-align:center;">
+    <p class="ch-label">Promessas de Deus</p>
+    <div class="divider-slim" style="background:var(--rose-light);opacity:.5;"></div>
+    <h2 class="ch-title">Promessas para<br><em>Guardar no Coração</em></h2>
+    <div class="divider-slim" style="background:var(--rose-light);opacity:.5;"></div>
+    <p class="ch-verse">"A Palavra de Deus é viva e eficaz."<br><span style="color:var(--rose-light);font-style:normal;font-size:8pt;letter-spacing:1mm;">HEBREUS 4:12</span></p>
+  </div>
+</div>
+
+<div class="page promise-page">
+  <div class="page-inner" style="justify-content:space-around;">
+    <div style="text-align:center;padding:5mm 0;">
+      <p style="font-size:8pt;color:var(--rose);letter-spacing:2mm;text-transform:uppercase;margin-bottom:4mm;">✿ Proteção ✿</p>
+      <p style="font-family:'Playfair Display',serif;font-size:17pt;font-style:italic;color:var(--brown-dark);line-height:1.5;padding:0 10mm;">"Nenhuma arma forjada contra ti prosperará."</p>
+      <p style="font-size:8pt;color:var(--rose);margin-top:3mm;letter-spacing:1mm;">ISAÍAS 54:17</p>
+    </div>
+    <div class="divider-rose"></div>
+    <div style="text-align:center;padding:5mm 0;">
+      <p style="font-size:8pt;color:var(--rose);letter-spacing:2mm;text-transform:uppercase;margin-bottom:4mm;">✿ Paz ✿</p>
+      <p style="font-family:'Playfair Display',serif;font-size:17pt;font-style:italic;color:var(--brown-dark);line-height:1.5;padding:0 10mm;">"Deixo-vos a paz, a minha paz vos dou."</p>
+      <p style="font-size:8pt;color:var(--rose);margin-top:3mm;letter-spacing:1mm;">JOÃO 14:27</p>
+    </div>
+    <div class="divider-rose"></div>
+    <div style="text-align:center;padding:5mm 0;">
+      <p style="font-size:8pt;color:var(--rose);letter-spacing:2mm;text-transform:uppercase;margin-bottom:4mm;">✿ Esperança ✿</p>
+      <p style="font-family:'Playfair Display',serif;font-size:17pt;font-style:italic;color:var(--brown-dark);line-height:1.5;padding:0 10mm;">"Os que esperam no Senhor renovam as suas forças."</p>
+      <p style="font-size:8pt;color:var(--rose);margin-top:3mm;letter-spacing:1mm;">ISAÍAS 40:31</p>
+    </div>
+    <div class="divider-rose"></div>
+    <div style="text-align:center;padding:5mm 0;">
+      <p style="font-size:8pt;color:var(--rose);letter-spacing:2mm;text-transform:uppercase;margin-bottom:4mm;">✿ Descanso ✿</p>
+      <p style="font-family:'Playfair Display',serif;font-size:17pt;font-style:italic;color:var(--brown-dark);line-height:1.5;padding:0 10mm;">"Vinde a mim todos os que estais cansados... e eu vos aliviarei."</p>
+      <p style="font-size:8pt;color:var(--rose);margin-top:3mm;letter-spacing:1mm;">MATEUS 11:28</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>57</span></div>
+</div>
+
+<!-- PLANO 30 DIAS OPENER -->
+<div class="page chapter-opener">
+  <div class="page-inner" style="justify-content:center;align-items:center;text-align:center;">
+    <p class="ch-label">Cronograma</p>
+    <div class="divider-slim" style="background:var(--rose-light);opacity:.5;"></div>
+    <h2 class="ch-title">Plano Espiritual<br><em>de 30 Dias</em></h2>
+    <div class="divider-slim" style="background:var(--rose-light);opacity:.5;"></div>
+    <p class="ch-verse">Pequenos passos diários que constroem uma fé sólida.</p>
+  </div>
+</div>
+
+<div class="page">
+  <div class="page-header"><span>Mãe que Confia</span><span>Plano de 30 Dias</span></div>
+  <div class="page-inner" style="justify-content:flex-start;gap:0;">
+    <div class="chapter-label">✿ Como Usar Este Plano</div>
+    <h2 class="chapter-title">Plano Espiritual <em>de 30 Dias</em></h2>
+    <div class="divider-slim"></div>
+    <p>Este plano foi criado para ser simples, prático e sustentável. Você não precisa ser perfeita — precisa ser consistente. Cada elemento leva em média 10 minutos.</p>
+    <div class="two-col" style="margin-top:4mm;">
+      <div class="card"><h4>📖 Leitura Bíblica</h4><p>Um salmo por semana, lido pela manhã. Semanas 1-4: Salmos 23, 91, 34 e 139.</p></div>
+      <div class="card"><h4>🙏 Oração</h4><p>5 minutos ao acordar + 5 minutos antes de dormir. Use as orações guiadas deste ebook.</p></div>
+    </div>
+    <div class="two-col">
+      <div class="card"><h4>✨ Gratidão</h4><p>3 itens de gratidão escritos no diário todos os dias, sem exceção.</p></div>
+      <div class="card"><h4>💛 Ação Prática</h4><p>Uma ação de amor intencional para seu filho por dia — um elogio, um abraço longo, um bilhete.</p></div>
+    </div>
+    <div class="verse-box" style="margin-top:5mm;">
+      <p class="verse-text">"A perseverança produz caráter aprovado, e o caráter aprovado produz esperança."</p>
+      <p class="verse-ref">Romanos 5:4</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>59</span></div>
+</div>
+
+<!-- CONCLUSÃO -->
+<div class="page conclusion-page">
+  <div class="corner-tl"></div><div class="corner-tr"></div>
+  <div class="corner-bl"></div><div class="corner-br"></div>
+  <div class="page-inner" style="justify-content:center;align-items:center;text-align:center;padding:18mm;">
+    <div class="chapter-label" style="text-align:center;">✿ Conclusão</div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:22pt;color:var(--brown-dark);margin:4mm 0;line-height:1.3;">
+      Você Não Está<br><em style="color:var(--rose);">Sozinha</em>
+    </h2>
+    <div class="divider-rose"></div>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:13pt;font-style:italic;color:var(--brown);line-height:1.75;max-width:150mm;">
+      "A mãe que confia não é a que não sente medo — é a que escolhe confiar mesmo sentindo."
+    </p>
+    <div class="divider-rose"></div>
+    <p style="font-size:10.5pt;line-height:1.85;color:var(--text);max-width:150mm;">
+      Ao longo desses 40 dias, você escolheu parar. Orar. Refletir. Confiar. Isso não é pouco — é exatamente o que Deus pediu.
+    </p>
+    <p style="font-size:10.5pt;line-height:1.85;color:var(--text);max-width:150mm;margin-top:4mm;">
+      Deus permanece presente em cada fase da caminhada — nas noites longas, nas dúvidas, nas vitórias silenciosas. E nenhuma mãe precisa enfrentar seus desafios sozinha.
+    </p>
+    <div class="verse-box" style="text-align:left;margin-top:6mm;">
+      <p class="verse-text">"Aquele que em vós começou a boa obra há de completá-la até ao dia de Jesus Cristo."</p>
+      <p class="verse-ref">Filipenses 1:6</p>
+    </div>
+    <p style="font-size:9.5pt;color:var(--text-light);margin-top:5mm;font-style:italic;">
+      Continue. Um dia de cada vez. Uma oração de cada vez.<br>
+      Você é uma mãe que confia — e isso muda tudo.
+    </p>
+    <div class="cover-brand" style="margin-top:8mm;">Devocional Filho Liberto</div>
+  </div>
+</div>
+
+</body></html>
