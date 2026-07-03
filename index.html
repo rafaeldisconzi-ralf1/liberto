@@ -44,33 +44,9 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── PROGRESS SEGMENTADO ── */
-    #progress-wrap {
-      position: fixed;
-      top: 36px; left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: var(--max-w);
-      height: 20px;
-      z-index: 100;
-      background: var(--dark);
-      display: flex;
-      align-items: center;
-      padding: 0 12px;
-      gap: 3px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-    .prog-seg {
-      flex: 1;
-      height: 4px;
-      background: rgba(255,255,255,0.15);
-      border-radius: 3px;
-      transition: background 0.4s ease;
-    }
-    .prog-seg.filled {
-      background: linear-gradient(90deg, var(--gold), var(--gold-light));
-    }
-    #progress-bar { display: none; }
+    /* ── PROGRESS (dentro da brand bar) ── */
+    #progress-wrap { display: none; }
+    #progress-bar  { display: none; }
 
     /* ── WRAPPER ── */
     #quiz-wrapper {
@@ -92,7 +68,7 @@
       display: none;
       flex-direction: column;
       gap: 22px;
-      padding: 78px 22px 56px;
+      padding: 60px 22px 56px;
       animation: rise 0.4s cubic-bezier(0.4,0,0.2,1) forwards;
     }
     .step.active { display: flex; }
@@ -630,7 +606,7 @@
     /* ── PRAYER COUNTER ── */
     #prayer-counter {
       position: fixed;
-      top: 44px;
+      top: 50px;
       right: 12px;
       z-index: 200;
       background: linear-gradient(135deg, var(--olive-dark), var(--olive));
@@ -671,7 +647,7 @@
     /* ── PRAYER TOAST ── */
     #prayer-toast {
       position: fixed;
-      top: 96px;
+      top: 100px;
       right: 12px;
       z-index: 199;
       background: rgba(61,107,79,0.95);
@@ -698,11 +674,14 @@
 
 
 
-<!-- Brand Bar -->
+<!-- Brand Bar com progress embutido -->
 <div id="brand-bar">
-  <span class="bb-cross">†</span>
-  <span class="bb-name">Devocional Filho Liberto</span>
-  <span class="bb-cross">†</span>
+  <div class="bb-row">
+    <span class="bb-cross">†</span>
+    <span class="bb-name">Devocional Filho Liberto</span>
+    <span class="bb-cross">†</span>
+  </div>
+  <div class="bb-progress" id="prog-wrap-inner"></div>
 </div>
 
 <!-- Prayer Counter -->
@@ -1300,7 +1279,8 @@
 
   // ── SEGMENTED PROGRESS ──
   (function initProgress() {
-    const wrap = document.getElementById('progress-wrap');
+    const wrap = document.getElementById('prog-wrap-inner');
+    if (!wrap) return;
     for (let i = 0; i < TOTAL; i++) {
       const seg = document.createElement('div');
       seg.className = 'prog-seg';
@@ -1369,7 +1349,8 @@
     cur.classList.remove('active');
     nxt.classList.add('active');
     const n = parseInt(id.replace('step-', ''));
-    document.querySelectorAll('.prog-seg').forEach((seg, i) => {
+    const wrap = document.getElementById('prog-wrap-inner');
+    if (wrap) wrap.querySelectorAll('.prog-seg').forEach((seg, i) => {
       seg.classList.toggle('filled', i < n);
     });
     window.scrollTo({ top: 0, behavior: 'smooth' });
