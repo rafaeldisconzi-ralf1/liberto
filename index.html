@@ -1346,7 +1346,7 @@
     nxt.classList.add('active');
     const n = parseInt(id.replace('step-', ''));
     document.getElementById('progress-bar').style.width = Math.round((n / TOTAL) * 100) + '%';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo(0, 0);
   }
 
   function scrollToBtn(el) {
@@ -2056,7 +2056,7 @@
     if (wrap) wrap.querySelectorAll('.prog-seg').forEach((seg, i) => {
       seg.classList.toggle('filled', i < n);
     });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo(0, 0);
   }
 
   function scrollToBtn(el) {
