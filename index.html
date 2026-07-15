@@ -1358,9 +1358,7 @@
   ];
   let _checkoutIdx = 0;
   function getCheckoutUrl() {
-    const url = CHECKOUT_URLS[_checkoutIdx % CHECKOUT_URLS.length];
-    _checkoutIdx++;
-    return url;
+    return CHECKOUT_URLS[Math.random() < 0.5 ? 0 : 1];
   }
 
   function openCheckout() {
