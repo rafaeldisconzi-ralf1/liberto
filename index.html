@@ -1178,7 +1178,7 @@
       📲 RECEBA O ACESSO IMEDIATO NO WHATSAPP
     </div>
 
-    <a class="btn btn-gold btn-pulse" href="https://pay.hotmart.com/J106551912S?checkoutMode=10" target="_blank" rel="noopener">
+    <a class="btn btn-gold btn-pulse" href="#" onclick="this.href=getCheckoutUrl()" target="_blank" rel="noopener">
       QUERO COMEÇAR AGORA →
     </a>
 
@@ -1199,7 +1199,7 @@
       </div>
     </div>
 
-    <a class="btn btn-gold btn-pulse" href="https://pay.hotmart.com/J106551912S?checkoutMode=10" target="_blank" rel="noopener">
+    <a class="btn btn-gold btn-pulse" href="#" onclick="this.href=getCheckoutUrl()" target="_blank" rel="noopener">
       QUERO COMEÇAR AGORA →
     </a>
 
@@ -1226,7 +1226,7 @@
       </div>
     </div>
 
-    <a class="btn btn-gold btn-pulse" href="https://pay.hotmart.com/J106551912S?checkoutMode=10" target="_blank" rel="noopener">
+    <a class="btn btn-gold btn-pulse" href="#" onclick="this.href=getCheckoutUrl()" target="_blank" rel="noopener">
       QUERO COMEÇAR AGORA →
     </a>
 
@@ -1259,7 +1259,7 @@
       <p class="price-inst">ou 12x de R$5,19 no cartão</p>
     </div>
 
-    <a class="btn btn-gold btn-pulse" href="https://pay.hotmart.com/J106551912S?checkoutMode=10" target="_blank" rel="noopener">
+    <a class="btn btn-gold btn-pulse" href="#" onclick="this.href=getCheckoutUrl()" target="_blank" rel="noopener">
       QUERO COMEÇAR AGORA →
     </a>
 
@@ -1349,6 +1349,18 @@
     const n = parseInt(id.replace('step-', ''));
     document.getElementById('progress-bar').style.width = Math.round((n / TOTAL) * 100) + '%';
     window.scrollTo(0, 0);
+  }
+
+  // ── SPLIT A/B: alterna Hotmart / Kiwify a cada clique ──
+  const CHECKOUT_URLS = [
+    'https://pay.hotmart.com/J106551912S?checkoutMode=10',
+    'https://pay.kiwify.com.br/fALlUtK'
+  ];
+  let _checkoutIdx = 0;
+  function getCheckoutUrl() {
+    const url = CHECKOUT_URLS[_checkoutIdx % CHECKOUT_URLS.length];
+    _checkoutIdx++;
+    return url;
   }
 
   function scrollToBtn(el) {
