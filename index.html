@@ -1351,19 +1351,10 @@
     window.scrollTo(0, 0);
   }
 
-  // ── SPLIT A/B: alterna Hotmart / Kiwify a cada clique ──
-  const CHECKOUT_URLS = [
-    'https://pay.hotmart.com/J106551912S?checkoutMode=10',
-    'https://pay.kiwify.com.br/fALlUtK'
-  ];
-  let _checkoutIdx = 0;
-  function getCheckoutUrl() {
-    return CHECKOUT_URLS[Math.random() < 0.5 ? 0 : 1];
-  }
+  const CHECKOUT_URL = 'https://pay.hotmart.com/J106551912S?checkoutMode=10';
 
   function openCheckout() {
-    const url = getCheckoutUrl();
-    window.open(url, '_blank', 'noopener');
+    window.open(CHECKOUT_URL, '_blank', 'noopener');
   }
 
   function scrollToBtn(el) {
